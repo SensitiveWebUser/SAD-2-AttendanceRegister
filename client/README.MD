@@ -9,6 +9,6 @@
 
 ### Launch client
 
- `cd /client`
+- `cd /client`
  
-`npm run start`
+- `npm run start:dev`
