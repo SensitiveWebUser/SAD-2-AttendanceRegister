@@ -9,6 +9,9 @@
 
 ### Launch Server
 
- `cd /server`
+- `cd /server`
+
+- Copy the file `.env.local.template` and rename it to `.env.local`
+- Add your Mongo URI and a JWT key
  
-`npm run start`
+- `npm run start`

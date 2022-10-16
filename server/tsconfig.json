@@ -2,10 +2,11 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "moduleResolution": "node",
     "outDir": "./build",
     "strict": true,
     "baseUrl": "./",
-     "paths": {
+    "paths": {
       "@Routes/*": [
         "src/routes/*"
       ],
@@ -21,9 +22,9 @@
       "@Utils/*": [
         "src/utils/*"
       ],
-     },
-     "esModuleInterop": true,
-     "skipLibCheck": true,
-     "forceConsistentCasingInFileNames": true
+    },
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   }
 }
