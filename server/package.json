@@ -6,14 +6,34 @@
   "scripts": {
     "start": "ts-node-dev -r tsconfig-paths/register src/index.ts",
     "build": "tsc",
-    "test": "jest --watchAll --no-cache",
-    "test:ci": "jest --no-cache"
+    "test": "jest -i --watchAll --no-cache",
+    "test:ci": "jest -i --no-cache"
   },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
+    "transform": {
+      "^.+.tsx?$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "@Routes/(.*)": [
+        "<rootDir>/src/routes/$1"
+      ],
+      "@Middlewares": [
+        "<rootDir>/src/middlewares/index.ts"
+      ],
+      "@Errors": [
+        "<rootDir>/src/errors/index.ts"
+      ],
+      "@Models/(.*)": [
+        "<rootDir>/src/models/$1"
+      ],
+      "@Utils/(.*)": [
+        "<rootDir>/src/utils/$1"
+      ]
+    },
     "setupFilesAfterEnv": [
-      "./src/test/setup.ts"
+      "<rootDir>/src/test/setup.ts"
     ]
   },
   "keywords": [],

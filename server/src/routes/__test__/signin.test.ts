@@ -4,25 +4,6 @@ import { app } from "../../app";
 const USERNAME = "testUsername";
 const PASSWORD = "password";
 
-it("returns Set-Cookie on successful signin", async () => {
-  await request(app)
-    .post("/api/users/signup")
-    .send({
-      username: USERNAME,
-      password: PASSWORD,
-    })
-    .expect(201);
-  const response = await request(app)
-    .post("/api/users/signin")
-    .send({
-      username: USERNAME,
-      password: PASSWORD,
-    })
-    .expect(200);
-
-  expect(response.get("Set-Cookie")).toBeDefined();
-});
-
 it("returns a 400 with an invalid password", async () => {
   return request(app)
     .post("/api/users/signin")
@@ -42,24 +23,6 @@ it("fails if username doesn't exist", async () => {
     .post("/api/users/signin")
     .send({
       username: "testUsername2",
-      password: PASSWORD,
-    })
-    .expect(400);
-});
-
-it("fail if password is incorrect", async () => {
-  await request(app)
-    .post("/api/users/signup")
-    .send({
-      username: USERNAME,
-      password: "password2",
-    })
-    .expect(201);
-
-  await request(app)
-    .post("/api/users/signin")
-    .send({
-      username: USERNAME,
       password: PASSWORD,
     })
     .expect(400);
