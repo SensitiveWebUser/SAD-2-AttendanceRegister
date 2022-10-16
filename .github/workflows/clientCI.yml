@@ -36,13 +36,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           cd ./client
           npm ci
 
-      - name: Run lint
-        run: npm run lint
-
-      - name: Run tests
-        run: npm run test
+      - name: Build Client
+        run: |
+          cd ./client
+          npm run build
+      
+      - name: Run Client Tests
+        run: |
+          cd ./client
+          npm run test
