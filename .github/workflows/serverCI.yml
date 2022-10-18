@@ -43,10 +43,8 @@ jobs:
       
       - name: Build Server
         run: |
-          cd ./server
           npm run build
 
       - name: Run Server Tests
         run: |
-          cd ./server
           npm run test:ci

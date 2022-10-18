@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-import { Password } from "../utils/password";
+import { Password } from "@Utils/password";
 
 // An interface that describes the properties
 // that are required to create a new User

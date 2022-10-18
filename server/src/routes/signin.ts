@@ -14,7 +14,7 @@ const router = express.Router();
 router.post(
   "/api/users/signin",
   [
-    body("username").not().isEmpty().withMessage("Username is required"),
+    body("username").trim().notEmpty().withMessage("Username must be provided"),
     body("password")
       .trim()
       .notEmpty()

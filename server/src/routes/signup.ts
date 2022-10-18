@@ -12,7 +12,10 @@ const router = express.Router();
 router.post(
   "/api/users/signup",
   [
-    body("email").isEmail().withMessage("Email must be valid"),
+    body("username")
+      .trim()
+      .isLength({ min: 4, max: 20 })
+      .withMessage("Username must be between 4 and 20 characters"),
     body("password")
       .trim()
       .isLength({ min: 4, max: 20 })
@@ -25,7 +28,7 @@ router.post(
     const existingUser = await User.findOne({ username });
 
     if (existingUser) {
-      throw new BadRequestError("User with email already exists");
+      throw new BadRequestError("User with username already exists");
     }
 
     const user = User.build({ username, password });

@@ -43,10 +43,8 @@ jobs:
 
       - name: Build Client
         run: |
-          cd ./client
           npm run build
       
       - name: Run Client Tests
         run: |
-          cd ./client
           npm run test

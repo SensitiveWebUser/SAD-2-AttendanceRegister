@@ -11,7 +11,7 @@
 
  `cd /client`
  
-`npm run start`
+`npm run start:dev`
 
 ### Launch server
 

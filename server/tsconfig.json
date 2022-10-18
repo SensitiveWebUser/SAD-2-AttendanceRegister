@@ -16,6 +16,9 @@
       "@Errors": [
         "src/errors/index.ts"
       ],
+      "@Errors/*": [
+        "src/errors/*"
+      ],
       "@Models/*": [
         "src/models/*"
       ],

@@ -25,6 +25,9 @@
       "@Errors": [
         "<rootDir>/src/errors/index.ts"
       ],
+      "@Errors/(.*)": [
+        "src/errors/$1"
+      ],
       "@Models/(.*)": [
         "<rootDir>/src/models/$1"
       ],
