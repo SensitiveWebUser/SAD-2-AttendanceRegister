@@ -4,10 +4,12 @@ import "./i18n";
 
 import {Home} from "./pages";
 
-export default (): JSX.Element => (
+const App = (): JSX.Element => (
 
     <div className="App">
       <Home />
     </div>
 
 );
+
+export default App;
