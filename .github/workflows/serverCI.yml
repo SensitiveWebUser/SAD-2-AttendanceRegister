@@ -13,7 +13,9 @@ on:
 jobs:
   ci:
     runs-on: ${{ matrix.os }}
-
+    defaults:
+          run:
+            working-directory: ./server
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -37,14 +39,10 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install Dependencies
-        run: |
-          cd ./client
-          npm ci
+        run: npm ci
       
       - name: Build Server
-        run: |
-          npm run build
+        run: npm run build
 
       - name: Run Server Tests
-        run: |
-          npm run test:ci
+        run: npm run test:ci
