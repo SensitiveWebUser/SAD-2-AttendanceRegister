@@ -1,8 +1,7 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import useRequest from "../../hooks/useRequest";
 
-export const signup: React.FC = () => {
+export const SignUp = ({ }) => {
     const { t } = useTranslation();
     const { } = useRequest;
 
@@ -10,11 +9,17 @@ export const signup: React.FC = () => {
         <div
             style={{
                 display: "flex",
-                flexDirection: "column",
-                minHeight: "100vh",
+                flexDirection: "column"
             }}
         >
             SIGNUP TEST PAGE
+            DOES STUFF FOR SIGN IN
+            <form>
+                <div>
+
+                </div>
+            </form>
         </div>
     );
 };
+
