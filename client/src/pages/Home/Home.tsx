@@ -1,7 +1,8 @@
 import React from "react";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { signup } from '../../components/login/signup';
 
-export const Home : React.FC = () => {
+export const Home: React.FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -12,8 +13,9 @@ export const Home : React.FC = () => {
         minHeight: "100vh",
       }}
     >
-      TEST PAGE <br/>
+      TEST PAGE <br />
       {t("translation.hello")}
-    </div>
+      <button onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => signup}>SIGNUP</button>
+    </div >
   );
 };
