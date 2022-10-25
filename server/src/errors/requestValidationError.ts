@@ -1,11 +1,11 @@
-import { ValidationError } from "express-validator";
+import { ValidationError } from 'express-validator';
 
-import { CustomError } from "./customError";
+import { CustomError } from './customError';
 
 export class RequestValidationError extends CustomError {
   statusCode = 400;
   constructor(public errors: ValidationError[]) {
-    super("Invalid request parameters");
+    super('Invalid request parameters');
     Object.setPrototypeOf(this, RequestValidationError.prototype);
   }
   serializeErrors() {

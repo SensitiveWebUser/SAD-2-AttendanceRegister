@@ -1,5 +1,5 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const TranslateExample: React.FC = () => {
   // https://react.i18next.com/guides/quick-start#translate-your-content
@@ -10,14 +10,14 @@ export const TranslateExample: React.FC = () => {
   return (
     <div>
       <header>
-        <h2>{t("hello")}</h2>
+        <h2>{t('hello')}</h2>
         <div>
-          <button onClick={() => changeLanguage("tr")}>🇹🇷 Türkçe</button>
-          <button onClick={() => changeLanguage("en")}>🇺🇸 English</button>
+          <button onClick={() => changeLanguage('tr')}>🇹🇷 Türkçe</button>
+          <button onClick={() => changeLanguage('en')}>🇺🇸 English</button>
         </div>
       </header>
       <main>
-        <p>{t("greet", { name: "World" })}</p>
+        <p>{t('greet', { name: 'World' })}</p>
       </main>
       <footer>
         <a
@@ -25,7 +25,7 @@ export const TranslateExample: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {t("documentation")}
+          {t('documentation')}
         </a>
       </footer>
     </div>

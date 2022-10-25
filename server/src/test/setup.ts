@@ -1,7 +1,7 @@
-import { MongoMemoryServer } from "mongodb-memory-server";
-import mongoose from "mongoose";
-import request from "supertest";
-import { app } from "../app";
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+import request from 'supertest';
+import { app } from '../app';
 
 declare global {
   function signup(): Promise<string[]>;
@@ -10,7 +10,7 @@ declare global {
 let mongod: any;
 
 beforeAll(async () => {
-  process.env.JWT_KEY = "ABC";
+  process.env.JWT_KEY = 'ABC';
 
   mongod = await MongoMemoryServer.create();
 
@@ -33,18 +33,18 @@ afterAll(async () => {
 });
 
 global.signup = async () => {
-  const username = "testUsername";
-  const password = "password";
+  const username = 'testUsername';
+  const password = 'password';
 
   const response = await request(app)
-    .post("/api/users/signup")
+    .post('/api/users/signup')
     .send({
       username,
       password,
     })
     .expect(201);
 
-  const cookie = response.get("Set-Cookie");
+  const cookie = response.get('Set-Cookie');
 
   return cookie;
 };
