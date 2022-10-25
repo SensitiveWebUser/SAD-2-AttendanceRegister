@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 /**
  * This component is generated as an example for axios
@@ -8,9 +8,9 @@ import axios from "axios";
  * please visit https://github.com/axios/axios
  */
 
-const BASE_API_URL = "https://official-joke-api.appspot.com/";
+const BASE_API_URL = 'https://official-joke-api.appspot.com/';
 
-const API_URL = "/jokes/programming/random";
+const API_URL = '/jokes/programming/random';
 
 const jokesApi = axios.create({
   baseURL: BASE_API_URL,
@@ -26,7 +26,7 @@ export const AxiosExample = () => {
   // similar to componentDidMount()
   useEffect(() => {
     jokesApi({
-      method: "get",
+      method: 'get',
       url: API_URL,
     })
       .then((res) => res.data)

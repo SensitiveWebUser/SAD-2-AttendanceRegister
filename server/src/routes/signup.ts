@@ -1,25 +1,25 @@
-import express, { Request, Response } from "express";
-import { body } from "express-validator";
-import jwt from "jsonwebtoken";
+import express, { Request, Response } from 'express';
+import { body } from 'express-validator';
+import jwt from 'jsonwebtoken';
 
-import { BadRequestError } from "@Errors";
-import { validateRequest } from "@Middlewares";
+import { BadRequestError } from '@Errors';
+import { validateRequest } from '@Middlewares';
 
-import { User } from "@Models/users";
+import { User } from '@Models/users';
 
 const router = express.Router();
 
 router.post(
-  "/api/users/signup",
+  '/api/users/signup',
   [
-    body("username")
+    body('username')
       .trim()
       .isLength({ min: 4, max: 20 })
-      .withMessage("Username must be between 4 and 20 characters"),
-    body("password")
+      .withMessage('Username must be between 4 and 20 characters'),
+    body('password')
       .trim()
       .isLength({ min: 4, max: 20 })
-      .withMessage("Password must be between 4 and 20 characters"),
+      .withMessage('Password must be between 4 and 20 characters'),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
@@ -28,7 +28,7 @@ router.post(
     const existingUser = await User.findOne({ username });
 
     if (existingUser) {
-      throw new BadRequestError("User with username already exists");
+      throw new BadRequestError('User with username already exists');
     }
 
     const user = User.build({ username, password });
@@ -48,7 +48,7 @@ router.post(
       jwt: userJwt,
     };
 
-    console.log("Create a new user");
+    console.log('Create a new user');
 
     res.status(201).send(user);
   }

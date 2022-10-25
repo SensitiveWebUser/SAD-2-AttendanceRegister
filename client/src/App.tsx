@@ -1,15 +1,11 @@
-import React from "react";
+import React, { Suspense } from 'react';
 
-import "./i18n";
-
-import {Home} from "./pages";
+import { Home } from './pages';
 
 const App = (): JSX.Element => (
-
-    <div className="App">
-      <Home />
-    </div>
-
+  <Suspense fallback={<h1>Loading...</h1>}>
+    <Home />
+  </Suspense>
 );
 
 export default App;
