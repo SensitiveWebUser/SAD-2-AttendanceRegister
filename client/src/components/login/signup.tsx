@@ -14,6 +14,9 @@ export const SignUp = ({ }) => {
         >
             SIGNUP TEST PAGE
             DOES STUFF FOR SIGN IN
+            {/* links to a sign up form */}
+            {/* checks the info against restrictions */}
+            {/* creates a new user on submit */}
             <form>
                 <div>
 
