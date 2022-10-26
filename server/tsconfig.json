@@ -7,24 +7,12 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
-      "@Routes/*": [
-        "src/routes/*"
-      ],
-      "@Middlewares": [
-        "src/middlewares/index.ts"
-      ],
-      "@Errors": [
-        "src/errors/index.ts"
-      ],
-      "@Errors/*": [
-        "src/errors/*"
-      ],
-      "@Models/*": [
-        "src/models/*"
-      ],
-      "@Utils/*": [
-        "src/utils/*"
-      ],
+      "@Routes/*": ["src/routes/*"],
+      "@Middlewares": ["src/middlewares/index.ts"],
+      "@Errors": ["src/errors/index.ts"],
+      "@Errors/*": ["src/errors/*"],
+      "@Models/*": ["src/models/*"],
+      "@Utils/*": ["src/utils/*"]
     },
     "esModuleInterop": true,
     "skipLibCheck": true,

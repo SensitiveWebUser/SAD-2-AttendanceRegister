@@ -31,7 +31,7 @@
     "start:dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "",
+    "lint": "prettier --write .",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -53,6 +53,10 @@
     ]
   },
   "devDependencies": {
-    "nock": "^13.0.11"
+    "nock": "^13.0.11",
+    "prettier": "2.7.1"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

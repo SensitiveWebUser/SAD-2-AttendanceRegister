@@ -1,10 +1,10 @@
-import express from "express";
+import express from 'express';
 
-import { currentUser } from "@Middlewares";
+import { currentUser } from '@Middlewares';
 
 const router = express.Router();
 
-router.get("/api/users/currentuser", currentUser, (req, res) => {
+router.get('/api/users/currentuser', currentUser, (req, res) => {
   res.send({ currentUser: req.currentUser || null });
 });
 

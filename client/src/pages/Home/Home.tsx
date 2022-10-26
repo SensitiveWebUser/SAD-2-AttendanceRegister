@@ -17,9 +17,9 @@ export const Home = ({ }) => {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
       }}
     >
       HOME PAGE <br />

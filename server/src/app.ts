@@ -1,25 +1,25 @@
-import express from "express";
-import "express-async-errors";
-import { json } from "body-parser";
-import cookieSession from "cookie-session";
+import express from 'express';
+import 'express-async-errors';
+import { json } from 'body-parser';
+import cookieSession from 'cookie-session';
 
-import { currentUserRouter } from "@Routes/currentUser";
-import { signinRouter } from "@Routes/signin";
-import { signoutRouter } from "@Routes/signout";
-import { signupRouter } from "@Routes/signup";
+import { currentUserRouter } from '@Routes/currentUser';
+import { signinRouter } from '@Routes/signin';
+import { signoutRouter } from '@Routes/signout';
+import { signupRouter } from '@Routes/signup';
 
-import { NotFoundError } from "@Errors";
-import { errorHandler } from "@Middlewares";
+import { NotFoundError } from '@Errors';
+import { errorHandler } from '@Middlewares';
 
 const app = express();
-app.set("trust proxy", true);
+app.set('trust proxy', true);
 
 // Middlewares
 app.use(json());
 app.use(
   cookieSession({
     signed: false,
-    secure: process.env.NODE_ENV !== "test",
+    secure: process.env.NODE_ENV !== 'test',
   })
 );
 
@@ -30,7 +30,7 @@ app.use(signoutRouter);
 app.use(signupRouter);
 
 //404
-app.all("*", async () => {
+app.all('*', async () => {
   throw new NotFoundError();
 });
 
