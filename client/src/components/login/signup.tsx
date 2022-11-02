@@ -1,10 +1,4 @@
-import { useTranslation } from 'react-i18next';
-import useRequest from '../../hooks/useRequest';
-
 export const SignUp = () => {
-  const { t } = useTranslation();
-  const { } = useRequest;
-
   return (
     <div
       style={{
