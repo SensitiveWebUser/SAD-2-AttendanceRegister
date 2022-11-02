@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import useRequest from '../../hooks/useRequest';
 type _react = typeof React;
 
-export const SignUp = ({}) => {
+export const Login = ({}) => {
   const { t } = useTranslation();
   const {} = useRequest;
 
@@ -14,7 +14,7 @@ export const SignUp = ({}) => {
         flexDirection: 'column',
       }}
     >
-      SIGNUP TEST PAGE DOES STUFF FOR SIGN UP
+      LOGIN TEST PAGE DOES STUFF FOR LOGIN
       {/* sign up form */}
       {/* checks the info against restrictions */}
       {/* creates a new user on submit */}
