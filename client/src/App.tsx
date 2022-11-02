@@ -1,7 +1,7 @@
-import { Suspense } from 'react';
-import { Header } from './components/Header/Header';
-import { Home } from './pages';
 import { LinearProgress } from '@mui/material';
+import { Suspense } from 'react';
+import { Header } from './components/Header';
+import { Home } from './pages';
 
 const App = (): JSX.Element => (
   <Suspense
@@ -11,7 +11,7 @@ const App = (): JSX.Element => (
       </>
     }
   >
-   <Header />
+    <Header />
     <Home />
   </Suspense>
 );

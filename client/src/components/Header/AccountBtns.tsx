@@ -1,5 +1,4 @@
-import { ButtonGroup } from '@mui/material';
-import Button from '@mui/material/Button';
+import { Button, ButtonGroup } from '@mui/material';
 import { useState } from 'react';
 
 export const AccountBtns = () => {
