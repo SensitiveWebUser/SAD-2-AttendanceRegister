@@ -1,6 +1,6 @@
 import { LinearProgress } from '@mui/material';
 import { Suspense } from 'react';
-import { Header } from './components/Header';
+import { Header } from './components';
 import { Home } from './pages';
 
 const App = (): JSX.Element => (

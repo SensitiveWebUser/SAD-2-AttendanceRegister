@@ -1,5 +1,5 @@
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
-import { AccountBtns } from '.';
+import { AccountBtns } from '../../components';
 
 export const Header = () => {
   return (
