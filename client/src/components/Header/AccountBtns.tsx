@@ -1,10 +1,14 @@
 import { ButtonGroup } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useState } from 'react';
-type _react = typeof React;
+import { useState } from 'react';
 
-export const AccountBtns = ({}) => {
+export const AccountBtns = () => {
   const [loginBtnText, setLoginBtnText] = useState('LOG IN');
+  const currentUser = null;
+
+  if (currentUser !== null) {
+    setLoginBtnText('LOG OUT');
+  }
 
   function handleSignUp() {
     //go to create account page/modal/whatever

@@ -1,11 +1,9 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useRequest from '../../hooks/useRequest';
-type _react = typeof React;
 
-export const SignUp = ({}) => {
+export const SignUp = () => {
   const { t } = useTranslation();
-  const {} = useRequest;
+  const { } = useRequest;
 
   return (
     <div

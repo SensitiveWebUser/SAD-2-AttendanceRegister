@@ -1,7 +1,5 @@
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
-import * as React from 'react';
 import { AccountBtns } from './AccountBtns';
-type _react = typeof React;
 
 export const Header = () => {
   return (
