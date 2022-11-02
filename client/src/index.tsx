@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import i18n from './i18n';
-import App from './App';
-import { I18nextProvider } from 'react-i18next';
-import { CssBaseline, ThemeProvider } from '@mui/material';
 import darkTheme from './utils/themes/Dark';
+
+import { App } from './components/App';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { I18nextProvider } from 'react-i18next';
 
 ReactDOM.render(
   <React.StrictMode>

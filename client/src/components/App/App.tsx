@@ -1,9 +1,9 @@
 import { LinearProgress } from '@mui/material';
 import { Suspense } from 'react';
-import { Header } from './components';
-import { Home } from './pages';
+import { Header } from '../Header';
+import { Home } from '../../pages/Home';
 
-const App = (): JSX.Element => (
+export const App = (): JSX.Element => (
   <Suspense
     fallback={
       <>
@@ -15,5 +15,3 @@ const App = (): JSX.Element => (
     <Home />
   </Suspense>
 );
-
-export default App;
