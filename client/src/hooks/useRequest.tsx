@@ -26,7 +26,7 @@ const DoRequest = ({ url, method, body, onSuccess }) => {
     }
   };
 
-  return { doRequest, errors };
+  return [doRequest, errors];
 };
 
 export default DoRequest;
