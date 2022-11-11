@@ -10,7 +10,7 @@ export const useRequest = ({
 }: useRequestProps) => {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
 
-  const [errors, setErrors] = useState<JSX.Element>(null);
+  const [errors, setErrors] = useState(null);
 
   // This function is used to make the request to the API
   // The function can be used as if it like a useHook function
