@@ -8,7 +8,7 @@ export const useRequest = ({
   body,
   onSuccess,
 }: useRequestProps) => {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
 
   const [errors, setErrors] = useState(null);
 
@@ -18,8 +18,11 @@ export const useRequest = ({
 
       // Set the Authorization header with the access token from Auth0 for the current user
       // If the user is not logged in, authorization will set to an empty string
-      const token: string = ((await getAccessTokenSilently()) as string) || '';
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      if (isAuthenticated) {
+        const token: string =
+          ((await getAccessTokenSilently()) as string) || '';
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      }
 
       const response = await axios[method](url, { ...body, ...props });
 

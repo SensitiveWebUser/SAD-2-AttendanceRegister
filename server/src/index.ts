@@ -7,12 +7,8 @@ import 'express-async-errors';
 import mongoose from 'mongoose';
 
 const startup = async () => {
-  if (!process.env.AUTH0_AUDIENCE) {
-    throw new Error('AUTH0_AUDIENCE must be defined');
-  }
-
-  if (!process.env.AUTH0_DOMAIN) {
-    throw new Error('AUTH0_DOMAIN must be defined');
+  if (!process.env.AUTH0_ISSUER) {
+    throw new Error('AUTH0_ISSUER must be defined');
   }
 
   if (!process.env.MONGO_URI) {
