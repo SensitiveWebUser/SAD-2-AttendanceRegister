@@ -10,14 +10,17 @@ export const useRequest = ({
 }: useRequestProps) => {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
 
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState<JSX.Element>(null);
 
+  // This function is used to make the request to the API
+  // The function can be used as if it like a useHook function
+  // It will return the data from the API or an error as JSX elements
   const doRequest = async (props = {}) => {
     try {
       setErrors(null);
 
       // Set the Authorization header with the access token from Auth0 for the current user
-      // If the user is not logged in, authorization will set to an empty string
+      // If the user is not logged in, authorization will not be set
       if (isAuthenticated) {
         const token: string =
           ((await getAccessTokenSilently()) as string) || '';
