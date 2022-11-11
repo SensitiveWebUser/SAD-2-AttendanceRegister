@@ -7,8 +7,8 @@ import 'express-async-errors';
 import mongoose from 'mongoose';
 
 const startup = async () => {
-  if (!process.env.JWT_KEY) {
-    throw new Error('JWT_KEY must be defined');
+  if (!process.env.AUTH0_ISSUER) {
+    throw new Error('AUTH0_ISSUER must be defined');
   }
 
   if (!process.env.MONGO_URI) {
