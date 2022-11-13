@@ -9,6 +9,6 @@ dotenv.config({ path: '.env.test' });
 axios.defaults.adapter = httpAdapter;
 
 afterAll(() => {
-	nock.cleanAll();
-	nock.restore();
+  nock.cleanAll();
+  nock.restore();
 });
