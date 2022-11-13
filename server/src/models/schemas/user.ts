@@ -1,12 +1,19 @@
-import { DataTypes } from 'sequelize';
+import {
+  Model,
+  DataTypes,
+  CreationOptional,
+  InferAttributes,
+  InferCreationAttributes,
+} from 'sequelize';
 
 import { sequelize } from '../database';
 
 import { UserType } from './userType';
 
-export const User = sequelize.define('user', {
+export const User = sequelize.define<UserModel>('user', {
   user_id: {
     type: DataTypes.STRING,
+    defaultValue: DataTypes.STRING,
     allowNull: false,
     primaryKey: true,
   },
@@ -27,7 +34,7 @@ export const User = sequelize.define('user', {
     allowNull: false,
   },
   user_type_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 });
@@ -36,3 +43,16 @@ export const User = sequelize.define('user', {
 User.belongsTo(UserType, { foreignKey: 'user_type_id' });
 
 console.log('sequelize Setup User: ', sequelize.models.User);
+
+interface UserModel
+  extends Model<
+    InferAttributes<UserModel>,
+    InferCreationAttributes<UserModel>
+  > {
+  user_id?: CreationOptional<string>;
+  first_name: string;
+  middle_name?: string;
+  last_name: string;
+  email: string;
+  user_type_id: string;
+}

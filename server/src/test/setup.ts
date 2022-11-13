@@ -1,16 +1,14 @@
-import request from 'supertest';
-import { app } from '../app';
+import { sequelize } from '@Models/database';
 
-beforeAll(async () => {
-  //TODO: add in-memory postgresql
-  //TODO: add in-memory to Sequelize
-});
-
+// This function is called after each tests are done
+// It will wipe the database clean
 beforeEach(async () => {
-  //TODO: clear in-memory postgresql using Sequelize
+  await sequelize.sync({ force: true });
 });
 
+// This runs after all tests are done
+// It closes the database connection
 afterAll(async () => {
-  //TODO: close in-memory postgresql
-  //TODO: close Sequelize connection
+  console.log('Jest stopping!');
+  await sequelize.close();
 });

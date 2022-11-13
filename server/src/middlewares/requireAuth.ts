@@ -16,6 +16,12 @@ export const requireAuth = async (
 ) => {
   const ISSUER = process.env.AUTH0_ISSUER;
 
+  // This allows bypassing the authentication for testing purposes
+  if (process.env.NODE_ENV === 'test') {
+    next();
+    return;
+  }
+
   expressjwt({
     secret: jwks.expressJwtSecret({
       cache: true,
