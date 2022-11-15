@@ -12,6 +12,7 @@
       "@Errors": ["src/errors/index.ts"],
       "@Errors/*": ["src/errors/*"],
       "@Models/*": ["src/models/*"],
+      "@Models": ["src/models/index.ts"],
       "@Utils/*": ["src/utils/*"]
     },
     "esModuleInterop": true,
