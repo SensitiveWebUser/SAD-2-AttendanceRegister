@@ -21,6 +21,7 @@ export const Home: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
+        marginTop: '200px',
       }}
     >
       <button onClick={() => doRequest()}>Get User</button>
