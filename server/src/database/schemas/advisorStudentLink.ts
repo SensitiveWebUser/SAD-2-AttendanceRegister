@@ -30,6 +30,10 @@ export const AdvisorStudentLink = sequelize.define<AdvisorStudentLink>(
   }
 );
 
+//Add foreign keys
+AdvisorStudentLink.belongsTo(User, { foreignKey: 'advisor_id' });
+AdvisorStudentLink.belongsTo(User, { foreignKey: 'student_id' });
+
 interface AdvisorStudentLink
   extends Model<
     InferAttributes<AdvisorStudentLink>,

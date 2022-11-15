@@ -8,6 +8,8 @@ import {
 
 import { sequelize } from '@Database';
 
+import { User } from './user';
+
 export const Module = sequelize.define<Module>('module', {
   module_id: {
     type: DataTypes.STRING,
@@ -24,6 +26,9 @@ export const Module = sequelize.define<Module>('module', {
     allowNull: false,
   },
 });
+
+// Add foreign keys
+Module.belongsTo(User, { foreignKey: 'module_leader' });
 
 interface Module
   extends Model<InferAttributes<Module>, InferCreationAttributes<Module>> {

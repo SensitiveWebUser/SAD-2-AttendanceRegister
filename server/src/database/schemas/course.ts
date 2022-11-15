@@ -8,6 +8,8 @@ import {
 
 import { sequelize } from '@Database';
 
+import { User } from './user';
+
 export const Course = sequelize.define<Course>('course', {
   course_id: {
     type: DataTypes.STRING,
@@ -24,6 +26,9 @@ export const Course = sequelize.define<Course>('course', {
     allowNull: false,
   },
 });
+
+// Add foreign keys
+Course.belongsTo(User, { foreignKey: 'course_leader' });
 
 interface Course
   extends Model<InferAttributes<Course>, InferCreationAttributes<Course>> {

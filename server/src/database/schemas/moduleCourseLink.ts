@@ -31,6 +31,10 @@ export const ModuleCourseLink = sequelize.define<ModuleCourseLink>(
   }
 );
 
+// Add foreign keys
+ModuleCourseLink.belongsTo(Module, { foreignKey: 'module_id' });
+ModuleCourseLink.belongsTo(Course, { foreignKey: 'course_id' });
+
 interface ModuleCourseLink
   extends Model<
     InferAttributes<ModuleCourseLink>,
