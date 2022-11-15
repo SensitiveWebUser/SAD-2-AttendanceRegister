@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { I18nextProvider } from 'react-i18next';
-import App from '../App';
+import { App } from '../components/App';
 import i18n from '../i18n';
 
 it('renders without crashing', () => {
