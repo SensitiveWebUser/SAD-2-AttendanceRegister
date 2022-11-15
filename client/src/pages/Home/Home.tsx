@@ -12,7 +12,7 @@ export const Home: React.FC = () => {
   const [doRequest, errors] = useRequest({
     url: `http://localhost:3001/api/users?user_id=${id}`,
     method: 'get',
-    onSuccess: (data: any) => console.log(data),
+    onSuccess: (data: unknown) => console.log(data),
   });
 
   return (
