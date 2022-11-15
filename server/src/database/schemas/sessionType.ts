@@ -27,5 +27,5 @@ interface SessionType
     InferCreationAttributes<SessionType>
   > {
   session_type_id?: CreationOptional<string>;
-  session_type_name: string;
+  session_type_name: 'Lab' | 'Lecture';
 }

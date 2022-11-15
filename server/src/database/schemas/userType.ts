@@ -24,5 +24,11 @@ export const UserType = sequelize.define<UserType>('user_type', {
 interface UserType
   extends Model<InferAttributes<UserType>, InferCreationAttributes<UserType>> {
   user_type_id?: CreationOptional<string>;
-  user_type_name: string;
+  user_type_name:
+    | 'Admin'
+    | 'Student'
+    | 'Tutor'
+    | 'ModuleLeader'
+    | 'CourseLeader'
+    | 'AcademicAdvisor';
 }

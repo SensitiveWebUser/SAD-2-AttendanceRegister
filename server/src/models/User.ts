@@ -18,7 +18,9 @@ export class User {
   }
 
   protected getId() {
-    return this._id;
+    UserSchema.findByPk().then((user) => {
+      return user?.user_id;
+    });
   }
 
   protected getUserType() {
