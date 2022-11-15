@@ -52,6 +52,7 @@ export const useRequest = ({
 interface useRequestProps {
   url: string;
   method: 'get' | 'post' | 'put' | 'delete';
-  body?: {};
+  body?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   onSuccess?: Function;
 }
