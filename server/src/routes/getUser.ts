@@ -1,34 +1,28 @@
 import express, { Request, Response } from 'express';
-import { query } from 'express-validator';
+import { param } from 'express-validator';
 import { requireAuth, validateRequest } from '@Middlewares';
 
 import { NotFoundError } from '@Errors';
 
-import { User } from '@Models/users';
+import { User } from '@Models';
 
 const router = express.Router();
 
 // Get the user profile
 // This route is protected by the requireAuth middleware
-// Query parameters: user_id (UUID)
-// Returns: the user profile
+// The user id is passed as a parameter in the url
+// Returns: the user profile if the user is found
+// 404 if the user is not found
 router.get(
-  '/api/users',
+  '/api/users/:id',
   requireAuth,
-  [query(['user_id']).isUUID(4).withMessage('user_id must be a valid UUID')],
+  [param('id').isString().withMessage('id must be a valid UUID')],
   validateRequest,
   async (req: Request, res: Response) => {
-    console.log(req.headers);
+    const { id } = req.params;
 
-    const { user_id } = req.query;
-
-    const user = await User.findById(user_id);
-
-    if (!user) {
-      console.log('User not found');
-
-      throw new NotFoundError("User doesn't exist");
-    }
+    const user = await User.findByPk(id as string);
+    if (!user) throw new NotFoundError("User doesn't exist");
 
     res.status(200).send(user);
   }
