@@ -4,7 +4,7 @@ dotenv.config({ path: __dirname + './../.env.local' });
 import { app } from './app';
 import 'express-async-errors';
 
-import { sequelize } from './models/database';
+import { sequelize } from '@Database';
 
 const startup = async () => {
   // Checks env variable AUTH0_ISSUER is set

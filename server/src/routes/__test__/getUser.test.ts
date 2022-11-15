@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { app } from '../../app';
 
-import { User, UserType } from '@Models';
+import { User, UserType } from '@Database';
 
 it('returns user data and 200 status code', async () => {
   // Create a UserType

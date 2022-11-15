@@ -4,7 +4,7 @@ import { requireAuth, validateRequest } from '@Middlewares';
 
 import { NotFoundError } from '@Errors';
 
-import { User } from '@Models';
+import { User } from '@Database';
 
 const router = express.Router();
 

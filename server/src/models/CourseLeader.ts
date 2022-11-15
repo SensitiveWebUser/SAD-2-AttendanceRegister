@@ -1,4 +1,5 @@
 import { Tutor } from '.';
+import { User } from '@Database';
 
 export class CourseLeader extends Tutor {
   private _course: object;
@@ -13,7 +14,8 @@ export class CourseLeader extends Tutor {
   }
 
   protected updateAttendance() {
-    //db.one('ALTER TABLE attendance...')
+    //User.findOne({where: ()})
+
     return;
   }
 }

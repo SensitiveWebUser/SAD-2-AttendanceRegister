@@ -1,4 +1,4 @@
-import { sequelize } from '@Models/database';
+import { sequelize } from '@Database';
 
 // This function is called after each tests are done
 // It will wipe the database clean

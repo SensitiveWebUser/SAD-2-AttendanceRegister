@@ -12,8 +12,9 @@
       "@Errors": ["src/errors/index.ts"],
       "@Errors/*": ["src/errors/*"],
       "@Models/*": ["src/models/*"],
-      "@Models": ["src/models/index.ts"],
-      "@Utils/*": ["src/utils/*"]
+      "@Models": ["src/database/index.ts"],
+      "@Utils/*": ["src/utils/*"],
+      "@Database": ["src/database/index.ts"]
     },
     "esModuleInterop": true,
     "skipLibCheck": true,
