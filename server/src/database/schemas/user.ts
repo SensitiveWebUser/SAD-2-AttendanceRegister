@@ -6,7 +6,7 @@ import {
   InferCreationAttributes,
 } from 'sequelize';
 
-import { sequelize } from '../database';
+import { sequelize } from '@Database';
 
 import { UserType } from './userType';
 
@@ -16,6 +16,10 @@ export const User = sequelize.define<UserModel>('user', {
     defaultValue: DataTypes.STRING,
     allowNull: false,
     primaryKey: true,
+    // get() {
+    //   const rawValue = this.getDataValue('user_id')
+    //   return rawValue ? rawValue : null;
+    // }
   },
   first_name: {
     type: DataTypes.STRING,

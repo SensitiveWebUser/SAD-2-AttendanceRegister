@@ -1,3 +1,5 @@
+import { User as UserSchema } from '@Database';
+
 export class User {
   private _id: string;
   private _type: string;

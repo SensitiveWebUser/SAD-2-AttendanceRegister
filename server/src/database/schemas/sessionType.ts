@@ -8,21 +8,24 @@ import {
 
 import { sequelize } from '@Database';
 
-export const UserType = sequelize.define<UserType>('user_type', {
-  user_type_id: {
+export const SessionType = sequelize.define<SessionType>('session_type', {
+  session_type_id: {
     type: DataTypes.STRING,
     defaultValue: DataTypes.STRING,
     allowNull: false,
     primaryKey: true,
   },
-  user_type_name: {
+  session_type_name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
-interface UserType
-  extends Model<InferAttributes<UserType>, InferCreationAttributes<UserType>> {
-  user_type_id?: CreationOptional<string>;
-  user_type_name: string;
+interface SessionType
+  extends Model<
+    InferAttributes<SessionType>,
+    InferCreationAttributes<SessionType>
+  > {
+  session_type_id?: CreationOptional<string>;
+  session_type_name: string;
 }
