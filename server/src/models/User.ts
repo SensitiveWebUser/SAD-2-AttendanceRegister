@@ -1,4 +1,4 @@
-import { User as UserSchema } from '@Database';
+import { getUserRouter } from '@Routes/getUser';
 
 export class User {
   private _id: string;
@@ -18,9 +18,7 @@ export class User {
   }
 
   protected getId() {
-    UserSchema.findByPk().then((user) => {
-      return user?.user_id;
-    });
+    return this._id;
   }
 
   protected getUserType() {
