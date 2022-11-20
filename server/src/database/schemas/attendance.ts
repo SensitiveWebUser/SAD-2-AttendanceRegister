@@ -22,7 +22,7 @@ export const Attendance = sequelize.define<Attendance>('attendance', {
     allowNull: false,
   },
   attended: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 });
@@ -38,5 +38,5 @@ interface Attendance
   > {
   user_id?: CreationOptional<string>;
   session_id: string;
-  attended: string;
+  attended: 'true' | 'late' | 'false';
 }

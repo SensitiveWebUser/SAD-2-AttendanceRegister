@@ -1,4 +1,4 @@
-import { getUserRouter } from '@Routes/getUser';
+import { User as UserSchema } from '@Database';
 
 export class User {
   private _id: string;
@@ -9,12 +9,12 @@ export class User {
   private _email: string;
 
   constructor() {
-    this._id = '';
-    this._type = '';
-    this._firstName = '';
-    this._middleName = '';
-    this._lastName = '';
-    this._email = '';
+    this._id = JSON.stringify(UserSchema.getAttributes().user_id);
+    this._type = JSON.stringify(UserSchema.getAttributes().user_type_id);
+    this._firstName = JSON.stringify(UserSchema.getAttributes().first_name);
+    this._middleName = JSON.stringify(UserSchema.getAttributes().middle_name);
+    this._lastName = JSON.stringify(UserSchema.getAttributes().last_name);
+    this._email = JSON.stringify(UserSchema.getAttributes().email);
   }
 
   protected getId() {

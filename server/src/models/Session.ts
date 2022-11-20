@@ -1,18 +1,22 @@
+import { Session as SessionSchema } from '@Database';
+
 export class Session {
   private _id: string;
   private _type: string;
   private _tutorId: string;
-  private _startTime: Date;
-  private _endTime: Date;
+  private _startTime: string;
+  private _endTime: string;
   private _sessionCode: string;
 
   constructor() {
-    this._id = '';
-    this._type = '';
-    this._tutorId = '';
-    this._startTime = new Date();
-    this._endTime = new Date();
-    this._sessionCode = '';
+    this._id = JSON.stringify(SessionSchema.getAttributes().session_id);
+    this._type = JSON.stringify(SessionSchema.getAttributes().session_type_id);
+    this._tutorId = JSON.stringify(SessionSchema.getAttributes().tutor_id);
+    this._startTime = JSON.stringify(
+      SessionSchema.getAttributes().start_timestamp
+    );
+    this._endTime = JSON.stringify(SessionSchema.getAttributes().end_timestamp);
+    this._sessionCode = JSON.stringify(SessionSchema.getAttributes().code);
   }
 
   protected getId() {
