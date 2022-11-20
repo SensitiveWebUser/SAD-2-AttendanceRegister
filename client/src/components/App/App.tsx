@@ -1,12 +1,7 @@
 import { Login } from '@mui/icons-material';
 import { LinearProgress } from '@mui/material';
 import { Fragment, Suspense } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-} from 'react-router-dom';
+import { Outlet, Route, Router, Routes } from 'react-router-dom';
 
 import { Home } from '../../pages';
 import { NotFound } from '../../pages/NotFound';
@@ -19,7 +14,7 @@ export const App = (): JSX.Element => (
       </Fragment>
     }
   >
-    <Router>
+    <Router location={''} navigator={undefined}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
