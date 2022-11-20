@@ -5,11 +5,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const pages = ['Attendance Report', 'Register Attendance'];
-
+const pages = [
+  { href: '/register', text: 'Register Attendance' },
+  { href: '/report', text: 'Attendance Report' },
+];
 export const Header = (): JSX.Element => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const userType = 'N';
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -21,7 +25,7 @@ export const Header = (): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed">
+      <AppBar position="relative">
         <Toolbar>
           <Typography
             variant="h2"
@@ -70,9 +74,14 @@ export const Header = (): JSX.Element => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map((item) => (
+                <MenuItem
+                  component={Link}
+                  key={item.text}
+                  onClick={handleCloseNavMenu}
+                  to={item.href}
+                >
+                  <Typography textAlign="center">{item.text}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -96,13 +105,15 @@ export const Header = (): JSX.Element => {
             UoPS
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map((item) => (
               <Button
-                key={page}
+                component={Link}
+                key={item.text}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                to={item.href}
               >
-                {page}
+                {item.text}
               </Button>
             ))}
           </Box>
@@ -110,7 +121,7 @@ export const Header = (): JSX.Element => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open profile">
               <IconButton href="/user/{id}" sx={{ p: 0 }}>
-                <Avatar alt="User-img" src="/static/images/avatar/2.jpg" />
+                <Avatar>{userType}</Avatar>
               </IconButton>
             </Tooltip>
           </Box>
