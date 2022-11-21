@@ -1,132 +1,250 @@
-import { AppBar, Avatar, Button, Menu, MenuItem, Tooltip } from '@mui/material';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { useState, Fragment } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
+import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Container,
+  Divider,
+  Drawer,
+  Fab,
+  Fade,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Tooltip,
+  useScrollTrigger,
+  Zoom,
+} from '@mui/material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import logo from '../../utils/resources/images/logo192.png';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { ExternalLink } from '../ExternalLink';
+import { useAuth0 } from '@auth0/auth0-react';
 
-const pages = [
-  { href: '/register', text: 'Register Attendance' },
-  { href: '/report', text: 'Attendance Report' },
-];
-export const Header = (): JSX.Element => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const userType = 'N';
+const ScrollTop = () => {
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 250,
+  });
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      '#back-to-top-anchor'
+    );
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    if (anchor) {
+      anchor.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar position="relative">
-        <Toolbar>
-          <Typography
-            variant="h2"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            UoPS
-          </Typography>
+    <Zoom in={trigger}>
+      <Box
+        onClick={handleClick}
+        role="presentation"
+        sx={{
+          position: 'fixed',
+          bottom: 16,
+          right: 16,
+          zIndex: 999,
+        }}
+      >
+        <Fab
+          color="secondary"
+          size="small"
+          aria-label="scroll back to top"
+          sx={{
+            backgroundColor: '#E5E5E5',
+            transition: '0.5s ease-in-out',
+            color: 'black',
+            '&:hover': { backgroundColor: '#BDBDBD' },
+          }}
+        >
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </Box>
+    </Zoom>
+  );
+};
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((item) => (
-                <MenuItem
-                  component={Link}
-                  key={item.text}
-                  onClick={handleCloseNavMenu}
-                  to={item.href}
-                >
-                  <Typography textAlign="center">{item.text}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Typography
-            variant="h2"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            UoPS
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((item) => (
-              <Button
-                component={Link}
-                key={item.text}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-                to={item.href}
+export const Header = () => {
+  const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
+  const [isSidebarOpen, setSideBarOpen] = useState(false);
+  const navigate = useNavigate();
+  const tooltipMessage = isAuthenticated ? 'Profile' : 'Login';
+  const pages = ['home', 'attendance', 'report'];
+  const icons = [
+    <DashboardIcon key={'dashboardIcon'} />,
+    <ArticleOutlinedIcon key={'articleIcon'} />,
+    <AssessmentOutlinedIcon key={'tempIcon'} />,
+  ];
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+    setSideBarOpen(open);
+  };
+
+  const handleClick = () => {
+    if (isAuthenticated) {
+      navigate('/profile', { replace: true });
+      return;
+    }
+    loginWithRedirect();
+  };
+
+  return (
+    <Fragment>
+      <AppBar position="absolute" color="transparent" elevation={0}>
+        <Fade in={true} timeout={1000}>
+          <Container maxWidth={false} component="section">
+            <Toolbar disableGutters id="back-to-top-anchor">
+              <Box
+                sx={{
+                  flexGrow: { xs: 1 },
+                  display: { xs: 'flex' },
+                }}
               >
-                {item.text}
-              </Button>
-            ))}
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open profile">
-              <IconButton href="/user/{id}" sx={{ p: 0 }}>
-                <Avatar>{userType}</Avatar>
-              </IconButton>
-            </Tooltip>
-          </Box>
-        </Toolbar>
+                <IconButton
+                  size="large"
+                  edge="start"
+                  aria-label="open drawer"
+                  sx={{
+                    color: 'primary.white',
+                  }}
+                  onClick={toggleDrawer(true)}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title={tooltipMessage}>
+                  <IconButton sx={{ gap: 2 }} onClick={handleClick}>
+                    <Avatar alt="Default Image" src={user?.picture} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            </Toolbar>
+          </Container>
+        </Fade>
       </AppBar>
-    </Box>
+      <Drawer
+        anchor={'left'}
+        open={isSidebarOpen}
+        onClose={toggleDrawer(false)}
+        elevation={0}
+        PaperProps={{ sx: { backgroundColor: '#24252a', color: 'white' } }}
+      >
+        <Box
+          sx={{ width: { xs: 175, md: 250 } }}
+          role="presentation"
+          onClick={toggleDrawer(false)}
+          onKeyDown={toggleDrawer(false)}
+        >
+          <List>
+            <ListItem>
+              <Box margin="auto">
+                <img src={logo} alt="logo" width={95} />
+              </Box>
+            </ListItem>
+          </List>
+          <Divider sx={{ bgcolor: '#CACACA' }} variant="middle" />
+          <List>
+            {pages.map((value, index) => (
+              <ListItem
+                button
+                key={value}
+                component={NavLink}
+                to={value === 'home' ? '/' : value}
+              >
+                <ListItemIcon sx={{ color: 'white' }}>
+                  {icons[index]}
+                </ListItemIcon>
+                <ListItemText
+                  primary={value}
+                  sx={{ textTransform: 'capitalize' }}
+                />
+              </ListItem>
+            ))}
+          </List>
+          <Divider sx={{ bgcolor: '#CACACA' }} variant="middle" />
+          <List>
+            {isAuthenticated ? (
+              <Fragment>
+                <ListItem
+                  button
+                  key={'Profile'}
+                  component={NavLink}
+                  to={'/profile'}
+                >
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Profile'} />
+                </ListItem>
+                <ListItem
+                  button
+                  key={'Logout'}
+                  onClick={() => logout({ returnTo: window.location.origin })}
+                >
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <LogoutIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Logout'} />
+                </ListItem>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <ListItem
+                  button
+                  key={'Login'}
+                  onClick={() => loginWithRedirect()}
+                >
+                  <ListItemIcon sx={{ color: 'white' }}>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={'Login'} />
+                </ListItem>
+              </Fragment>
+            )}
+          </List>
+          <List
+            style={{
+              position: 'fixed',
+              bottom: 0,
+              textAlign: 'center',
+              paddingBottom: 10,
+            }}
+          >
+            <ListItem>
+              <ListItemText>
+                Made with love
+                <br />
+                By{' '}
+                <ExternalLink href="https://github.com/SensitiveWebUser/SAD-2-AttendanceRegister">
+                  Group 2
+                </ExternalLink>
+              </ListItemText>
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
+      <ScrollTop />
+    </Fragment>
   );
 };

@@ -20,7 +20,14 @@ module.exports = {
     },
   },
   plugins: ['react', '@typescript-eslint'],
-  ignorePatterns: ['public/**/*', '*.json', '*.md', '*.test.tsx', 'build/**/*'],
+  ignorePatterns: [
+    'public/**/*',
+    '*.json',
+    '*.md',
+    '*.test.tsx',
+    'build/**/*',
+    'src/utils/resources/*',
+  ],
   rules: {
     '@typescript-eslint/indent': 'off',
     indent: ['error', 2],
