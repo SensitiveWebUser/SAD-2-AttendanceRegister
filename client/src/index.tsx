@@ -7,11 +7,12 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import { App } from './components/App';
 import { SnackbarProvider } from 'notistack';
-import { Slide } from '@mui/material';
+import { responsiveFontSizes, Slide } from '@mui/material';
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
 import darkTheme from './utils/themes/Dark';
+const theme = responsiveFontSizes(darkTheme);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -28,7 +29,7 @@ ReactDOM.render(
       autoHideDuration={3500}
     >
       <I18nextProvider i18n={i18n}>
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={theme}>
           <Auth0Provider
             domain={process.env.REACT_APP_AUTH0_DOMAIN}
             clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}

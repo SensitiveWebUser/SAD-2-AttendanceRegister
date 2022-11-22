@@ -79,7 +79,7 @@ const ScrollTop = () => {
   );
 };
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
   const [isSidebarOpen, setSideBarOpen] = useState(false);
   const navigate = useNavigate();

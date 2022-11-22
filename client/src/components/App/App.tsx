@@ -1,4 +1,4 @@
-import { Login } from '@mui/icons-material';
+import { useAuth0 } from '@auth0/auth0-react';
 import { LinearProgress } from '@mui/material';
 import { Fragment, Suspense } from 'react';
 import {
@@ -10,24 +10,39 @@ import {
 
 import { Home } from '../../pages';
 import { NotFound } from '../../pages/NotFound';
+import { Profile } from '../../pages/Profile';
 import { Header } from '../Header';
 
-export const App = (): JSX.Element => (
-  <Suspense
-    fallback={
-      <Fragment>
-        <LinearProgress /> <h1>Loading...</h1>
-      </Fragment>
-    }
-  >
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Outlet />
-    </Router>
-  </Suspense>
-);
+export const App = (): JSX.Element => {
+  const { isAuthenticated } = useAuth0();
+  return (
+    <Suspense
+      fallback={
+        <Fragment>
+          <LinearProgress /> <h1>Loading...</h1>
+        </Fragment>
+      }
+    >
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/Attendance"
+            element={isAuthenticated ? <Home /> : <NotFound />}
+          />
+          <Route
+            path="/Report"
+            element={isAuthenticated ? <Home /> : <NotFound />}
+          />
+          <Route
+            path="/profile"
+            element={isAuthenticated ? <Profile /> : <NotFound />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Outlet />
+      </Router>
+    </Suspense>
+  );
+};
