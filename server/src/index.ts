@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
-dotenv.config({ path: __dirname + './../.env.local' });
+dotenv.config({ path: __dirname + '/../.env.local' });
+console.log(process.env);
 
 import { app } from './app';
 import 'express-async-errors';
