@@ -4,7 +4,7 @@ import { requireAuth, validateRequest } from '@Middlewares';
 
 import { NotFoundError } from '@Errors';
 
-import { User } from '@Database';
+import { User as UserSchema } from '@Database';
 
 const router = express.Router();
 
@@ -21,7 +21,7 @@ router.get(
   async (req: Request, res: Response) => {
     const { id } = req.params;
 
-    const user = await User.findByPk(id as string);
+    const user = await UserSchema.findByPk(id as string);
     if (!user) throw new NotFoundError("User doesn't exist");
 
     res.status(200).send(user);

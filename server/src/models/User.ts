@@ -1,5 +1,3 @@
-import { User as UserSchema } from '@Database';
-
 export class User {
   private _id: string;
   private _type: string;
@@ -8,13 +6,20 @@ export class User {
   private _lastName: string;
   private _email: string;
 
-  constructor() {
-    this._id = JSON.stringify(UserSchema.getAttributes().user_id);
-    this._type = JSON.stringify(UserSchema.getAttributes().user_type_id);
-    this._firstName = JSON.stringify(UserSchema.getAttributes().first_name);
-    this._middleName = JSON.stringify(UserSchema.getAttributes().middle_name);
-    this._lastName = JSON.stringify(UserSchema.getAttributes().last_name);
-    this._email = JSON.stringify(UserSchema.getAttributes().email);
+  constructor(
+    id: string,
+    type: string,
+    firstName: string,
+    middleName: string,
+    lastName: string,
+    email: string
+  ) {
+    this._id = id;
+    this._type = type;
+    this._firstName = firstName;
+    this._middleName = middleName;
+    this._lastName = lastName;
+    this._email = email;
   }
 
   protected getId() {
@@ -46,25 +51,25 @@ export class User {
   }
 
   protected setFirstName(firstName: string) {
-    firstName = this._firstName;
+    this._firstName = firstName;
   }
 
   protected setMiddleName(middleName: string) {
-    middleName = this._middleName;
+    this._middleName = middleName;
   }
 
   protected setLastName(lastName: string) {
-    lastName = this._lastName;
+    this._lastName = lastName;
   }
 
   protected setName(firstName: string, middleName: string, lastName: string) {
-    firstName = this._firstName;
-    middleName = this._middleName;
-    lastName = this._lastName;
+    this._firstName = firstName;
+    this._middleName = middleName;
+    this._lastName = lastName;
   }
 
   protected setEmail(email: string) {
-    email = this._email;
+    this._email = email;
   }
 
   protected toJson() {

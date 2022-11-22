@@ -10,7 +10,7 @@ export const Home: React.FC = () => {
 
   const { t } = useTranslation();
   const [doRequest, errors] = useRequest({
-    url: `http://localhost:3001/api/users?user_id=${id}`,
+    url: `http://localhost:3001/api/user/${id}`,
     method: 'get',
     onSuccess: (data: unknown) => console.log(data),
   });

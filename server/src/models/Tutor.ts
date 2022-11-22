@@ -1,11 +1,19 @@
-import { Session, User } from '.';
+import { User } from '.';
 
 export class Tutor extends User {
-  private _sessionList: Array<Session>;
+  private _sessionList: object;
 
-  constructor() {
-    super();
-    this._sessionList = new Array<Session>();
+  constructor(
+    id: string,
+    type: string,
+    firstName: string,
+    middleName: string,
+    lastName: string,
+    email: string,
+    sessionList: object
+  ) {
+    super(id, type, firstName, middleName, lastName, email);
+    this._sessionList = sessionList;
   }
 
   protected getSessions() {
