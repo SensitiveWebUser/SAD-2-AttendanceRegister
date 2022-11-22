@@ -17,6 +17,7 @@ const router = express.Router();
 // 404 if the user is not found
 router.get(
   '/api/users/:id',
+  requireAuth,
   [param('id').isNumeric().withMessage('User id must be a number')],
   validateRequest,
   async (req: Request, res: Response) => {

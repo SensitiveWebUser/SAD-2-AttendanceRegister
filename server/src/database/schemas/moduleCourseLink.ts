@@ -11,10 +11,12 @@ export const ModuleCourseLink = sequelize.define<ModuleCourseLink>(
     module_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
     },
     course_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
     },
   }
 );

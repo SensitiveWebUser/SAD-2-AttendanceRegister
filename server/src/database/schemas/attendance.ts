@@ -10,10 +10,12 @@ export const Attendance = sequelize.define<Attendance>('attendance', {
     type: DataTypes.INTEGER,
     defaultValue: DataTypes.INTEGER,
     allowNull: false,
+    primaryKey: true,
   },
   session_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    primaryKey: true,
   },
   attended: {
     type: DataTypes.TIME,
