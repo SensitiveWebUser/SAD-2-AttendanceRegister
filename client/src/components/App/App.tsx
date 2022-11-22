@@ -10,6 +10,7 @@ import {
 
 import { Home } from '../../pages';
 import { NotFound } from '../../pages/NotFound';
+import { Header } from '../Header';
 
 export const App = (): JSX.Element => (
   <Suspense
@@ -20,6 +21,7 @@ export const App = (): JSX.Element => (
     }
   >
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
