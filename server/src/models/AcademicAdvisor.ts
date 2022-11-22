@@ -1,4 +1,5 @@
 import { Tutor } from './Tutor';
+import { Student } from './Student';
 
 export class AcademicAdvisor extends Tutor {
   private _adviseeList: object;
@@ -14,7 +15,7 @@ export class AcademicAdvisor extends Tutor {
     adviseeList: object
   ) {
     super(id, type, firstName, middleName, lastName, email, sessionList);
-    this._adviseeList = new Array<Tutor>();
+    this._adviseeList = new Array<Student>();
   }
 
   public getAdviseeList() {
