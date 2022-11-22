@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      # Default username
+      - POSTGRES_USER=postgres
+      # Change password to something less obvious
+      - POSTGRES_PASSWORD=123
+      # Default database name
+      - POSTGRES_DB=sad
+    logging:
+      options:
+        max-size: 10m
+        max-file: '3'
+
+    ports:
+      # 5432 is the default port for postgres
+      - '5432:5432'
+    volumes:
+      # Add the following line to persist data in dev-tools/postgres-data
+      - ./postgres-data:/var/lib/postgresql/data
