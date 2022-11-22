@@ -6,6 +6,8 @@ import { NotFoundError } from '@Errors';
 
 import { User as UserSchema } from '@Database';
 
+import { User } from '@Models';
+
 const router = express.Router();
 
 // Get the user profile
@@ -25,6 +27,14 @@ router.get(
     if (!user) throw new NotFoundError("User doesn't exist");
 
     res.status(200).send(user);
+    return new User(
+      user.user_id!,
+      user.user_type_id,
+      user.first_name,
+      user.middle_name!,
+      user.last_name,
+      user.email
+    );
   }
 );
 
