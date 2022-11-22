@@ -17,24 +17,32 @@ const router = express.Router();
 // 404 if the user is not found
 router.get(
   '/api/users/:id',
-  requireAuth,
-  [param('id').isString().withMessage('id must be a valid UUID')],
+  [param('id').isNumeric().withMessage('User id must be a number')],
   validateRequest,
   async (req: Request, res: Response) => {
     const { id } = req.params;
 
-    const user = await UserSchema.findByPk(id as string);
-    if (!user) throw new NotFoundError("User doesn't exist");
+    // Get the user from the database
+    const user = await UserSchema.findByPk(id);
 
-    res.status(200).send(user);
-    return new User(
-      user.user_id!,
-      user.user_type_id,
-      user.first_name,
-      user.middle_name!,
-      user.last_name,
-      user.email
-    );
+    // If the user is not found, throw a 404 error
+    if (!user) {
+      throw new NotFoundError();
+    }
+
+    // Return json data of the user
+    res
+      .status(200)
+      .json(
+        new User(
+          user.user_id as number,
+          user.user_type_id,
+          user.first_name,
+          user.middle_name as string,
+          user.last_name,
+          user.email
+        ).toJson()
+      );
   }
 );
 

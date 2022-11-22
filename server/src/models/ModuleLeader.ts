@@ -1,11 +1,11 @@
-import { Tutor } from '.';
+import { Tutor } from './Tutor';
 
 export class ModuleLeader extends Tutor {
   private _module: string;
 
   constructor(
-    id: string,
-    type: string,
+    id: number,
+    type: number,
     firstName: string,
     middleName: string,
     lastName: string,
@@ -17,9 +17,9 @@ export class ModuleLeader extends Tutor {
     this._module = module;
   }
 
-  protected getModule() {
+  public getModule() {
     return this._module;
   }
 
-  protected updateAttendance() {}
+  public updateAttendance() {}
 }

@@ -1,14 +1,14 @@
 export class User {
-  private _id: string;
-  private _type: string;
+  private _id: number;
+  private _type: number;
   private _firstName: string;
   private _middleName: string;
   private _lastName: string;
   private _email: string;
 
   constructor(
-    id: string,
-    type: string,
+    id: number,
+    type: number,
     firstName: string,
     middleName: string,
     lastName: string,
@@ -22,61 +22,68 @@ export class User {
     this._email = email;
   }
 
-  protected getId() {
+  public getId() {
     return this._id;
   }
 
-  protected getUserType() {
+  public getUserType() {
     return this._type;
   }
 
-  protected getFirstName() {
+  public getFirstName() {
     return this._firstName;
   }
 
-  protected getMiddleName() {
+  public getMiddleName() {
     return this._middleName;
   }
 
-  protected getLastName() {
+  public getLastName() {
     return this._lastName;
   }
 
-  protected getName() {
+  public getName() {
     return `${this._firstName} ${this._middleName} ${this._lastName}`;
   }
 
-  protected getEmail() {
+  public getEmail() {
     return this._email;
   }
 
-  protected setFirstName(firstName: string) {
+  public setFirstName(firstName: string) {
     this._firstName = firstName;
   }
 
-  protected setMiddleName(middleName: string) {
+  public setMiddleName(middleName: string) {
     this._middleName = middleName;
   }
 
-  protected setLastName(lastName: string) {
+  public setLastName(lastName: string) {
     this._lastName = lastName;
   }
 
-  protected setName(firstName: string, middleName: string, lastName: string) {
+  public setName(firstName: string, middleName: string, lastName: string) {
     this._firstName = firstName;
     this._middleName = middleName;
     this._lastName = lastName;
   }
 
-  protected setEmail(email: string) {
+  public setEmail(email: string) {
     this._email = email;
   }
 
-  protected toJson() {
-    return {};
+  public toJson() {
+    return JSON.stringify({
+      id: this._id,
+      type: this._type,
+      firstName: this._firstName,
+      middleName: this._middleName,
+      lastName: this._lastName,
+      email: this._email,
+    });
   }
 
-  protected generateAttendanceReport() {
+  public generateAttendanceReport() {
     return {};
   }
 }

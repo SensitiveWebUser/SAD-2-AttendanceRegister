@@ -1,11 +1,11 @@
-import { Tutor } from '.';
+import { Tutor } from './Tutor';
 
 export class AcademicAdvisor extends Tutor {
   private _adviseeList: object;
 
   constructor(
-    id: string,
-    type: string,
+    id: number,
+    type: number,
     firstName: string,
     middleName: string,
     lastName: string,
@@ -17,7 +17,7 @@ export class AcademicAdvisor extends Tutor {
     this._adviseeList = new Array<Tutor>();
   }
 
-  protected getadviseeList() {
+  public getAdviseeList() {
     return this._adviseeList;
   }
 }

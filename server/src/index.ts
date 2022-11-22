@@ -5,6 +5,7 @@ import { app } from './app';
 import 'express-async-errors';
 
 import { sequelize } from '@Database';
+import { dummyDataImport } from '../dev-tools/dummyData';
 
 const startup = async () => {
   // Checks env variable AUTH0_ISSUER is set
@@ -22,8 +23,16 @@ const startup = async () => {
     .authenticate()
     .then(async () => {
       console.log('Connection to database established successfully.');
+
+      // Syncs database with models
       await sequelize.sync();
       console.log('Database synced successfully.');
+
+      // Imports dummy data into database if ADD_DUMMY_DATA is set to true
+      process.env.ADD_DUMMY_DATA === 'true' &&
+        (await dummyDataImport().then(() =>
+          console.log('Dummy data imported successfully.')
+        ));
     })
     .catch((error) => {
       console.error('ERROR: Something went wrong with database: ', error);

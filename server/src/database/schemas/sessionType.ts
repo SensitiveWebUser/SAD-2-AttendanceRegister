@@ -1,31 +1,21 @@
-import {
-  Model,
-  DataTypes,
-  CreationOptional,
-  InferAttributes,
-  InferCreationAttributes,
-} from 'sequelize';
+import { Model, DataTypes, CreationOptional } from 'sequelize';
 
 import { sequelize } from '@Database';
 
 export const SessionType = sequelize.define<SessionType>('session_type', {
   session_type_id: {
-    type: DataTypes.STRING,
-    defaultValue: DataTypes.STRING,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
   },
   session_type_name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(20),
     allowNull: false,
   },
 });
 
-interface SessionType
-  extends Model<
-    InferAttributes<SessionType>,
-    InferCreationAttributes<SessionType>
-  > {
-  session_type_id?: CreationOptional<string>;
+interface SessionType extends Model {
+  session_type_id?: CreationOptional<number>;
   session_type_name: 'Lab' | 'Lecture';
 }

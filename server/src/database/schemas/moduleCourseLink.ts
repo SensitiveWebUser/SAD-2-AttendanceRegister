@@ -1,10 +1,4 @@
-import {
-  Model,
-  DataTypes,
-  CreationOptional,
-  InferAttributes,
-  InferCreationAttributes,
-} from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 
 import { sequelize } from '@Database';
 
@@ -14,18 +8,12 @@ import { Course } from './course';
 export const ModuleCourseLink = sequelize.define<ModuleCourseLink>(
   'module_course_link',
   {
-    module_course_id: {
-      type: DataTypes.STRING,
-      defaultValue: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true,
-    },
     module_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     course_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   }
@@ -35,12 +23,7 @@ export const ModuleCourseLink = sequelize.define<ModuleCourseLink>(
 ModuleCourseLink.belongsTo(Module, { foreignKey: 'module_id' });
 ModuleCourseLink.belongsTo(Course, { foreignKey: 'course_id' });
 
-interface ModuleCourseLink
-  extends Model<
-    InferAttributes<ModuleCourseLink>,
-    InferCreationAttributes<ModuleCourseLink>
-  > {
-  module_course_id?: CreationOptional<string>;
-  module_id: string;
-  course_id: string;
+interface ModuleCourseLink extends Model {
+  module_id: number;
+  course_id: number;
 }

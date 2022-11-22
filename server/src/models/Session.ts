@@ -1,17 +1,17 @@
 export class Session {
-  private _id: string;
-  private _type: string;
-  private _tutorId: string;
-  private _startTime: string;
-  private _endTime: string;
+  private _id: number;
+  private _type: number;
+  private _tutorId: number;
+  private _startTime: Date;
+  private _endTime: Date;
   private _sessionCode: string;
 
   constructor(
-    id: string,
-    type: string,
-    tutorId: string,
-    startTime: string,
-    endTime: string,
+    id: number,
+    type: number,
+    tutorId: number,
+    startTime: Date,
+    endTime: Date,
     sessionCode: string
   ) {
     this._id = id;
@@ -22,27 +22,27 @@ export class Session {
     this._sessionCode = sessionCode;
   }
 
-  protected getId() {
+  public getId() {
     return this._id;
   }
 
-  protected getSessionType() {
+  public getSessionType() {
     return this._type;
   }
 
-  protected getTutor() {
+  public getTutor() {
     return this._tutorId;
   }
 
-  protected getStartTime() {
+  public getStartTime() {
     return this._startTime;
   }
 
-  protected getEndTime() {
+  public getEndTime() {
     return this._endTime;
   }
 
-  protected getSessionCode() {
+  public getSessionCode() {
     return this._sessionCode;
   }
 }

@@ -1,10 +1,4 @@
-import {
-  Model,
-  DataTypes,
-  CreationOptional,
-  InferAttributes,
-  InferCreationAttributes,
-} from 'sequelize';
+import { Model, DataTypes, CreationOptional } from 'sequelize';
 
 import { sequelize } from '@Database';
 
@@ -14,33 +8,33 @@ import { SessionType } from './sessionType';
 
 export const Session = sequelize.define<Session>('session', {
   session_id: {
-    type: DataTypes.STRING,
-    defaultValue: DataTypes.STRING,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
   },
   session_type_id: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   tutor_id: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   module_id: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   start_timestamp: {
-    type: DataTypes.TIME,
+    type: DataTypes.DATE,
     allowNull: false,
   },
   end_timestamp: {
-    type: DataTypes.TIME,
+    type: DataTypes.DATE,
     allowNull: false,
   },
   code: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(4),
     allowNull: false,
   },
 });
@@ -50,13 +44,12 @@ Session.belongsTo(SessionType, { foreignKey: 'session_type_id' });
 Session.belongsTo(User, { foreignKey: 'tutor_id' });
 Session.belongsTo(Module, { foreignKey: 'module_id' });
 
-interface Session
-  extends Model<InferAttributes<Session>, InferCreationAttributes<Session>> {
-  session_id?: CreationOptional<string>;
-  session_type_id: string;
-  tutor_id: string;
-  module_id: string;
-  start_timestamp: string;
-  end_timestamp: string;
+interface Session extends Model {
+  session_id?: CreationOptional<number>;
+  session_type_id: number;
+  tutor_id: number;
+  module_id: number;
+  start_timestamp: Date;
+  end_timestamp: Date;
   code: string;
 }

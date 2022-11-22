@@ -1,17 +1,17 @@
-import { User } from '.';
+import { User } from './User';
 
 export class Student extends User {
   private _attendanceData: object;
-  private _advisor: string;
+  private _advisor: number;
 
   constructor(
-    id: string,
-    type: string,
+    id: number,
+    type: number,
     firstName: string,
     middleName: string,
     lastName: string,
     email: string,
-    advisor: string,
+    advisor: number,
     attendanceData: object
   ) {
     super(id, type, firstName, middleName, lastName, email);
@@ -19,13 +19,13 @@ export class Student extends User {
     this._attendanceData = attendanceData;
   }
 
-  protected getAttendanceData() {
+  public getAttendanceData() {
     return this._attendanceData;
   }
 
-  protected getAdvisor() {
+  public getAdvisor() {
     return this._advisor;
   }
 
-  protected registerAttendance() {}
+  public registerAttendance() {}
 }

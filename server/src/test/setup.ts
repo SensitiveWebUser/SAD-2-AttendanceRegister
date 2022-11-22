@@ -9,6 +9,5 @@ beforeEach(async () => {
 // This runs after all tests are done
 // It closes the database connection
 afterAll(async () => {
-  console.log('Jest stopping!');
   await sequelize.close();
 });

@@ -1,11 +1,11 @@
-import { User } from '.';
+import { User } from './User';
 
 export class Tutor extends User {
   private _sessionList: object;
 
   constructor(
-    id: string,
-    type: string,
+    id: number,
+    type: number,
     firstName: string,
     middleName: string,
     lastName: string,
@@ -16,7 +16,7 @@ export class Tutor extends User {
     this._sessionList = sessionList;
   }
 
-  protected getSessions() {
+  public getSessions() {
     return this._sessionList;
   }
 }

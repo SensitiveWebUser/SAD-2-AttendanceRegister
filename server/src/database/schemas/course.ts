@@ -1,10 +1,4 @@
-import {
-  Model,
-  DataTypes,
-  CreationOptional,
-  InferAttributes,
-  InferCreationAttributes,
-} from 'sequelize';
+import { Model, DataTypes, CreationOptional } from 'sequelize';
 
 import { sequelize } from '@Database';
 
@@ -12,17 +6,17 @@ import { User } from './user';
 
 export const Course = sequelize.define<Course>('course', {
   course_id: {
-    type: DataTypes.STRING,
-    defaultValue: DataTypes.STRING,
+    type: DataTypes.INTEGER,
+    defaultValue: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
   },
   course_name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(20),
     allowNull: false,
   },
   course_leader: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
 });
@@ -30,9 +24,8 @@ export const Course = sequelize.define<Course>('course', {
 // Add foreign keys
 Course.belongsTo(User, { foreignKey: 'course_leader' });
 
-interface Course
-  extends Model<InferAttributes<Course>, InferCreationAttributes<Course>> {
-  course_id?: CreationOptional<string>;
+interface Course extends Model {
+  course_id?: CreationOptional<number>;
   course_name: string;
-  course_leader: string;
+  course_leader: number;
 }
