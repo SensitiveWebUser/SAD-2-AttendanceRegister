@@ -33,10 +33,7 @@ module.exports = {
     indent: ['error', 2],
     'react/jsx-indent': 'off',
     'react/jsx-indent-props': 'off',
-    'linebreak-style': [
-      'error',
-      process.platform === 'win32' ? 'windows' : 'unix',
-    ],
+    'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     'react/react-in-jsx-scope': 'off',
