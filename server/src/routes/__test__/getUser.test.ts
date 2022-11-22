@@ -6,17 +6,17 @@ import { User, UserType } from '@Database';
 const updateDb = async () => {
   // Create a user type
   const userType = await UserType.create({
-    user_type_id: 1,
+    user_type_id: '1',
     user_type_name: 'Admin',
   });
 
   // Create a User
   const user = await User.create({
-    user_id: 1,
+    user_id: '1',
     first_name: 'John',
     last_name: 'Smith',
     email: 'JohnSmith@localhost.com',
-    user_type_id: userType.user_type_id as number,
+    user_type_id: userType.user_type_id as string,
   });
 
   return { user, userType };

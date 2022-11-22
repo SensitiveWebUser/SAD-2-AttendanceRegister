@@ -1,24 +1,24 @@
 import { Tutor } from './Tutor';
 
 export class ModuleLeader extends Tutor {
-  private _module: string;
+  private _moduleId: string;
 
   constructor(
-    id: number,
-    type: number,
+    id: string,
+    type: string,
     firstName: string,
     middleName: string,
     lastName: string,
     email: string,
     sessionList: object,
-    module: string
+    moduleId: string
   ) {
     super(id, type, firstName, middleName, lastName, email, sessionList);
-    this._module = module;
+    this._moduleId = moduleId;
   }
 
-  public getModule() {
-    return this._module;
+  public getModuleId() {
+    return this._moduleId;
   }
 
   public updateAttendance() {}

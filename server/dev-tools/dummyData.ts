@@ -15,7 +15,7 @@ const dummyData = {
     {
       course_id: 1,
       course_name: 'Course 1',
-      course_leader: 1,
+      course_leader_id: 1,
     },
   ],
   user_types: [
@@ -42,6 +42,9 @@ const dummyData = {
     {
       user_type_id: 6,
       user_type_name: 'advisor',
+    },
+    {
+      user_type_name: 'advisor2',
     },
   ],
   users: [
@@ -141,13 +144,13 @@ const dummyData = {
     {
       module_id: 1,
       module_name: 'Module 1',
-      module_leader: 4,
+      module_leader_id: 4,
       course_id: 1,
     },
     {
       module_id: 2,
       module_name: 'Module 2',
-      module_leader: 8,
+      module_leader_id: 8,
       course_id: 1,
     },
   ],
@@ -174,8 +177,8 @@ const dummyData = {
       session_type_id: 1,
       module_id: 1,
       tutor_id: 3,
-      start_timestamp: new Date(),
-      end_timestamp: new Date(new Date().getTime() + 60 * 60 * 1000),
+      start_timestamp: new Date().getTime(),
+      end_timestamp: new Date(new Date().getTime() + 60 * 60 * 1000).getTime(),
       code: '1234',
     },
     {
@@ -184,8 +187,8 @@ const dummyData = {
       session_type_id: 2,
       module_id: 2,
       tutor_id: 7,
-      start_timestamp: new Date(),
-      end_timestamp: new Date(new Date().getTime() + 60 * 60 * 1000),
+      start_timestamp: new Date().getTime(),
+      end_timestamp: new Date(new Date().getTime() + 60 * 60 * 1000).getTime(),
       code: 'asdf',
     },
   ],
@@ -193,22 +196,22 @@ const dummyData = {
     {
       session_id: 1,
       user_id: 2,
-      attended: null,
+      attended: 0,
     },
     {
       session_id: 1,
       user_id: 6,
-      attended: null,
+      attended: 0,
     },
     {
       session_id: 2,
       user_id: 2,
-      attended: null,
+      attended: 0,
     },
     {
       session_id: 2,
       user_id: 6,
-      attended: null,
+      attended: 0,
     },
   ],
 };

@@ -1,14 +1,14 @@
 import { CourseLeader } from '../CourseLeader';
 
 const courseLeaderTestData = {
-  id: 1,
-  type: 4,
+  id: '1',
+  type: '4',
   firstName: 'John',
   middleName: 'A',
   lastName: 'Smith',
   email: 'JohnSmith@localhost.com',
   sessionList: {},
-  course: 1,
+  courseId: '1',
 };
 
 const _courseLeader = new CourseLeader(
@@ -19,7 +19,7 @@ const _courseLeader = new CourseLeader(
   courseLeaderTestData.lastName,
   courseLeaderTestData.email,
   courseLeaderTestData.sessionList,
-  courseLeaderTestData.course
+  courseLeaderTestData.courseId
 );
 
 describe('CourseLeader model', () => {
@@ -31,6 +31,6 @@ describe('CourseLeader model', () => {
 // Test courseLeader getter and setter methods
 describe('CourseLeader model getter and setter methods', () => {
   it('getCourse method returns the correct course', () => {
-    expect(_courseLeader.getCourse()).toEqual(courseLeaderTestData.course);
+    expect(_courseLeader.getCourseId()).toEqual(courseLeaderTestData.courseId);
   });
 });

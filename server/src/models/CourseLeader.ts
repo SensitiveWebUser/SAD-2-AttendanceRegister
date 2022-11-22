@@ -1,24 +1,24 @@
 import { Tutor } from './Tutor';
 
 export class CourseLeader extends Tutor {
-  private _course: number;
+  private _courseId: string;
 
   constructor(
-    id: number,
-    type: number,
+    id: string,
+    type: string,
     firstName: string,
     middleName: string,
     lastName: string,
     email: string,
     sessionList: object,
-    course: number
+    courseId: string
   ) {
     super(id, type, firstName, middleName, lastName, email, sessionList);
-    this._course = course;
+    this._courseId = courseId;
   }
 
-  public getCourse() {
-    return this._course;
+  public getCourseId() {
+    return this._courseId;
   }
 
   public updateAttendance() {}

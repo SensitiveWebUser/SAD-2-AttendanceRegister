@@ -1,14 +1,14 @@
 import { ModuleLeader } from '../ModuleLeader';
 
 const moduleLeaderTestData = {
-  id: 1,
-  type: 1,
+  id: '1',
+  type: '1',
   firstName: 'John',
   middleName: 'A',
   lastName: 'Smith',
   email: 'JohnSmith@localhost.com',
   sessionList: {},
-  module: 'CS1234',
+  moduleId: 'CS1234',
 };
 
 const _moduleLeader = new ModuleLeader(
@@ -19,7 +19,7 @@ const _moduleLeader = new ModuleLeader(
   moduleLeaderTestData.lastName,
   moduleLeaderTestData.email,
   moduleLeaderTestData.sessionList,
-  moduleLeaderTestData.module
+  moduleLeaderTestData.moduleId
 );
 
 describe('ModuleLeader', () => {
@@ -31,6 +31,6 @@ describe('ModuleLeader', () => {
 // Test module leader getter and setter methods
 describe('ModuleLeader model getter and setter methods', () => {
   it('getModule method returns the correct module', () => {
-    expect(_moduleLeader.getModule()).toEqual(moduleLeaderTestData.module);
+    expect(_moduleLeader.getModuleId()).toEqual(moduleLeaderTestData.moduleId);
   });
 });

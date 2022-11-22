@@ -3,8 +3,8 @@
 import { AcademicAdvisor } from '../AcademicAdvisor';
 
 const academicAdvisorTestData = {
-  id: 1,
-  type: 1,
+  id: '1',
+  type: '1',
   firstName: 'John',
   middleName: 'A',
   lastName: 'Smith',

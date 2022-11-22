@@ -1,15 +1,15 @@
 export class Session {
-  private _id: number;
-  private _type: number;
-  private _tutorId: number;
+  private _id: string;
+  private _type: string;
+  private _tutorId: string;
   private _startTime: Date;
   private _endTime: Date;
   private _sessionCode: string;
 
   constructor(
-    id: number,
-    type: number,
-    tutorId: number,
+    id: string,
+    type: string,
+    tutorId: string,
     startTime: Date,
     endTime: Date,
     sessionCode: string

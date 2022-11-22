@@ -4,8 +4,8 @@ export class AcademicAdvisor extends Tutor {
   private _adviseeList: object;
 
   constructor(
-    id: number,
-    type: number,
+    id: string,
+    type: string,
     firstName: string,
     middleName: string,
     lastName: string,

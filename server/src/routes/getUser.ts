@@ -18,7 +18,7 @@ const router = express.Router();
 router.get(
   '/api/users/:id',
   requireAuth,
-  [param('id').isNumeric().withMessage('User id must be a number')],
+  [param('id').isString().withMessage('User id must be a string')],
   validateRequest,
   async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -36,7 +36,7 @@ router.get(
       .status(200)
       .json(
         new User(
-          user.user_id as number,
+          user.user_id as string,
           user.user_type_id,
           user.first_name,
           user.middle_name as string,

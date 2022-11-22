@@ -1,9 +1,9 @@
 import { Session } from '../Session';
 
 const sessionTestData = {
-  id: 1,
-  type: 1,
-  tutor: 1,
+  id: '1',
+  type: '1',
+  tutor: '1',
   startTime: new Date(),
   endTime: new Date(),
   code: '1234',

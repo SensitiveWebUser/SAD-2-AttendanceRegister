@@ -7,18 +7,17 @@ import { Session } from './session';
 
 export const Attendance = sequelize.define<Attendance>('attendance', {
   user_id: {
-    type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
+    type: DataTypes.STRING(36),
     allowNull: false,
     primaryKey: true,
   },
   session_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING(36),
     allowNull: false,
     primaryKey: true,
   },
   attended: {
-    type: DataTypes.TIME,
+    type: DataTypes.BIGINT,
     allowNull: true,
   },
 });
@@ -28,7 +27,7 @@ Attendance.belongsTo(User, { foreignKey: 'user_id' });
 Attendance.belongsTo(Session, { foreignKey: 'session_id' });
 
 interface Attendance extends Model {
-  user_id?: CreationOptional<number>;
-  session_id: number;
-  attended: Date;
+  user_id?: CreationOptional<string>;
+  session_id: string;
+  attended: number;
 }

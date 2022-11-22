@@ -1,13 +1,13 @@
 import { Student } from '@Models';
 
 const studentTestData = {
-  id: 1,
-  type: 1,
+  id: '1',
+  type: '1',
   firstName: 'John',
   middleName: 'A',
   lastName: 'Smith',
   email: 'JohnSmith@localhost.com',
-  advisor: 1,
+  advisor: '1',
   _attendanceData: {},
 };
 

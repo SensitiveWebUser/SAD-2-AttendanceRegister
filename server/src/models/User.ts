@@ -1,14 +1,14 @@
 export class User {
-  private _id: number;
-  private _type: number;
+  private _id: string;
+  private _type: string;
   private _firstName: string;
   private _middleName: string;
   private _lastName: string;
   private _email: string;
 
   constructor(
-    id: number,
-    type: number,
+    id: string,
+    type: string,
     firstName: string,
     middleName: string,
     lastName: string,

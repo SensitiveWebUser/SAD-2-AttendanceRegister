@@ -4,8 +4,8 @@ import { sequelize } from '@Database';
 
 export const SessionType = sequelize.define<SessionType>('session_type', {
   session_type_id: {
-    type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
+    type: DataTypes.STRING(36),
+    defaultValue: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
   },
@@ -16,6 +16,6 @@ export const SessionType = sequelize.define<SessionType>('session_type', {
 });
 
 interface SessionType extends Model {
-  session_type_id?: CreationOptional<number>;
+  session_type_id?: CreationOptional<string>;
   session_type_name: 'Lab' | 'Lecture';
 }

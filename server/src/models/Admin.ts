@@ -2,8 +2,8 @@ import { User } from './User';
 
 export class Admin extends User {
   constructor(
-    id: number,
-    type: number,
+    id: string,
+    type: string,
     firstName: string,
     middleName: string,
     lastName: string,

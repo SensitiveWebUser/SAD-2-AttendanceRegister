@@ -1,8 +1,8 @@
 import { Tutor } from '../Tutor';
 
 const tutorTestData = {
-  id: 1,
-  type: 1,
+  id: '1',
+  type: '1',
   firstName: 'John',
   middleName: 'A',
   lastName: 'Smith',

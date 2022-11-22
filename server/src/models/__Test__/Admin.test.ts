@@ -1,8 +1,8 @@
 import { Admin } from '../Admin';
 
 const adminTestData = {
-  id: 1,
-  type: 1,
+  id: '1',
+  type: '1',
   firstName: 'John',
   middleName: 'A',
   lastName: 'Smith',

@@ -9,12 +9,12 @@ export const ModuleCourseLink = sequelize.define<ModuleCourseLink>(
   'module_course_link',
   {
     module_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(36),
       allowNull: false,
       primaryKey: true,
     },
     course_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(36),
       allowNull: false,
       primaryKey: true,
     },
@@ -26,6 +26,6 @@ ModuleCourseLink.belongsTo(Module, { foreignKey: 'module_id' });
 ModuleCourseLink.belongsTo(Course, { foreignKey: 'course_id' });
 
 interface ModuleCourseLink extends Model {
-  module_id: number;
-  course_id: number;
+  module_id: string;
+  course_id: string;
 }

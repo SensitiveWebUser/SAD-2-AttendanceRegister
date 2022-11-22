@@ -4,8 +4,8 @@ import { sequelize } from '@Database';
 
 export const UserType = sequelize.define<UserType>('user_type', {
   user_type_id: {
-    type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
+    type: DataTypes.STRING(36),
+    defaultValue: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
   },
@@ -16,7 +16,7 @@ export const UserType = sequelize.define<UserType>('user_type', {
 });
 
 interface UserType extends Model {
-  user_type_id?: CreationOptional<number>;
+  user_type_id?: CreationOptional<string>;
   user_type_name:
     | 'Admin'
     | 'Student'

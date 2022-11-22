@@ -4,8 +4,8 @@ export class Tutor extends User {
   private _sessionList: object;
 
   constructor(
-    id: number,
-    type: number,
+    id: string,
+    type: string,
     firstName: string,
     middleName: string,
     lastName: string,
