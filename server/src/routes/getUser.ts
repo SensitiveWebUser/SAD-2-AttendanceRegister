@@ -4,6 +4,8 @@ import { requireAuth, validateRequest } from '@Middlewares';
 
 import { NotFoundError } from '@Errors';
 
+import { User as UserSchema } from '@Database';
+
 import { User } from '@Models';
 
 const router = express.Router();
@@ -16,15 +18,32 @@ const router = express.Router();
 router.get(
   '/api/users/:id',
   requireAuth,
-  [param('id').isString().withMessage('id must be a valid UUID')],
+  [param('id').isString().withMessage('User id must be a string')],
   validateRequest,
   async (req: Request, res: Response) => {
     const { id } = req.params;
 
-    const user = await User.findByPk(id as string);
-    if (!user) throw new NotFoundError('User doesn\'t exist');
+    // Get the user from the database
+    const user = await UserSchema.findByPk(id);
 
-    res.status(200).send(user);
+    // If the user is not found, throw a 404 error
+    if (!user) {
+      throw new NotFoundError();
+    }
+
+    // Return json data of the user
+    res
+      .status(200)
+      .json(
+        new User(
+          user.user_id as string,
+          user.user_type_id,
+          user.first_name,
+          user.middle_name as string,
+          user.last_name,
+          user.email
+        ).toJson()
+      );
   }
 );
 
