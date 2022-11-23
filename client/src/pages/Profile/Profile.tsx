@@ -25,26 +25,26 @@ export const Profile = (): JSX.Element => {
           position: 'absolute',
         }}
       />
-      <Container
-        sx={{ width: '80%', pt: '100px', flexGrow: 1, position: 'absolute' }}
-      >
+      <Container sx={{ width: 'auto', pt: '100px', flexGrow: 1 }}>
         <Grid
           container
           direction="row"
           justifyContent="space-around"
           alignItems="center"
-          rowSpacing={1}
+          rowSpacing={2}
           columnSpacing="auto"
         >
           <Grid
             item
-            xs={'auto'}
+            xs={6}
             sx={{
               backgroundColor: '#464954',
               color: 'white',
               borderRadius: '8px',
               p: '30px',
               pb: '200px',
+              zIndex: 1,
+              minWidth: '320px',
             }}
           >
             <Avatar
@@ -83,6 +83,8 @@ export const Profile = (): JSX.Element => {
               borderRadius: '8px',
               p: '30px',
               position: 'relative',
+              mt: '30px',
+              minWidth: '320px',
             }}
           >
             <Typography
