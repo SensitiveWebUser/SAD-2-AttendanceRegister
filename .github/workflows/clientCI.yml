@@ -43,6 +43,6 @@ jobs:
 
       - name: Build Client
         run: npm run build
-      
+
       - name: Run Client Tests
         run: npm run test

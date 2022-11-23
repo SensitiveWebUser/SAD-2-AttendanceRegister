@@ -22,7 +22,7 @@ router.get(
     const { id } = req.params;
 
     const user = await User.findByPk(id as string);
-    if (!user) throw new NotFoundError("User doesn't exist");
+    if (!user) throw new NotFoundError('User doesn\'t exist');
 
     res.status(200).send(user);
   }

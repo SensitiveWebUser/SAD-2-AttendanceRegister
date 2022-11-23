@@ -1,16 +1,16 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd ./client
-
 npx lint-staged
+
+cd ./client
 
 CI=true npm test
 
+#add client tests here
+
 cd ..
 cd ./server
-
-npx lint-staged
 
 npm run test:ci
 

@@ -4,11 +4,35 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "npx eslint --fix .",
+    "prettier": "prettier --write --ignore-unknown ."
+  },
+  "lint-staged": {
+    "**/*": [
+      "npm run prettier",
+      "npm run lint"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "husky": "^8.0.0"
-  }
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "eslint": "^8.27.0",
+    "eslint-plugin-react": "^7.31.10",
+    "husky": "^8.0.0",
+    "prettier": "2.7.1",
+    "lint-staged": "^13.0.3"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
+  },
+  "dependencies": {}
 }

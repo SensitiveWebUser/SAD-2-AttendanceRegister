@@ -7,7 +7,6 @@
     "start": "ts-node-dev -r tsconfig-paths/register src/index.ts --env development",
     "build": "tsc",
     "test": "jest -i --watchAll --no-cache",
-    "lint": "",
     "test:ci": "jest -i --no-cache"
   },
   "jest": {
@@ -69,13 +68,12 @@
     "@types/supertest": "^2.0.12",
     "@types/uuid": "^8.3.4",
     "jest": "^28.1.0",
-    "prettier": "2.7.1",
     "sqlite3": "^5.1.2",
     "supertest": "^6.2.3",
     "ts-jest": "^28.0.3",
     "tsconfig-paths": "^4.1.0"
   },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }
