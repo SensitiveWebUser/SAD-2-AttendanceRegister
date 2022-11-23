@@ -9,7 +9,7 @@ export const Home = (): JSX.Element => {
 
   const [, setUserData] = useState({});
   const [doRequest, errors] = useRequest({
-    url: `/api/users/${id}`,
+    url: `http://localhost:3001/api/user/${id}`,
     method: 'get',
     onSuccess: (data: unknown) => setUserData(data),
   });
