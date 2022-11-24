@@ -12,11 +12,11 @@ export class Admin extends User {
     super(id, type, firstName, middleName, lastName, email);
   }
 
-  createUser() {}
+  // createUser() {}
 
-  updateUser() {}
+  // updateUser() {}
 
-  bulkImportUsers() {}
+  // bulkImportUsers() {}
 
-  initiatePasswordReset() {}
+  // initiatePasswordReset() {}
 }

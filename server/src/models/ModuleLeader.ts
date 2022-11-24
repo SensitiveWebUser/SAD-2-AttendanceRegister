@@ -21,5 +21,5 @@ export class ModuleLeader extends Tutor {
     return this._moduleId;
   }
 
-  public updateAttendance() {}
+  // public updateAttendance() {}
 }
