@@ -2,36 +2,43 @@ export class Session {
   private _id: string;
   private _type: string;
   private _tutorId: string;
+  private _moduleId: string;
   private _startTime: Date;
   private _endTime: Date;
   private _sessionCode: string;
 
-  constructor(
-    id: string,
-    type: string,
-    tutorId: string,
-    startTime: Date,
-    endTime: Date,
-    sessionCode: string
-  ) {
-    this._id = id;
-    this._type = type;
-    this._tutorId = tutorId;
-    this._startTime = startTime;
-    this._endTime = endTime;
-    this._sessionCode = sessionCode;
+  constructor({
+    session_id,
+    session_type_id,
+    tutor_id,
+    module_id,
+    start_timestamp,
+    end_timestamp,
+    code,
+  }: constructorParams) {
+    this._id = session_id;
+    this._type = session_type_id;
+    this._tutorId = tutor_id;
+    this._moduleId = module_id;
+    this._startTime = start_timestamp;
+    this._endTime = end_timestamp;
+    this._sessionCode = code;
   }
 
   public getId() {
     return this._id;
   }
 
-  public getSessionType() {
+  public getSessionTypeId() {
     return this._type;
   }
 
-  public getTutor() {
+  public getTutorId() {
     return this._tutorId;
+  }
+
+  public getModuleId() {
+    return this._moduleId;
   }
 
   public getStartTime() {
@@ -45,4 +52,14 @@ export class Session {
   public getSessionCode() {
     return this._sessionCode;
   }
+}
+
+interface constructorParams {
+  session_id: string;
+  session_type_id: string;
+  tutor_id: string;
+  module_id: string;
+  start_timestamp: Date;
+  end_timestamp: Date;
+  code: string;
 }

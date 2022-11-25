@@ -1,1 +1,1 @@
-export { getUserRouter } from './getUser';
+export { getUserRouter } from './getUser.route';

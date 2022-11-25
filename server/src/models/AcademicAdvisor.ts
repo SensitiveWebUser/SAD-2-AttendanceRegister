@@ -1,24 +1,19 @@
-import { Tutor } from './Tutor';
+import { Tutor, tutorConstructorParams } from './Tutor';
 import { Student } from './Student';
 
 export class AcademicAdvisor extends Tutor {
-  private _adviseeList: object;
-
-  constructor(
-    id: string,
-    type: string,
-    firstName: string,
-    middleName: string,
-    lastName: string,
-    email: string,
-    sessionList: object,
-    adviseeList: object
-  ) {
-    super(id, type, firstName, middleName, lastName, email, sessionList);
-    this._adviseeList = new Array<Student>();
+  constructor({
+    user_id,
+    first_name,
+    middle_name,
+    last_name,
+    email,
+    user_type_id,
+  }: constructorParams) {
+    super({ user_id, first_name, middle_name, last_name, email, user_type_id });
   }
 
-  public getAdviseeList() {
-    return this._adviseeList;
-  }
+  public getAdviseeList() {}
 }
+
+interface constructorParams extends tutorConstructorParams {}

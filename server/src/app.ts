@@ -6,7 +6,7 @@ import { NotFoundError } from '@Errors';
 import { errorHandler } from '@Middlewares';
 
 // Routes imports
-import { getUserRouter } from '@Routes/getUser';
+import { getUserRouter } from '@Routes/getUser.route';
 
 const app = express();
 

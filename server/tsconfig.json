@@ -14,7 +14,8 @@
       "@Models/*": ["src/models/*"],
       "@Models": ["src/models/index.ts"],
       "@Utils/*": ["src/utils/*"],
-      "@Database": ["src/database/index.ts"]
+      "@Database": ["src/database/index.ts"],
+      "@Controllers": ["src/controllers/index.ts"]
     },
     "esModuleInterop": true,
     "skipLibCheck": true,

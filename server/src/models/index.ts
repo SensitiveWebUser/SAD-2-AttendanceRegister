@@ -6,3 +6,5 @@ export * from './ModuleLeader';
 export * from './AcademicAdvisor';
 export * from './Student';
 export * from './Session';
+export * from './Attendance';
+export * from './Course';

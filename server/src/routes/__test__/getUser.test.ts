@@ -24,22 +24,22 @@ const updateDb = async () => {
 
 it('returns user data and 200 status code', async () => {
   // Create user in database
-  const { user } = await updateDb();
+  const { user, userType } = await updateDb();
 
   // Get the user
-  const response = await request(app).get(`/api/users/${user.user_id}`);
+  const response = await request(app).get(`/api/user/${user.user_id}`);
 
   expect(response.status).toEqual(200);
   expect(JSON.parse(response.body)).toEqual({
     id: user.user_id,
     firstName: user.first_name,
-    middleName: null,
+    middleName: '',
     lastName: user.last_name,
     email: user.email,
-    type: user.user_type_id,
+    type: userType.user_type_name,
   });
 });
 
 it('returns 404 status code if user not found', async () => {
-  await request(app).get('/api/users/123').send().expect(404);
+  await request(app).get('/api/user/123').send().expect(404);
 });

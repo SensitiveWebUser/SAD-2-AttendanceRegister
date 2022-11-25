@@ -1,15 +1,15 @@
-import { User } from './User';
+import { User, userConstructorParams } from './User';
 
 export class Admin extends User {
-  constructor(
-    id: string,
-    type: string,
-    firstName: string,
-    middleName: string,
-    lastName: string,
-    email: string
-  ) {
-    super(id, type, firstName, middleName, lastName, email);
+  constructor({
+    user_id,
+    first_name,
+    middle_name,
+    last_name,
+    email,
+    user_type_id,
+  }: constructorParams) {
+    super({ user_id, first_name, middle_name, last_name, email, user_type_id });
   }
 
   createUser() {}
@@ -20,3 +20,5 @@ export class Admin extends User {
 
   initiatePasswordReset() {}
 }
+
+interface constructorParams extends userConstructorParams {}

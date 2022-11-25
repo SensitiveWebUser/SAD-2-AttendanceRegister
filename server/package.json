@@ -40,6 +40,9 @@
       ],
       "@Database": [
         "<rootDir>/src/database/index.ts"
+      ],
+      "@Controllers": [
+        "<rootDir>/src/controllers/index.ts"
       ]
     },
     "setupFilesAfterEnv": [

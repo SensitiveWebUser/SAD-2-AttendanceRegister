@@ -1,20 +1,19 @@
-import { Tutor } from './Tutor';
+import { Tutor, tutorConstructorParams } from './Tutor';
 
 export class ModuleLeader extends Tutor {
   private _moduleId: string;
 
-  constructor(
-    id: string,
-    type: string,
-    firstName: string,
-    middleName: string,
-    lastName: string,
-    email: string,
-    sessionList: object,
-    moduleId: string
-  ) {
-    super(id, type, firstName, middleName, lastName, email, sessionList);
-    this._moduleId = moduleId;
+  constructor({
+    user_id,
+    first_name,
+    middle_name,
+    last_name,
+    email,
+    user_type_id,
+    module_id,
+  }: constructorParams) {
+    super({ user_id, first_name, middle_name, last_name, email, user_type_id });
+    this._moduleId = module_id;
   }
 
   public getModuleId() {
@@ -22,4 +21,8 @@ export class ModuleLeader extends Tutor {
   }
 
   public updateAttendance() {}
+}
+
+interface constructorParams extends tutorConstructorParams {
+  module_id: string;
 }
