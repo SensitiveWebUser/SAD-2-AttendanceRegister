@@ -11,7 +11,7 @@ export const Home = (): JSX.Element => {
   const [doRequest, errors] = useRequest({
     url: `http://localhost:3001/api/user/${id}`,
     method: 'get',
-    onSuccess: (data: unknown) => setUserData(data),
+    onSuccess: (data: any) => setUserData(data),
   });
 
   return (
