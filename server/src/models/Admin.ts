@@ -1,15 +1,15 @@
-import { User, userConstructorParams } from './User';
+import { User, userConstructorParams } from '@Models';
 
 export class Admin extends User {
   constructor({
-    user_id,
-    first_name,
-    middle_name,
-    last_name,
+    userId,
+    firstName,
+    middleName,
+    lastName,
     email,
-    user_type_id,
+    userTypeId,
   }: constructorParams) {
-    super({ user_id, first_name, middle_name, last_name, email, user_type_id });
+    super({ userId, firstName, middleName, lastName, email, userTypeId });
   }
 
   createUser() {}

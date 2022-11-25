@@ -1,10 +1,14 @@
-import { Session, AcademicAdvisor, Course, Attendance } from '@Models';
-import { User, userConstructorParams } from './User';
+import {
+  Session,
+  Course,
+  Attendance,
+  User,
+  userConstructorParams,
+} from '@Models';
 
 import {
   Attendance as AttendanceSchema,
   Session as SessionSchema,
-  User as UserSchema,
   Course as CourseSchema,
 } from '@Database';
 
@@ -12,16 +16,16 @@ export class Student extends User {
   private _courseId: string;
 
   constructor({
-    user_id,
-    first_name,
-    middle_name,
-    last_name,
+    userId,
+    firstName,
+    middleName,
+    lastName,
     email,
-    user_type_id,
-    course_id,
+    userTypeId,
+    courseId,
   }: constructorParams) {
-    super({ user_id, first_name, middle_name, last_name, email, user_type_id });
-    this._courseId = course_id;
+    super({ userId, firstName, middleName, lastName, email, userTypeId });
+    this._courseId = courseId;
   }
 
   // generates a report object of the users attendance for a given module or all modules
@@ -50,7 +54,17 @@ export class Student extends User {
         var session: Session | string = this.getId();
 
         // If the session exists, create a session object
-        if (sessionData) session = new Session(sessionData.dataValues);
+        //TODO: better mapping of data
+        if (sessionData)
+          session = new Session({
+            sessionId: sessionData.dataValues.session_id,
+            sessionTypeId: sessionData.dataValues.session_type_id,
+            tutorId: sessionData.dataValues.tutor_id,
+            moduleId: sessionData.dataValues.module_id,
+            startTimestamp: sessionData.dataValues.start_timestamp,
+            endTimestamp: sessionData.dataValues.end_timestamp,
+            code: sessionData.dataValues.code,
+          });
 
         // If the module id is specified and the session is a session object
         // check if module id matches the module id of the session
@@ -70,27 +84,31 @@ export class Student extends User {
       }
     }
 
-    //return the report object
+    //Return the report object
     return report;
   };
 
-  // gets the users course as a Course object
+  // Gets the users course as a Course object
   public getCourse = async () => {
     const course = await CourseSchema.findByPk(this._courseId);
 
     if (!course) return null;
 
-    return new Course(course.dataValues);
+    return new Course({
+      courseId: course.dataValues.course_id,
+      courseName: course.dataValues.course_name,
+      courseLeaderId: course.dataValues.course_leader_id,
+    });
   };
 
-  // try to register the users attendance for a session by checking
+  // Try to register the users attendance for a session by checking
   // if the user is registered for the session and if the session has not already ended
   // returns true if the user was registered and false if they were not
   public registerAttendance = async (
     sessionId: string,
     code: string
   ): Promise<boolean> => {
-    // get the attendanceRecord from the database
+    // Get the attendanceRecord from the database
     const attendanceRecord = await AttendanceSchema.findOne({
       where: {
         user_id: this.getId(),
@@ -98,27 +116,27 @@ export class Student extends User {
       },
     });
 
-    // get the session from the database
+    // Get the session from the database
     const sessionRecord = await SessionSchema.findByPk(sessionId);
 
-    // check if the session and attendanceRecord exists
+    // Check if the session and attendanceRecord exists
     //? Might want to make this an error
     if (!attendanceRecord || !sessionRecord) return false;
 
-    // uses database records to create Attendance and Session objects
+    // Uses database records to create Attendance and Session objects
     const session = new Session(sessionRecord.dataValues);
     const attendance = new Attendance(attendanceRecord.dataValues);
 
-    // makes date objects for the current time
+    // Makes date objects for the current time
     const timestamp = new Date();
 
-    // checks if code is correct, student already registered and if the session has not ended/started
+    // Checks if code is correct, student already registered and if the session has not ended/started
     if (
       session.getSessionCode() === code ||
       !attendance.hasAttended() ||
       (session.getStartTime() > timestamp && session.getEndTime() < timestamp)
     ) {
-      // try to update the attendance record in the database
+      // Try to update the attendance record in the database
       try {
         attendance.setAttendedDate(timestamp);
         await attendance.updateDatabase();
@@ -135,7 +153,7 @@ export class Student extends User {
 }
 
 interface constructorParams extends userConstructorParams {
-  course_id: string;
+  courseId: string;
 }
 
 interface Report {

@@ -1,28 +1,26 @@
-import { Tutor, tutorConstructorParams } from './Tutor';
+import { Tutor, tutorConstructorParams } from '@Models';
 
 export class CourseLeader extends Tutor {
   private _courseId: string;
 
   constructor({
-    user_id,
-    first_name,
-    middle_name,
-    last_name,
+    userId,
+    firstName,
+    middleName,
+    lastName,
     email,
-    user_type_id,
-    course_id,
+    userTypeId,
+    courseId,
   }: constructorParams) {
-    super({ user_id, first_name, middle_name, last_name, email, user_type_id });
-    this._courseId = course_id;
+    super({ userId, firstName, middleName, lastName, email, userTypeId });
+    this._courseId = courseId;
   }
 
   public getCourseId() {
     return this._courseId;
   }
-
-  public updateAttendance() {}
 }
 
 interface constructorParams extends tutorConstructorParams {
-  course_id: string;
+  courseId: string;
 }

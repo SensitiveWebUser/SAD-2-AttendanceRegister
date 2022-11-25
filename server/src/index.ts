@@ -7,7 +7,7 @@ import 'express-async-errors';
 import { sequelize } from '@Database';
 import { dummyDataImport } from '../dev-tools/dummyData';
 
-import { Student } from '@Models';
+import { Student, Session } from '@Models';
 
 const startup = async () => {
   // Checks env variable AUTH0_ISSUER is set
@@ -36,7 +36,7 @@ const startup = async () => {
           console.log('Dummy data imported successfully.')
         ));
 
-      //TESTING PURPOSES ONLY - REMOVE BEFORE COMMIT
+      //TESTING PURPOSES ONLY - REMOVE BEFORE MERGE
       const userData = {
         user_id: '2',
         first_name: 'John',
@@ -47,9 +47,21 @@ const startup = async () => {
         course_id: '1',
       };
 
-      const user = new Student(userData);
+      //TODO: think of a better way to do this
+      const user = new Student({
+        userId: userData.user_id,
+        firstName: userData.first_name,
+        middleName: userData.middle_name,
+        lastName: userData.last_name,
+        email: userData.email,
+        userTypeId: userData.user_type_id,
+        courseId: userData.course_id,
+      });
 
-      console.log('User getAttendanceData', await user.getAttendanceData());
+      console.log(
+        'User getAttendanceData',
+        (await user.getAttendanceData()).data[0].session
+      );
       console.log('User getCourse', await user.getCourse());
     })
     .catch((error) => {

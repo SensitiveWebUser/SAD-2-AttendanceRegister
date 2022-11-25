@@ -1,5 +1,3 @@
-import { Module } from './../database/schemas/module';
-
 import { Attendance as AttendanceSchema } from '@Database';
 
 export class Attendance {
@@ -7,21 +5,21 @@ export class Attendance {
   private _studentId: string;
   private attended: Date;
 
-  constructor({ attendance_id, student_id, attended }: constructorParams) {
-    this._attendanceId = attendance_id;
-    this._studentId = student_id;
+  constructor({ attendanceId, studentId, attended }: constructorParams) {
+    this._attendanceId = attendanceId;
+    this._studentId = studentId;
     this.attended = new Date(attended);
   }
 
-  public getAttendanceId() {
+  public getAttendanceId(): string {
     return this._attendanceId;
   }
 
-  public getStudentId() {
+  public getStudentId(): string {
     return this._studentId;
   }
 
-  public getAttendedDate() {
+  public getAttendedDate(): Date {
     return this.attended;
   }
 
@@ -57,7 +55,7 @@ export class Attendance {
 }
 
 interface constructorParams {
-  attendance_id: string;
-  student_id: string;
+  attendanceId: string;
+  studentId: string;
   attended: number;
 }

@@ -12,19 +12,19 @@ export class User {
 
   // constructor for the user object
   constructor({
-    user_id,
-    first_name,
-    middle_name,
-    last_name,
+    userId,
+    firstName,
+    middleName,
+    lastName,
     email,
-    user_type_id,
+    userTypeId,
   }: constructorParams) {
-    this._id = user_id;
-    this._firstName = first_name;
-    this._middleName = middle_name || '';
-    this._lastName = last_name;
+    this._id = userId;
+    this._firstName = firstName;
+    this._middleName = middleName || '';
+    this._lastName = lastName;
     this._email = email;
-    this._type = user_type_id;
+    this._type = userTypeId;
   }
 
   // get the user id as a string
@@ -127,6 +127,8 @@ export class User {
     });
   }
 
+  // uses verables on the object to update the user in the database
+  // returns true if the user was updated, false if not
   public async updateDatabase(): Promise<boolean> {
     try {
       await UserSchema.update(
@@ -152,12 +154,12 @@ export class User {
 }
 
 interface constructorParams {
-  user_id: string;
-  first_name: string;
-  middle_name?: string;
-  last_name: string;
+  userId: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
   email: string;
-  user_type_id: string;
+  userTypeId: string;
 }
 
 export { constructorParams as userConstructorParams };

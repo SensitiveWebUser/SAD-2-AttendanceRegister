@@ -8,20 +8,21 @@ export class Session {
   private _sessionCode: string;
 
   constructor({
-    session_id,
-    session_type_id,
-    tutor_id,
-    module_id,
-    start_timestamp,
-    end_timestamp,
+    sessionId,
+    sessionTypeId,
+    tutorId,
+    moduleId,
+    startTimestamp,
+    endTimestamp,
     code,
   }: constructorParams) {
-    this._id = session_id;
-    this._type = session_type_id;
-    this._tutorId = tutor_id;
-    this._moduleId = module_id;
-    this._startTime = start_timestamp;
-    this._endTime = end_timestamp;
+    this._id = sessionId;
+    this._type = sessionTypeId;
+    this._tutorId = tutorId;
+    this._moduleId = moduleId;
+    //TODO: Fix Invalid Date bug
+    this._startTime = new Date(startTimestamp);
+    this._endTime = new Date(endTimestamp);
     this._sessionCode = code;
   }
 
@@ -55,11 +56,11 @@ export class Session {
 }
 
 interface constructorParams {
-  session_id: string;
-  session_type_id: string;
-  tutor_id: string;
-  module_id: string;
-  start_timestamp: Date;
-  end_timestamp: Date;
+  sessionId: string;
+  sessionTypeId: string;
+  tutorId: string;
+  moduleId: string;
+  startTimestamp: number;
+  endTimestamp: number;
   code: string;
 }

@@ -16,7 +16,14 @@ export const getUserController = async (req: Request, res: Response) => {
     throw new NotFoundError();
   }
 
-  const userObj = new User(user.dataValues);
+  const userObj = new User({
+    userId: user.dataValues.user_id,
+    firstName: user.dataValues.first_name,
+    middleName: user.dataValues.middle_name,
+    lastName: user.dataValues.last_name,
+    email: user.dataValues.email,
+    userTypeId: user.dataValues.user_type_id,
+  });
 
   // Return json data of the user
   res.status(200).json(await userObj.toJson());

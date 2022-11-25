@@ -1,12 +1,12 @@
 export class Course {
   private _courseId: string;
   private _courseName: string;
-  private _course_leader_id: string;
+  private _courseLeaderId: string;
 
-  constructor({ course_id, course_name, course_leader_id }: constructorParams) {
-    this._courseId = course_id;
-    this._courseName = course_name;
-    this._course_leader_id = course_leader_id;
+  constructor({ courseId, courseName, courseLeaderId }: constructorParams) {
+    this._courseId = courseId;
+    this._courseName = courseName;
+    this._courseLeaderId = courseLeaderId;
   }
 
   public getCourseId() {
@@ -18,7 +18,7 @@ export class Course {
   }
 
   public getCourseLeaderId() {
-    return this._course_leader_id;
+    return this._courseLeaderId;
   }
 
   public setCourseName(courseName: string) {
@@ -30,7 +30,7 @@ export class Course {
 }
 
 interface constructorParams {
-  course_id: string;
-  course_name: string;
-  course_leader_id: string;
+  courseId: string;
+  courseName: string;
+  courseLeaderId: string;
 }
