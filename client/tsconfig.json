@@ -19,5 +19,6 @@
     "typeRoots": ["../node_modules/@types"],
     "baseUrl": "./"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/cypress/**/*.ts", "cypress.config.js"]
 }

@@ -5,7 +5,7 @@
     "baseUrl": "./",
     // be explicit about types included
     // to avoid clashing with Jest types
-    "types": ["cypress", "node"]
+    "types": ["cypress"]
   },
-  "include": ["../node_modules/cypress", "./**/*.ts"]
+  "include": ["../node_modules/cypress", "../cypress.config.js", "./**/*.ts"]
 }
