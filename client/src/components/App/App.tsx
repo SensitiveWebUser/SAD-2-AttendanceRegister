@@ -8,8 +8,7 @@ import {
   Outlet,
 } from 'react-router-dom';
 
-import { Home } from '../../pages';
-import { NotFound } from '../../pages/NotFound';
+import { Home, NotFound } from '../../pages';
 import { Header } from '../Header';
 
 export const App = (): JSX.Element => (
