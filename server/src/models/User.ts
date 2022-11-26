@@ -83,7 +83,7 @@ export class User {
     });
   }
 
-  // public generateAttendanceReport() {
-  //   return {};
-  // }
+  public generateAttendanceReport() {
+    console.log('TODO FUNCTION');
+  }
 }

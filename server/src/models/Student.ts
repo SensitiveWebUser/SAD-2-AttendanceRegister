@@ -27,5 +27,7 @@ export class Student extends User {
     return this._advisorId;
   }
 
-  // public registerAttendance() {}
+  public registerAttendance() {
+    console.log('TODO FUNCTION');
+  }
 }

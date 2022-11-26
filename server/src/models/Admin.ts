@@ -12,11 +12,19 @@ export class Admin extends User {
     super(id, type, firstName, middleName, lastName, email);
   }
 
-  // createUser() {}
+  createUser() {
+    console.log('TODO FUNCTION');
+  }
 
-  // updateUser() {}
+  updateUser() {
+    console.log('TODO FUNCTION');
+  }
 
-  // bulkImportUsers() {}
+  bulkImportUsers() {
+    console.log('TODO FUNCTION');
+  }
 
-  // initiatePasswordReset() {}
+  initiatePasswordReset() {
+    console.log('TODO FUNCTION');
+  }
 }

@@ -21,5 +21,7 @@ export class CourseLeader extends Tutor {
     return this._courseId;
   }
 
-  // public updateAttendance() {}
+  public updateAttendance() {
+    console.log('TODO FUNCTION');
+  }
 }
