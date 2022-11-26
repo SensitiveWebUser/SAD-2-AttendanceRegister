@@ -11,6 +11,7 @@ import {
 import { Home } from '../../pages';
 import { NotFound } from '../../pages/NotFound';
 import { Header } from '../Header';
+import { Report } from '../../pages/Report';
 
 export const App = (): JSX.Element => (
   <Suspense
@@ -25,7 +26,8 @@ export const App = (): JSX.Element => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/attendance" element={<NotFound />} />
+        <Route path="/report" element={<Report />} />
       </Routes>
       <Outlet />
     </Router>

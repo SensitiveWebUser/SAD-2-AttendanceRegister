@@ -37,6 +37,7 @@ export const useRequest = ({
         <div className="alert alert-danger">
           <h4>Ooops....</h4>
           <ul className="my-0">
+            {console.log(err)}
             {err.response.data.errors.map((err) => (
               <li key={err.message}>{err.message}</li>
             ))}
