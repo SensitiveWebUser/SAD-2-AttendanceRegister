@@ -2,6 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 
 import { sequelize } from '@Database';
 
+// NEEDS TO BE IMPORTED SEPARATELY
 import { User } from './user';
 
 export const AdvisorStudentLink = sequelize.define<AdvisorStudentLink>(

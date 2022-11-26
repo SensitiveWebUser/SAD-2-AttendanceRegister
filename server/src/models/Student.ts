@@ -12,9 +12,9 @@ import {
   Course as CourseSchema,
 } from '@Database';
 
-export class Student extends User {
-  private _courseId: string;
+import { mapAttendance, mapSession } from '@Utils/dataMapper';
 
+export class Student extends User {
   constructor({
     userId,
     firstName,
@@ -22,16 +22,19 @@ export class Student extends User {
     lastName,
     email,
     userTypeId,
-    courseId,
   }: constructorParams) {
     super({ userId, firstName, middleName, lastName, email, userTypeId });
-    this._courseId = courseId;
   }
 
   // generates a report object of the users attendance for a given module or all modules
-  public getAttendanceData = async (moduleId?: string): Promise<Report> => {
+  public getAttendanceData = async (
+    moduleId?: string
+  ): Promise<studentAttendanceReport> => {
     // empty report object to be returned at the end
-    var report: Report = { data: [] };
+    const report: studentAttendanceReport = {
+      data: [],
+      amountOfStudentSessions: 0,
+    };
 
     // get all sessions for the user from the attendance table
     const data = await AttendanceSchema.findAll({
@@ -50,55 +53,29 @@ export class Student extends User {
 
         const sessionData = await SessionSchema.findByPk(sessionId);
 
-        // Set default values for the session to the session id
-        var session: Session | string = this.getId();
-
         // If the session exists, create a session object
-        //TODO: better mapping of data
-        if (sessionData)
-          session = new Session({
-            sessionId: sessionData.dataValues.session_id,
-            sessionTypeId: sessionData.dataValues.session_type_id,
-            tutorId: sessionData.dataValues.tutor_id,
-            moduleId: sessionData.dataValues.module_id,
-            startTimestamp: sessionData.dataValues.start_timestamp,
-            endTimestamp: sessionData.dataValues.end_timestamp,
-            code: sessionData.dataValues.code,
-          });
+        if (!sessionData) continue;
+
+        const session = new Session(mapSession(sessionData.dataValues));
 
         // If the module id is specified and the session is a session object
         // check if module id matches the module id of the session
         // if it does skip the rest of the loop
-        if (
-          moduleId &&
-          typeof session !== 'string' &&
-          session.getModuleId() === moduleId
-        )
+        if (moduleId && session.getModuleId() === moduleId) {
           continue;
+        }
 
         // Add the session and timestamp to the report object
         report.data.push({
           session,
           timestamp,
         });
+        report.amountOfStudentSessions++;
       }
     }
 
     //Return the report object
     return report;
-  };
-
-  // Gets the users course as a Course object
-  public getCourse = async () => {
-    const course = await CourseSchema.findByPk(this._courseId);
-
-    if (!course) return null;
-
-    return new Course({
-      courseId: course.dataValues.course_id,
-      courseName: course.dataValues.course_name,
-      courseLeaderId: course.dataValues.course_leader_id,
-    });
   };
 
   // Try to register the users attendance for a session by checking
@@ -120,12 +97,13 @@ export class Student extends User {
     const sessionRecord = await SessionSchema.findByPk(sessionId);
 
     // Check if the session and attendanceRecord exists
-    //? Might want to make this an error
     if (!attendanceRecord || !sessionRecord) return false;
 
     // Uses database records to create Attendance and Session objects
-    const session = new Session(sessionRecord.dataValues);
-    const attendance = new Attendance(attendanceRecord.dataValues);
+    const session = new Session(mapSession(sessionRecord.dataValues));
+    const attendance = new Attendance(
+      mapAttendance(attendanceRecord.dataValues)
+    );
 
     // Makes date objects for the current time
     const timestamp = new Date();
@@ -138,13 +116,12 @@ export class Student extends User {
     ) {
       // Try to update the attendance record in the database
       try {
-        attendance.setAttendedDate(timestamp);
+        attendance.setTimestampDate(timestamp);
         await attendance.updateDatabase();
       } catch {
         return false;
       }
 
-      //? Might want to make this an error
       return true;
     }
 
@@ -152,10 +129,12 @@ export class Student extends User {
   };
 }
 
-interface constructorParams extends userConstructorParams {
-  courseId: string;
+interface studentAttendanceReport {
+  data: Array<{
+    session: Session;
+    timestamp: Date;
+  }>;
+  amountOfStudentSessions: number;
 }
 
-interface Report {
-  data: Array<{ session: Session | string; timestamp: Date }>;
-}
+interface constructorParams extends userConstructorParams {}

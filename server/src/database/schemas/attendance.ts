@@ -2,6 +2,7 @@ import { Model, DataTypes, CreationOptional } from 'sequelize';
 
 import { sequelize } from '@Database';
 
+// NEEDS TO BE IMPORTED SEPARATELY
 import { User } from './user';
 import { Session } from './session';
 

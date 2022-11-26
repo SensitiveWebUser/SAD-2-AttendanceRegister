@@ -25,11 +25,11 @@ const dummyData = {
     },
     {
       user_type_id: '2',
-      user_type_name: 'student',
+      user_type_name: 'Student',
     },
     {
       user_type_id: '3',
-      user_type_name: 'tutor',
+      user_type_name: 'Tutor',
     },
     {
       user_type_id: '4',
@@ -41,10 +41,7 @@ const dummyData = {
     },
     {
       user_type_id: '6',
-      user_type_name: 'advisor',
-    },
-    {
-      user_type_name: 'advisor2',
+      user_type_name: 'Advisor',
     },
   ],
   users: [
@@ -55,7 +52,6 @@ const dummyData = {
       last_name: 'Doe',
       email: 'JohnDoe@localhost.com',
       user_type_id: '1',
-      course_id: null,
     },
     {
       user_id: '2',
@@ -64,7 +60,6 @@ const dummyData = {
       last_name: 'Doe',
       email: 'JohnDoe2@localhost.com',
       user_type_id: '2',
-      course_id: '1',
     },
     {
       user_id: '3',
@@ -73,7 +68,6 @@ const dummyData = {
       last_name: 'Doe',
       email: 'JohnDoe3@localhost.com',
       user_type_id: '3',
-      course_id: null,
     },
     {
       user_id: '4',
@@ -82,7 +76,6 @@ const dummyData = {
       last_name: 'Doe',
       email: 'JohnDoe4@localhost.com',
       user_type_id: '4',
-      course_id: null,
     },
     {
       user_id: '5',
@@ -91,7 +84,6 @@ const dummyData = {
       last_name: 'Doe',
       email: 'JohnDoe5@localhost.com',
       user_type_id: '5',
-      course_id: null,
     },
     {
       user_id: '6',
@@ -100,7 +92,6 @@ const dummyData = {
       last_name: 'Doe',
       email: 'JohnDoe6@localhost.com',
       user_type_id: '2',
-      course_id: '1',
     },
     {
       user_id: '7',
@@ -109,7 +100,6 @@ const dummyData = {
       last_name: 'Doe',
       email: 'JohnDoe7@localhost.com',
       user_type_id: '3',
-      course_id: null,
     },
     {
       user_id: '8',
@@ -118,7 +108,6 @@ const dummyData = {
       last_name: 'Doe',
       email: 'JohnDoe8@localhost.com',
       user_type_id: '4',
-      course_id: null,
     },
     {
       user_id: '9',
@@ -127,7 +116,6 @@ const dummyData = {
       last_name: 'Doe',
       email: 'JohnDoe9@localhost.com',
       user_type_id: '6',
-      course_id: null,
     },
   ],
   advisor_student_links: [

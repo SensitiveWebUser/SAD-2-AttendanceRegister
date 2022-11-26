@@ -2,6 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 
 import { sequelize } from '@Database';
 
+// NEEDS TO BE IMPORTED SEPARATELY
 import { Module } from './module';
 import { Course } from './course';
 

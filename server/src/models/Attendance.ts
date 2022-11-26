@@ -1,34 +1,34 @@
 import { Attendance as AttendanceSchema } from '@Database';
 
 export class Attendance {
-  private _attendanceId: string;
+  private _sessionId: string;
   private _studentId: string;
-  private attended: Date;
+  private _timestamp: Date;
 
-  constructor({ attendanceId, studentId, attended }: constructorParams) {
-    this._attendanceId = attendanceId;
+  constructor({ sessionId, studentId, timestamp }: constructorParams) {
+    this._sessionId = sessionId;
     this._studentId = studentId;
-    this.attended = new Date(attended);
+    this._timestamp = new Date(timestamp);
   }
 
-  public getAttendanceId(): string {
-    return this._attendanceId;
+  public getSessionId(): string {
+    return this._sessionId;
   }
 
   public getStudentId(): string {
     return this._studentId;
   }
 
-  public getAttendedDate(): Date {
-    return this.attended;
+  public getTimestampDate(): Date {
+    return this._timestamp;
   }
 
-  public setAttendedDate(attended: Date) {
-    this.attended = attended;
+  public setTimestampDate(timestamp: Date) {
+    this._timestamp = timestamp;
   }
 
   public hasAttended = (): boolean => {
-    if (this.attended.getTime() !== 0) return true;
+    if (this._timestamp.getTime() !== 0) return true;
 
     return false;
   };
@@ -37,12 +37,12 @@ export class Attendance {
     try {
       await AttendanceSchema.update(
         {
-          attended: this.attended.getTime(),
+          attended: this._timestamp.getTime(),
         },
         {
           where: {
             user_id: this._studentId,
-            attendance_id: this._attendanceId,
+            session_id: this._sessionId,
           },
         }
       );
@@ -55,7 +55,7 @@ export class Attendance {
 }
 
 interface constructorParams {
-  attendanceId: string;
+  sessionId: string;
   studentId: string;
-  attended: number;
+  timestamp: number;
 }

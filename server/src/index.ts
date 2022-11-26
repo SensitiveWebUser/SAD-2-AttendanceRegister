@@ -7,7 +7,8 @@ import 'express-async-errors';
 import { sequelize } from '@Database';
 import { dummyDataImport } from '../dev-tools/dummyData';
 
-import { Student, Session } from '@Models';
+import { Student, Tutor, ModuleLeader } from '@Models';
+import { mapUser } from '@Utils/dataMapper';
 
 const startup = async () => {
   // Checks env variable AUTH0_ISSUER is set
@@ -47,22 +48,48 @@ const startup = async () => {
         course_id: '1',
       };
 
-      //TODO: think of a better way to do this
-      const user = new Student({
-        userId: userData.user_id,
-        firstName: userData.first_name,
-        middleName: userData.middle_name,
-        lastName: userData.last_name,
-        email: userData.email,
-        userTypeId: userData.user_type_id,
-        courseId: userData.course_id,
+      const tutorData = {
+        user_id: '3',
+        first_name: 'John',
+        middle_name: '3',
+        last_name: 'Doe',
+        email: 'JohnDoe3@localhost.com',
+        user_type_id: '3',
+        course_id: null,
+      };
+
+      const moduleLeaderData = {
+        user_id: '4',
+        first_name: 'John',
+        middle_name: '4',
+        last_name: 'Doe',
+        email: 'JohnDoe4@localhost.com',
+        user_type_id: '4',
+      };
+
+      const tutor = new Tutor(mapUser(tutorData));
+
+      const user = new Student(mapUser(userData));
+
+      const moduleLeader = new ModuleLeader({
+        ...mapUser(moduleLeaderData),
+        moduleId: '1',
       });
+
+      console.log("Tutor's students: ", await tutor.getStudentsAttendance());
+
+      console.log(
+        'ModuleLeader: ',
+        await moduleLeader.getStudentsAttendance(
+          tutor.getId(),
+          moduleLeader.getModuleId()
+        )
+      );
 
       console.log(
         'User getAttendanceData',
         (await user.getAttendanceData()).data[0].session
       );
-      console.log('User getCourse', await user.getCourse());
     })
     .catch((error) => {
       console.error('ERROR: Something went wrong with database: ', error);

@@ -134,10 +134,10 @@ export class User {
       await UserSchema.update(
         {
           first_name: this._firstName,
-          middle_name: this._middleName,
+          middle_name: this._middleName == '' ? null : this._middleName,
           last_name: this._lastName,
           email: this._email,
-          _type: this._type,
+          user_type_id: this._type,
         },
         {
           where: {
@@ -156,7 +156,7 @@ export class User {
 interface constructorParams {
   userId: string;
   firstName: string;
-  middleName?: string;
+  middleName?: string | null;
   lastName: string;
   email: string;
   userTypeId: string;

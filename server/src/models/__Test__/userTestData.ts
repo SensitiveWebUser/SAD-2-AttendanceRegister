@@ -6,5 +6,4 @@ export const userTestData = {
   email: 'JohnDoe@localhost.com',
   userTypeId: '1',
   moduleId: '1',
-  courseId: null,
 };
