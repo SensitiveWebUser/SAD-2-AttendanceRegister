@@ -21,5 +21,7 @@ export class ModuleLeader extends Tutor {
     return this._moduleId;
   }
 
-  public updateAttendance() {}
+  public updateAttendance() {
+    console.log('TODO FUNCTION');
+  }
 }

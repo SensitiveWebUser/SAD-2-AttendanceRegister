@@ -3,12 +3,7 @@ module.exports = {
     node: true,
     commonjs: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/jsx-runtime',
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -18,7 +13,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['@typescript-eslint'],
   ignorePatterns: [
     'public/**/*',
     '*.json',
@@ -30,16 +25,8 @@ module.exports = {
   rules: {
     '@typescript-eslint/indent': 'off',
     indent: ['error', 2],
-    'react/jsx-indent': 'off',
-    'react/jsx-indent-props': 'off',
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
-    'react/react-in-jsx-scope': 'off',
-  },
-  settings: {
-    react: {
-      version: 'detect',
-    },
   },
 };
