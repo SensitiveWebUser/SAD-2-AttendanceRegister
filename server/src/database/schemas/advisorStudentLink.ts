@@ -1,7 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-
 import { sequelize } from '@Database';
-
 import { User } from './user';
 
 export const AdvisorStudentLink = sequelize.define<AdvisorStudentLink>(
@@ -17,10 +15,10 @@ export const AdvisorStudentLink = sequelize.define<AdvisorStudentLink>(
       allowNull: false,
       primaryKey: true,
     },
-  }
+  },
+  { underscored: true, freezeTableName: true, timestamps: false }
 );
 
-//Add foreign keys
 AdvisorStudentLink.belongsTo(User, { foreignKey: 'advisor_id' });
 AdvisorStudentLink.belongsTo(User, { foreignKey: 'student_id' });
 

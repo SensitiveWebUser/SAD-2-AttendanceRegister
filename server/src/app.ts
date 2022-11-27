@@ -1,34 +1,37 @@
 import express from 'express';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import debug from 'debug';
 import 'express-async-errors';
 import { json } from 'body-parser';
-
 import { NotFoundError } from '@Errors';
 import { errorHandler } from '@Middlewares';
+import { getUserRouter } from '@Routes/index';
 
-// Routes imports
-import { getUserRouter } from '@Routes/getUser';
-
+const logger = debug('backend:request');
 const app = express();
 
-// Add CORS headers
+// cors rules
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', '*');
   next();
 });
 
-// Middlewares
+// application middleware
+app.use(helmet());
+app.use(morgan('tiny', { stream: { write: (msg) => logger(msg) } }));
 app.use(json());
 
-//Routes
+// express routes
 app.use(getUserRouter);
 
-//404
+// 404 handler
 app.all('*', async () => {
   throw new NotFoundError();
 });
 
-//Error handler
+// generic error handler
 app.use(errorHandler);
 
 export { app };
