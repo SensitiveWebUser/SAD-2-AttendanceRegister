@@ -1,28 +1,75 @@
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { TextReport } from '../../components/TextReport';
 import { BarReport } from '../../components/BarReport';
 import { PieReport } from '../../components/PieReport';
+import React from 'react';
 
 export const Report = (): JSX.Element => {
   return (
-    <Container sx={{ width: 'auto', pt: '100px', flexGrow: 1 }}>
-      <Grid container>
-        <Grid item>
-          <Box id="text-container" sx={{ width: '100%' }}>
-            <TextReport />
-          </Box>
+    <React.Fragment>
+      <Grid
+        container
+        p={5}
+        direction="row"
+        justifyContent="space-around"
+        alignItems="center"
+        sx={{ pt: '100px', flexGrow: 1 }}
+      >
+        <Grid
+          item
+          xs={12}
+          sm={11}
+          sx={{
+            color: 'primary.white',
+            backgroundColor: '#33353f',
+            borderRadius: '4px',
+            mb: '2rem',
+            flexGrow: 1,
+          }}
+        >
+          <TextReport />
         </Grid>
-        <Grid item>
-          <Box id="bar-container" sx={{ width: '50%' }}>
-            {/* <BarReport/> */}
-          </Box>
+        <Grid
+          item
+          xs={12}
+          sm={5}
+          sx={{
+            maxWidth: '400px',
+            color: 'primary.white',
+            backgroundColor: '#33353f',
+            borderRadius: '4px',
+            mb: '2rem',
+            minWidth: '20rem',
+            p: '2rem',
+            flexGrow: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* <BarReport /> */}
         </Grid>
-        <Grid item>
-          <Box id="pie-container" sx={{ width: '50%' }}>
-            {/* <PieReport/> */}
-          </Box>
+        <Grid
+          item
+          xs={12}
+          sm={5}
+          sx={{
+            maxWidth: '400px',
+            color: 'primary.white',
+            backgroundColor: '#33353f',
+            borderRadius: '4px',
+            mb: '2rem',
+            minWidth: '20rem',
+            p: '2rem',
+            flexGrow: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* <PieReport /> */}
         </Grid>
       </Grid>
-    </Container>
+    </React.Fragment>
   );
 };

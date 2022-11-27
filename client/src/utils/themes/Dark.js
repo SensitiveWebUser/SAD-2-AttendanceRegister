@@ -1,8 +1,26 @@
 import { createTheme } from '@mui/material';
 
 const darkTheme = createTheme({
+  typography: {
+    h1: {
+      fontSize: '1.7rem',
+      color: 'primary.white',
+    },
+    h2: {
+      fontSize: '1.5rem',
+      color: 'primary.white',
+    },
+    h3: {
+      fontSize: '1.2rem',
+      color: 'primary.white',
+    },
+    body1: {
+      fontSize: '1.0rem',
+      color: 'primary.white',
+    },
+  },
   palette: {
-    type: 'dark',
+    mode: 'dark',
     primary: {
       main: '#91E5F6',
       white: '#fff',
@@ -18,6 +36,12 @@ const darkTheme = createTheme({
     },
   },
   components: {
+    MuiTable: {
+      color: 'primary.white',
+    },
+    MuiTableCell: {
+      color: 'primary.white',
+    },
     MuiCssBaseline: {
       styleOverrides: {
         body: {

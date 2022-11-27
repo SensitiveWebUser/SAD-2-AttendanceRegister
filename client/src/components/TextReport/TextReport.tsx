@@ -9,22 +9,23 @@ import {
   IconButton,
   Collapse,
   TableContainer,
+  Button,
 } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import EditIcon from '@mui/icons-material/Edit';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useState } from 'react';
 
-const modules = ['HF', 'SAAD', 'MITP'];
+const modules = ['1', '2', '3'];
 const attendance = ['100', '35', '68'];
 
-function Row() {
-  const { user } = useAuth0();
+function ModuleRow() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -34,28 +35,36 @@ function Row() {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell>row.module</TableCell>
-        <TableCell>row.attendance</TableCell>
+        <TableCell>HF</TableCell>
+        <TableCell>200%</TableCell>
+        <TableCell align="right" sx={{ p: '20px' }} />
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell sx={{ p: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                Module Name
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Module</TableCell>
-                    <TableCell>Attendance</TableCell>
-                  </TableRow>
-                </TableHead>
+              <Table size="small" aria-label="modules-sessions-students">
                 <TableBody>
                   {modules.map((row, index) => (
                     <TableRow key={index}>
-                      <TableCell>{row}</TableCell>
-                      <TableCell>{attendance[index]}</TableCell>
+                      <TableCell
+                        sx={{ width: '50px', border: 'none', p: '20px' }}
+                      />
+                      <TableCell sx={{ border: 'none', p: '20px' }}>
+                        {row}
+                      </TableCell>
+                      <TableCell sx={{ border: 'none', p: '20px' }}>
+                        {attendance[index]}
+                      </TableCell>
+                      <TableCell
+                        align="right"
+                        sx={{ border: 'none', p: '20px' }}
+                      >
+                        <Button variant="outlined" size="small">
+                          <EditIcon sx={{ p: '5px' }} />
+                          Edit
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -69,21 +78,29 @@ function Row() {
 }
 
 export const TextReport = (): JSX.Element => {
+  const { user } = useAuth0();
   return (
     <>
-      <Typography variant="h1">user.name Attendance</Typography>
-      <TableContainer>
-        <Table aria-label="collapsible table">
+      <Typography variant="h1" sx={{ p: '1rem' }}>
+        {user.name} Attendance
+      </Typography>
+      <TableContainer sx={{ p: '1rem' }}>
+        <Table aria-label="collapsible module infomation">
           <TableHead>
             <TableRow>
-              <TableCell />
-              <TableCell>Module</TableCell>
-              <TableCell>Attendance</TableCell>
+              <TableCell sx={{ width: '50px' }} />
+              <TableCell>
+                <b>Module</b>
+              </TableCell>
+              <TableCell>
+                <b>% Attendance</b>
+              </TableCell>
+              <TableCell align="right" sx={{ p: '20px' }} />
             </TableRow>
           </TableHead>
           <TableBody>
             {modules.map((row, index) => (
-              <Row key={index} />
+              <ModuleRow key={index} />
             ))}
           </TableBody>
         </Table>

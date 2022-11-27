@@ -1,54 +1,28 @@
-import { Grid, Box, Typography } from '@mui/material';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useState } from 'react';
-// import { Pie } from 'react-chartjs-2';
-import type { ChartData, ChartOptions } from 'chart.js';
+const options = {
+  responsive: true,
+  redraw: true,
+  maintainAspectRatio: true,
+  aspectRatio: 1,
+  plugins: {
+    title: {
+      display: false,
+    },
+  },
+};
 
-interface data {
-  options: ChartOptions<'line'>;
-  data: ChartData<'line'>;
-}
-
+const labels = ['Module1', 'Module2', 'Module3'];
 const data = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  labels: labels,
   datasets: [
     {
-      label: 'First dataset',
-      data: [33, 53, 85, 41, 44, 65],
-      fill: true,
-      backgroundColor: 'rgba(75,192,192,0.2)',
-      borderColor: 'rgba(75,192,192,1)',
-    },
-    {
-      label: 'Second dataset',
-      data: [33, 25, 35, 51, 54, 76],
-      fill: false,
-      borderColor: '#742774',
+      label: '% Attendance',
+      backgroundColor: '#5263ce',
+      borderColor: '#2b2c33',
+      data: [20, 10, 5],
     },
   ],
 };
-
 export const PieReport = (): JSX.Element => {
-  const { user } = useAuth0();
-  const [pieLabel, setPieLabel] = useState();
-
-  return (
-    <>
-      <Typography>{user.name}</Typography>
-      {/* <Pie
-        data={data}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: user.name,
-            },
-            legend: {
-              display: false,
-            },
-          },
-        }}
-      />*/}
-    </>
-  );
+  // return <Pie options={options} data={data} />;
+  return;
 };
