@@ -1,32 +1,29 @@
-const options = {
-  responsive: true,
-  redraw: true,
-  maintainAspectRatio: true,
-  aspectRatio: 1,
-  plugins: {
-    legend: {
-      display: false,
-    },
-    title: {
-      display: false,
-    },
-  },
-};
+import Chart from 'react-apexcharts';
 
-const labels = ['Module1', 'Module2', 'Module3'];
-const data = {
-  labels: labels,
-  datasets: [
-    {
-      label: '% Attendance',
-      backgroundColor: '#5263ce',
-      borderColor: 'blue',
-      textColor: '#fff',
-      data: [20, 10, 5],
-    },
-  ],
-};
 export const BarReport = (): JSX.Element => {
-  // return <Bar options={options} data={data} />;
-  return;
+  const options = {
+    options: {
+      chart: {
+        id: 'basic-bar',
+      },
+      xaxis: {
+        categories: ['HF', 'MITP', 'SAAD', 'FYP'],
+      },
+    },
+    series: [
+      {
+        name: 'series-1',
+        data: [10, 60, 100, 30],
+      },
+    ],
+  };
+
+  return (
+    <Chart
+      options={options.options}
+      series={options.series}
+      type="bar"
+      width="500"
+    />
+  );
 };

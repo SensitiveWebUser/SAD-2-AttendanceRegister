@@ -26,7 +26,7 @@ function ModuleRow() {
   return (
     <>
       <TableRow>
-        <TableCell>
+        <TableCell sx={{ p: 0 }}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -47,9 +47,6 @@ function ModuleRow() {
                 <TableBody>
                   {modules.map((row, index) => (
                     <TableRow key={index}>
-                      <TableCell
-                        sx={{ width: '50px', border: 'none', p: '20px' }}
-                      />
                       <TableCell sx={{ border: 'none', p: '20px' }}>
                         {row}
                       </TableCell>
@@ -58,7 +55,7 @@ function ModuleRow() {
                       </TableCell>
                       <TableCell
                         align="right"
-                        sx={{ border: 'none', p: '20px' }}
+                        sx={{ border: 'none', p: '0px', width: '50px' }}
                       >
                         <Button variant="outlined" size="small">
                           <EditIcon sx={{ p: '5px' }} />

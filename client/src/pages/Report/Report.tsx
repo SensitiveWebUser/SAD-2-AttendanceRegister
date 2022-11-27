@@ -47,7 +47,7 @@ export const Report = (): JSX.Element => {
             alignItems: 'center',
           }}
         >
-          {/* <BarReport /> */}
+          <BarReport />
         </Grid>
         <Grid
           item
@@ -67,7 +67,7 @@ export const Report = (): JSX.Element => {
             alignItems: 'center',
           }}
         >
-          {/* <PieReport /> */}
+          <PieReport />
         </Grid>
       </Grid>
     </React.Fragment>
