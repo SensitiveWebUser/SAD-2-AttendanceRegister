@@ -84,6 +84,6 @@ export class User {
   }
 
   public generateAttendanceReport() {
-    return {};
+    console.log('TODO FUNCTION');
   }
 }
