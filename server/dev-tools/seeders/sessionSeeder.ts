@@ -23,20 +23,20 @@ const tutorUser = userSeeder.objects[1];
 
 const tutorialSessionTypeId = sessionTypeSeeder.objects.find(
   (x) => x.session_type_name === 'Tutorial'
-)!.session_type_id;
+)?.session_type_id;
 const lectureSessionTypeId = sessionTypeSeeder.objects.find(
   (x) => x.session_type_name === 'Lecture'
-)!.session_type_id;
+)?.session_type_id;
 const onlineSessionTypeId = sessionTypeSeeder.objects.find(
   (x) => x.session_type_name === 'Online'
-)!.session_type_id;
+)?.session_type_id;
 
 const moduleId = moduleSeeder.objects[0].module_id;
 
 const objects: ObjectType[] = [
   {
     session_id: uuidv4(),
-    session_type_id: tutorialSessionTypeId,
+    session_type_id: tutorialSessionTypeId ?? '',
     tutor_id: tutorUser.user_id,
     module_id: moduleId,
     user_id: studentUser.user_id,
@@ -46,7 +46,7 @@ const objects: ObjectType[] = [
   },
   {
     session_id: uuidv4(),
-    session_type_id: lectureSessionTypeId,
+    session_type_id: lectureSessionTypeId ?? '',
     tutor_id: tutorUser.user_id,
     module_id: moduleId,
     user_id: studentUser.user_id,
@@ -56,7 +56,7 @@ const objects: ObjectType[] = [
   },
   {
     session_id: uuidv4(),
-    session_type_id: onlineSessionTypeId,
+    session_type_id: onlineSessionTypeId ?? '',
     tutor_id: tutorUser.user_id,
     module_id: moduleId,
     user_id: studentUser.user_id,
