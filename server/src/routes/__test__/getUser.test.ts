@@ -1,4 +1,5 @@
 import request from 'supertest';
+import { v4 as uuidv4 } from 'uuid';
 import { app } from '../../app';
 
 import { User, UserType } from '@Database';
@@ -6,7 +7,7 @@ import { User, UserType } from '@Database';
 const updateDb = async () => {
   // Create a user type
   const userType = await UserType.create({
-    user_type_id: '1',
+    user_type_id: uuidv4(),
     user_type_name: 'Admin',
   });
 
@@ -16,7 +17,7 @@ const updateDb = async () => {
     first_name: 'John',
     last_name: 'Smith',
     email: 'JohnSmith@localhost.com',
-    user_type_id: userType.user_type_id as string,
+    user_type_id: userType.user_type_id,
   });
 
   return { user, userType };
