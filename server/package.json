@@ -7,7 +7,7 @@
     "start": "ts-node-dev -r tsconfig-paths/register src/index.ts --env development",
     "start:prod": "tsc && node build/src/index.js",
     "build": "tsc",
-    "test": "jest -i --watchAll --no-cache",
+    "test": "jest -i --watchAll --no-cache --setupFiles dotenv/config",
     "lint": "npx eslint --fix .",
     "prettier": "prettier --write --ignore-unknown .",
     "test:ci": "jest -i --no-cache"
