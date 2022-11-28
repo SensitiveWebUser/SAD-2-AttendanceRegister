@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Module } from '@Database';
+import { Module } from '../../src/database';
 import userSeeder from './userSeeder';
 import debug from 'debug';
 

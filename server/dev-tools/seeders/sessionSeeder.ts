@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import debug from 'debug';
-import { Session } from '@Database';
+import { Session } from '../../src/database';
 import userSeeder from './userSeeder';
 import sessionTypeSeeder from './sessionTypeSeeder';
 import moduleSeeder from './moduleSeeder';

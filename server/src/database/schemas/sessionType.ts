@@ -1,5 +1,5 @@
 import { Model, DataTypes, CreationOptional } from 'sequelize';
-import { sequelize } from '@Database';
+import { sequelize } from '../database';
 
 export const SessionType = sequelize.define<SessionType>(
   'session_type',
