@@ -3,7 +3,7 @@ import { Button, Container, Link, Slide, Typography } from '@mui/material';
 import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Background from '../../utils/resources/images/background.png';
+import Background from '../../utils/resources/images/background.svg';
 
 export const Home = (): JSX.Element => {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
