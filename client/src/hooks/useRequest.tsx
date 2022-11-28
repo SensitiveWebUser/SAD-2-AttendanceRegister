@@ -1,8 +1,9 @@
-import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios';
 import { Alert, AlertTitle } from '@mui/material';
+import axios from 'axios';
 import { useSnackbar } from 'notistack';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const useRequest = ({
   url,
@@ -13,6 +14,7 @@ export const useRequest = ({
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const { enqueueSnackbar } = useSnackbar();
   const [errors, setErrors] = useState(null);
+  const { t } = useTranslation();
 
   // This function is used to make the request to the API
   // The function can be used as if it like a useHook function
@@ -33,7 +35,7 @@ export const useRequest = ({
 
       if (onSuccess) {
         onSuccess(response.data);
-        enqueueSnackbar('Success', {
+        enqueueSnackbar(t('request.success'), {
           variant: 'success',
         });
       }
@@ -48,8 +50,10 @@ export const useRequest = ({
           severity="error"
           sx={{ mt: 2, bgcolor: '#160B0B', color: '#F4C7C7' }}
         >
-          <AlertTitle sx={{ fontWeight: '600' }}>Error</AlertTitle>
-          Something went wrong when requesting {url}
+          <AlertTitle sx={{ fontWeight: '600' }}>
+            {t('request.error.message')}
+          </AlertTitle>
+          {t('request.error.message', { url: url })}
         </Alert>
       );
     }
