@@ -13,7 +13,7 @@ export function errorHandler(
   next: NextFunction
 ) {
   if (err instanceof CustomError) {
-    logger(`error handled with status code ${req.statusCode} `);
+    logger(`error handled with status code ${err.statusCode} `);
     return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
 

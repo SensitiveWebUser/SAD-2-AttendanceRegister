@@ -1,48 +1,133 @@
+import { Module, SessionType } from '../models';
+import {
+  Session as SessionSchema,
+  SessionType as SessionTypeSchema,
+  Module as ModuleSchema,
+} from '../database';
+
 export class Session {
-  private _id: string;
-  private _type: string;
-  private _tutorId: string;
-  private _startTime: Date;
-  private _endTime: Date;
-  private _sessionCode: string;
+  id: string;
+  type: string;
+  moduleId: string;
+  startTimestamp: Date;
+  endTimestamp: Date;
+  code: string;
 
-  constructor(
-    id: string,
-    type: string,
-    tutorId: string,
-    startTime: Date,
-    endTime: Date,
-    sessionCode: string
-  ) {
-    this._id = id;
-    this._type = type;
-    this._tutorId = tutorId;
-    this._startTime = startTime;
-    this._endTime = endTime;
-    this._sessionCode = sessionCode;
+  constructor({
+    id,
+    type,
+    moduleId,
+    startTimestamp,
+    endTimestamp,
+    code,
+  }: constructorParams) {
+    this.id = id;
+    this.type = type;
+    this.moduleId = moduleId;
+    this.startTimestamp = startTimestamp;
+    this.endTimestamp = endTimestamp;
+    this.code = code;
   }
 
-  public getId() {
-    return this._id;
-  }
+  // getters
 
-  public getSessionType() {
-    return this._type;
-  }
+  public getId = (): string => this.id;
 
-  public getTutor() {
-    return this._tutorId;
-  }
+  public getType = async (): Promise<SessionType> => {
+    const sessionTypeRecord = await SessionTypeSchema.findByPk(this.type);
 
-  public getStartTime() {
-    return this._startTime;
-  }
+    const type = new SessionType({
+      id: sessionTypeRecord!.dataValues.session_type_id,
+      name: sessionTypeRecord!.dataValues.session_type_name,
+    });
 
-  public getEndTime() {
-    return this._endTime;
-  }
+    return type;
+  };
 
-  public getSessionCode() {
-    return this._sessionCode;
+  public getModuleId = (): string => this.moduleId;
+
+  public getStartTimestamp = (): Date => this.startTimestamp;
+
+  public getEndTimestamp = (): Date => this.endTimestamp;
+
+  public getCode = (): string => this.code;
+
+  // setters
+
+  public setId = (id: string): void => {
+    this.id = id;
+  };
+
+  public setStartTimestamp = (startTimestamp: Date): void => {
+    this.startTimestamp = startTimestamp;
+  };
+
+  public setEndTimestamp = (endTimestamp: Date): void => {
+    this.endTimestamp = endTimestamp;
+  };
+
+  // methods
+
+  public updateDatabaseAsync = async (): Promise<boolean> => {
+    const session = await SessionSchema.findByPk(this.getId());
+
+    if (!session) return false;
+
+    await session
+      .update({
+        type: this.type,
+        moduleId: this.moduleId,
+        startTimestamp: this.startTimestamp,
+        endTimestamp: this.endTimestamp,
+        code: this.code,
+      })
+      .catch(() => {
+        return false;
+      });
+
+    return true;
+  };
+
+  public getModule = async (): Promise<Module | null> => {
+    const moduleRecord = await ModuleSchema.findOne({
+      where: {
+        module_id: this.getModuleId,
+      },
+    });
+
+    if (!moduleRecord) return null;
+
+    return new Module({
+      id: moduleRecord.dataValues.module_id,
+      name: moduleRecord.dataValues.module_name,
+      moduleLeader: moduleRecord.dataValues.module_leader_id,
+    });
+  };
+
+  async toJsonAsync(): Promise<toJsonReturn> {
+    return {
+      id: this.getId(),
+      type: await this.getType().then((type) => type.getName),
+      moduleId: this.getModuleId(),
+      startTime: this.startTimestamp,
+      endTime: this.endTimestamp,
+    };
   }
+}
+
+interface toJsonReturn {
+  id: string;
+  type: string;
+  moduleId: string;
+  startTime: Date;
+  endTime: Date;
+}
+
+interface constructorParams {
+  id: string;
+  type: string;
+  moduleId: string;
+  startTimestamp: Date;
+  endTimestamp: Date;
+  code: string;
 }
