@@ -4,7 +4,7 @@ dotenv.config({ path: __dirname + '/../.env.local' });
 import debug from 'debug';
 import { app } from './app';
 import 'express-async-errors';
-import { sequelize } from '@Database';
+import { sequelize } from './database/database';
 import seedAsync from '../dev-tools/seed';
 
 const logger = debug('backend:startup');

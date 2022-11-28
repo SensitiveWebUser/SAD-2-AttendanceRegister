@@ -2,7 +2,7 @@ import request from 'supertest';
 import { v4 as uuidv4 } from 'uuid';
 import { app } from '../../app';
 
-import { User, UserType } from '@Database';
+import { User, UserType } from '../../database/index';
 
 const updateDb = async () => {
   // Create a user type

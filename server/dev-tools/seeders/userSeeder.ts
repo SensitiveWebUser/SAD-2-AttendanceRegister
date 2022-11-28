@@ -1,5 +1,5 @@
 import debug from 'debug';
-import { User } from '@Database';
+import { User } from '../../src/database';
 import userTypeSeeder from './userTypeSeeder';
 
 const logger = debug('backend:seeder-user');

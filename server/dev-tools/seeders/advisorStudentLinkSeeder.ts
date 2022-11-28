@@ -1,4 +1,4 @@
-import { AdvisorStudentLink } from '@Database';
+import { AdvisorStudentLink } from '../../src/database';
 import userSeeder from './userSeeder';
 import debug from 'debug';
 
