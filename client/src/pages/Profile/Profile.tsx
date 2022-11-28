@@ -12,7 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 export const Profile = (): JSX.Element => {
   const { user } = useAuth0();
 
-  const detail = ['userType', 'module1', 'module2', 'module3'];
+  const detail = ['userType', 'module1', 'module2', 'module3']; // TODO: replace with user details
   const percentage = '100%';
 
   return (
@@ -72,31 +72,11 @@ export const Profile = (): JSX.Element => {
                   {value}
                 </Typography>
               ))}
+              <Divider
+                sx={{ bgcolor: '#CACACA', mt: '30px', mb: '30px' }}
+                variant="fullWidth"
+              />
             </List>
-          </Grid>
-          <Grid
-            item
-            xs={'auto'}
-            sx={{
-              backgroundColor: '#464954',
-              color: 'white',
-              borderRadius: '8px',
-              p: '30px',
-              position: 'relative',
-              mt: '30px',
-              minWidth: '320px',
-            }}
-          >
-            <Typography
-              component="h2"
-              variant="h2"
-              sx={{ pt: '10px', pb: '10px' }}
-            >
-              Semester Overview
-            </Typography>
-            <Typography variant="body1" sx={{ fontSize: '100px' }}>
-              {percentage}
-            </Typography>
           </Grid>
         </Grid>
       </Container>
