@@ -1,9 +1,25 @@
+import { color } from '@mui/system';
 import Chart from 'react-apexcharts';
 
 export const BarReport = (): JSX.Element => {
   const options = {
     options: {
+      tooltip: {
+        enabled: false,
+      },
+      dataLabels: {
+        formatter: function (val) {
+          return val + '%';
+        },
+        style: {
+          fontSize: '12px',
+          colors: ['#fff'],
+        },
+      },
       chart: {
+        toolbar: {
+          show: false,
+        },
         id: 'basic-bar',
       },
       xaxis: {
@@ -12,7 +28,7 @@ export const BarReport = (): JSX.Element => {
     },
     series: [
       {
-        name: 'series-1',
+        name: 'Attendance %',
         data: [10, 60, 100, 30],
       },
     ],
@@ -23,7 +39,8 @@ export const BarReport = (): JSX.Element => {
       options={options.options}
       series={options.series}
       type="bar"
-      width="500"
+      width="120%"
+      height="auto"
     />
   );
 };

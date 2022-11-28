@@ -9,7 +9,7 @@ export const Report = (): JSX.Element => {
     <React.Fragment>
       <Grid
         container
-        p={5}
+        p={3}
         direction="row"
         justifyContent="space-around"
         alignItems="center"
@@ -34,13 +34,12 @@ export const Report = (): JSX.Element => {
           xs={12}
           sm={5}
           sx={{
-            maxWidth: '400px',
+            height: 'auto',
             color: 'primary.white',
             backgroundColor: '#33353f',
             borderRadius: '4px',
             mb: '2rem',
-            minWidth: '20rem',
-            p: '2rem',
+            p: '1rem',
             flexGrow: 1,
             display: 'flex',
             flexDirection: 'column',
@@ -54,13 +53,12 @@ export const Report = (): JSX.Element => {
           xs={12}
           sm={5}
           sx={{
-            maxWidth: '400px',
+            height: 'auto',
             color: 'primary.white',
             backgroundColor: '#33353f',
             borderRadius: '4px',
             mb: '2rem',
-            minWidth: '20rem',
-            p: '2rem',
+            p: '1rem',
             flexGrow: 1,
             display: 'flex',
             flexDirection: 'column',
