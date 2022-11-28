@@ -6,6 +6,7 @@ import 'express-async-errors';
 import { json } from 'body-parser';
 import errorHandler from './middlewares/errorHandler';
 import userRouter from './routes/users.router';
+import courseRouter from './routes/courses.router';
 
 const logger = debug('backend:request');
 const app = express();
@@ -24,6 +25,7 @@ app.use(json());
 
 // express routes
 app.use('/api/users', userRouter);
+app.use('/api/courses', courseRouter);
 
 // generic error handler
 app.use(errorHandler);
