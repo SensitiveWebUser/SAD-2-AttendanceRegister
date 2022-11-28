@@ -6,7 +6,7 @@ import getCourseAsync from '../controllers/courses/courses.get';
 import deleteCourseAsync from '../controllers/courses/courses.delete';
 import createCourseAsync from '../controllers/courses/courses.create';
 import updateCourseAsync from '../controllers/courses/courses.update';
-import bulkImportAsync from 'src/controllers/courses/courses.bulk';
+import bulkImportAsync from '../controllers/courses/courses.bulk';
 
 const upload = multer({ dest: os.tmpdir() });
 const router = express.Router();
