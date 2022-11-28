@@ -7,7 +7,7 @@ import { I18nextProvider } from 'react-i18next';
 import { App } from './components/App';
 import i18n from './i18n';
 import reportWebVitals from './reportWebVitals';
-import * as serviceWorker from './serviceWorkerRegistration';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import darkTheme from './utils/themes/Dark';
 
 ReactDOM.render(
@@ -43,7 +43,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker.register();
+serviceWorkerRegistration.register();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
