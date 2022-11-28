@@ -20,7 +20,10 @@
     },
     "setupFilesAfterEnv": [
       "<rootDir>/src/test/setup.ts"
-    ]
+    ],
+    "testMatch": [
+      "**/?(*.)+(spec|test).[t]s?(x)"
+  ]
   },
   "keywords": [],
   "author": "",
