@@ -1,7 +1,6 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { TextReport } from '../../components/TextReport';
 import { BarReport } from '../../components/BarReport';
-import { PieReport } from '../../components/PieReport';
 import React from 'react';
 
 export const Report = (): JSX.Element => {
@@ -32,7 +31,7 @@ export const Report = (): JSX.Element => {
         <Grid
           item
           xs={12}
-          sm={5}
+          sm={11}
           sx={{
             height: 'auto',
             color: 'primary.white',
@@ -47,25 +46,6 @@ export const Report = (): JSX.Element => {
           }}
         >
           <BarReport />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={5}
-          sx={{
-            height: 'auto',
-            color: 'primary.white',
-            backgroundColor: '#33353f',
-            borderRadius: '4px',
-            mb: '2rem',
-            p: '1rem',
-            flexGrow: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <PieReport />
         </Grid>
       </Grid>
     </React.Fragment>

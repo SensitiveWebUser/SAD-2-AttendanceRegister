@@ -1,7 +1,9 @@
-import { color } from '@mui/system';
 import Chart from 'react-apexcharts';
 
 export const BarReport = (): JSX.Element => {
+  const data = [10, 20, 50, 30];
+  const categories = ['HF', 'MITP', 'SAAD', 'FYP'];
+
   const options = {
     options: {
       tooltip: {
@@ -17,19 +19,24 @@ export const BarReport = (): JSX.Element => {
         },
       },
       chart: {
+        width: '100%',
+        foreColor: '#fff',
         toolbar: {
           show: false,
         },
         id: 'basic-bar',
       },
       xaxis: {
-        categories: ['HF', 'MITP', 'SAAD', 'FYP'],
+        style: {
+          colors: ['#fff'],
+        },
+        categories: categories,
       },
     },
     series: [
       {
         name: 'Attendance %',
-        data: [10, 60, 100, 30],
+        data: data,
       },
     ],
   };
@@ -39,8 +46,8 @@ export const BarReport = (): JSX.Element => {
       options={options.options}
       series={options.series}
       type="bar"
-      width="120%"
-      height="auto"
+      height="350"
+      width="400"
     />
   );
 };
