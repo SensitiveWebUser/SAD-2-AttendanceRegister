@@ -12,7 +12,7 @@ import {
   getCourseRouter,
   getModuleRouter,
   getSessionRouter,
-  getUserModuleAttendance,
+  getUserModuleAttendanceRouter,
   createUserRouter,
   updateUserRouter,
   registerAttendanceRouter,
@@ -39,7 +39,7 @@ app.use(getUserRouter);
 app.use(getCourseRouter);
 app.use(getModuleRouter);
 app.use(getSessionRouter);
-app.use(getUserModuleAttendance);
+app.use(getUserModuleAttendanceRouter);
 app.use(createUserRouter);
 app.use(updateUserRouter);
 app.use(registerAttendanceRouter);
