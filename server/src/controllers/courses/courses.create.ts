@@ -4,7 +4,7 @@ import { Course } from '../../database';
 
 const logger = debug('backend:courses-controller-create');
 
-export default async function getCourse(req: Request, res: Response) {
+export default async function createCourseAsync(req: Request, res: Response) {
   const { name, courseLeader } = req.query;
 
   const course = Course.build({

@@ -5,7 +5,7 @@ import { NotFoundError } from '../../errors';
 
 const logger = debug('backend:courses-controller-get');
 
-export default async function getCourse(req: Request, res: Response) {
+export default async function getCourseAsync(req: Request, res: Response) {
   const { id } = req.params;
 
   const course = await Course.findByPk(id);

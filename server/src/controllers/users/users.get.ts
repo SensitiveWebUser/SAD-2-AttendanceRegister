@@ -6,7 +6,7 @@ import { NotFoundError } from '../../errors';
 
 const logger = debug('backend:users-controller');
 
-export default async function getUser(req: Request, res: Response) {
+export default async function getUserAsync(req: Request, res: Response) {
   const { id } = req.params;
 
   const user = await UserSchema.findByPk(id);

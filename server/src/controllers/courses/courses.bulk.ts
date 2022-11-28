@@ -6,7 +6,7 @@ import { Course } from '../../database';
 
 const logger = debug('backend:courses-controller-bulk');
 
-export default async function bulkImportAsync(req: Request, res: Response) {
+export default async function bulkImportCoursesAsync(req: Request, res: Response) {
   const file = req.file;
 
   // ensure a file was uploaded

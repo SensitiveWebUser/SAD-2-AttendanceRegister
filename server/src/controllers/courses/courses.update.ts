@@ -5,7 +5,7 @@ import { NotFoundError } from '../../errors';
 
 const logger = debug('backend:courses-controller-update');
 
-export default async function getCourse(req: Request, res: Response) {
+export default async function updateCourseAsync(req: Request, res: Response) {
   const { id } = req.params;
   const { name, courseLeader } = req.query;
 
