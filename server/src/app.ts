@@ -4,9 +4,20 @@ import helmet from 'helmet';
 import debug from 'debug';
 import 'express-async-errors';
 import { json } from 'body-parser';
-import { NotFoundError } from '@Errors';
-import { errorHandler } from '@Middlewares';
-import { getUserRouter } from '@Routes/index';
+import { NotFoundError } from '../src/errors';
+import { errorHandler } from '../src/middlewares';
+
+import {
+  getUserRouter,
+  getCourseRouter,
+  getModuleRouter,
+  getSessionRouter,
+  getUserModuleAttendance,
+  createUserRouter,
+  updateUserRouter,
+  registerAttendanceRouter,
+  updateAttendanceRouter,
+} from './routes';
 
 const logger = debug('backend:request');
 const app = express();
@@ -25,6 +36,14 @@ app.use(json());
 
 // express routes
 app.use(getUserRouter);
+app.use(getCourseRouter);
+app.use(getModuleRouter);
+app.use(getSessionRouter);
+app.use(getUserModuleAttendance);
+app.use(createUserRouter);
+app.use(updateUserRouter);
+app.use(registerAttendanceRouter);
+app.use(updateAttendanceRouter);
 
 // 404 handler
 app.all('*', async () => {

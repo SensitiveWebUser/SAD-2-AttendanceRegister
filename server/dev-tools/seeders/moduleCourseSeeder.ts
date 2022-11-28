@@ -1,4 +1,4 @@
-import { ModuleCourseLink } from '@Database';
+import { ModuleCourseLink } from '../../src/database';
 import moduleSeeder from './moduleSeeder';
 import courseSeeder from './courseSeeder';
 import debug from 'debug';

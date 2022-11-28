@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import debug from 'debug';
-import { UserType as ObjectType } from '@Database';
+import { UserType as ObjectType } from '../../src/database';
 
 type ObjectType = {
   user_type_id: string;

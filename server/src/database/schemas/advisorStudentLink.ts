@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '@Database';
+import { sequelize } from '../database';
 import { User } from './user';
 
 export const AdvisorStudentLink = sequelize.define<AdvisorStudentLink>(

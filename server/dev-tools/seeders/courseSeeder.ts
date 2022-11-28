@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Course } from '@Database';
+import { Course } from '../../src/database';
 import userSeeder from './userSeeder';
 import debug from 'debug';
 

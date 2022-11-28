@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { expressjwt, GetVerificationKey } from 'express-jwt';
 import * as jwks from 'jwks-rsa';
 
-import { UnauthorizedError } from '@Errors/unauthorizedError';
+import { UnauthorizedError } from '../errors';
 
 // This is the middleware that will be used to verify the JWT token
 // It will be used in the routes that require authentication

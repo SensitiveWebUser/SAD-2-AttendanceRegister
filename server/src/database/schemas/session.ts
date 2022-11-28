@@ -1,5 +1,5 @@
 import { Model, DataTypes, CreationOptional } from 'sequelize';
-import { sequelize } from '@Database';
+import { sequelize } from '../database';
 import { User } from './user';
 import { Module } from './module';
 import { SessionType } from './sessionType';

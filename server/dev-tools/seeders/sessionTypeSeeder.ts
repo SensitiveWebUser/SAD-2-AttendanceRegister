@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import debug from 'debug';
-import { SessionType as ObjectType } from '@Database';
+import { SessionType as ObjectType } from '../../src/database';
 
 type ObjectType = {
   session_type_id: string;
