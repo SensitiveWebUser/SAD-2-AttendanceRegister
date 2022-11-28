@@ -16,7 +16,7 @@ export const requireAuth = async (
   res: Response,
   next: NextFunction
 ) => {
-  const issuerUrl = process.env.AUTH0_ISSUER_BASE_URL;
+  const issuerUrl = process.env.AUTH0_ISSUER;
 
   // bypassing authentication for testing purposes
   if (process.env.NODE_ENV === 'test') {
