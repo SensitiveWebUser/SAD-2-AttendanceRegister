@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
+import { Alert, AlertTitle } from '@mui/material';
+import { useSnackbar } from 'notistack';
 
 export const useRequest = ({
   url,
@@ -9,7 +11,7 @@ export const useRequest = ({
   onSuccess,
 }: useRequestProps) => {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
-
+  const { enqueueSnackbar } = useSnackbar();
   const [errors, setErrors] = useState(null);
 
   // This function is used to make the request to the API
@@ -31,17 +33,24 @@ export const useRequest = ({
 
       if (onSuccess) {
         onSuccess(response.data);
+        enqueueSnackbar('Success', {
+          variant: 'success',
+        });
       }
     } catch (err) {
+      err.response.data.errors.map((err) => {
+        enqueueSnackbar(err.message, {
+          variant: 'error',
+        });
+      });
       setErrors(
-        <div className="alert alert-danger">
-          <h4>Ooops....</h4>
-          <ul className="my-0">
-            {err.response.data.errors.map((err) => (
-              <li key={err.message}>{err.message}</li>
-            ))}
-          </ul>
-        </div>
+        <Alert
+          severity="error"
+          sx={{ mt: 2, bgcolor: '#160B0B', color: '#F4C7C7' }}
+        >
+          <AlertTitle sx={{ fontWeight: '600' }}>Error</AlertTitle>
+          Something went wrong when requesting {url}
+        </Alert>
       );
     }
   };

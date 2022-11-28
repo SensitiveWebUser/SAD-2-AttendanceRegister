@@ -7,6 +7,6 @@ export class UnauthorizedError extends CustomError {
     Object.setPrototypeOf(this, UnauthorizedError.prototype);
   }
   serializeErrors() {
-    return [{ message: 'Unauthorized' }];
+    return [{ message: this.message }];
   }
 }
