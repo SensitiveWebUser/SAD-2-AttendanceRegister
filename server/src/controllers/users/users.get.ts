@@ -2,7 +2,7 @@ import debug from 'debug';
 import type { Request, Response } from 'express';
 import { User as UserSchema } from '../../database';
 import { User as UserModel } from '../../models';
-import { NotFoundError } from 'src/errors';
+import { NotFoundError } from '../../errors';
 
 const logger = debug('backend:users-controller');
 

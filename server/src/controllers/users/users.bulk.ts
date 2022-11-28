@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import debug from 'debug';
 import { parse } from 'csv-parse';
 import fs from 'fs';
-import managementClient from 'src/utils/managementClient';
+import managementClient from '../../utils/managementClient';
 
 const logger = debug('backend:users-controller');
 
