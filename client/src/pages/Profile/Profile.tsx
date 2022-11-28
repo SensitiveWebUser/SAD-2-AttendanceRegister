@@ -12,7 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 export const Profile = (): JSX.Element => {
   const { user } = useAuth0();
 
-  const detail = ['userType', 'course?', 'module(s)'];
+  const detail = ['userType', 'module1', 'module2', 'module3'];
   const percentage = '100%';
 
   return (
