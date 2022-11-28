@@ -1,5 +1,39 @@
 {
-  "translation": {
-    "hello": "Hello"
+  "homepage": {
+    "title": "Welcome!",
+    "loggedIn": "View your data",
+    "loggedOut": "Login to view your data"
+  },
+  "error": {
+    "404": {
+      "title": "404",
+      "message": "The page you're looking for doesn't exist.",
+      "backMessage": "Go to the home page "
+    }
+  },
+  "request": {
+    "success": "success",
+    "error": {
+      "title": "Error",
+      "message": "Something went wrong when requesting {{ url }}"
+    }
+  },
+  "nav": {
+    "link": {
+      "home": "home",
+      "attendance": "attendance",
+      "report": "report",
+      "login": "Login",
+      "logout": "Logout",
+      "profile": "Profile"
+    },
+    "avatarAlt": "Default Avatar",
+    "logoAlt": "Company Logo",
+    "footer": {
+      "message": "Made with love <br /> By "
+    }
+  },
+  "loading": {
+    "message": "Loading..."
   }
 }
