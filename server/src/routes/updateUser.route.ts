@@ -1,11 +1,14 @@
 import express from 'express';
 import { body, param } from 'express-validator';
+import { userTypeEnum } from 'src/utils/userTypeEnum';
 import { updateUserController } from '../controllers';
-import { validateRequest } from '../middlewares';
+import { requireAuth, requireRole, validateRequest } from '../middlewares';
 
 const router = express.Router();
 router.patch(
   '/api/user/:id',
+  requireAuth,
+  requireRole([userTypeEnum.ADMIN]),
   [
     param('id').isString().withMessage('User id must be a string'),
     body('firstName')
