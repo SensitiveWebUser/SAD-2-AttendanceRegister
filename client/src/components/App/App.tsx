@@ -7,7 +7,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { Home, NotFound } from '../../pages';
+import { Home, NotFound, Profile } from '../../pages';
 import { Header } from '../Header';
 
 export const App = (): JSX.Element => {
@@ -27,6 +27,7 @@ export const App = (): JSX.Element => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/Profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Outlet />
