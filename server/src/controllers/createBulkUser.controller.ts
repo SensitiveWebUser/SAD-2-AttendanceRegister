@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-
+import bcrypt from 'bcrypt';
 import { parse } from 'csv-parse';
 import debug from 'debug';
 import fs from 'fs';
@@ -50,7 +50,7 @@ async function getAuth0FormatAsync(records: TypeCSV[]): Promise<AuthUsers[]> {
   return users;
 }
 
-export default async function bulkImportAsync(req: Request, res: Response) {
+export const bulkImportAsync = (req: Request, res: Response) => {
   const file = req.file;
 
   // ensure a file was uploaded
