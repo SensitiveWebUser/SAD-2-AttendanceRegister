@@ -41,8 +41,6 @@ export class Module {
 
     if (!sessionRecords) throw new Error('no sessions found');
 
-    console.log(sessionRecords);
-
     return Promise.all(
       sessionRecords.map(async (session) => {
         return new Session({
