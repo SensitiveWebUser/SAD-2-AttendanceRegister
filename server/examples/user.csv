@@ -1,7 +1,7 @@
-email,password
-student@localhost.com,studentpassword123
-tutor@localhost.com,tutorpassword123
-academic-advisor@localhost.com,academicadvisorpassword123
-course-leader@localhost.com,courseleader123
-module-leader@localhost.com,moduleleader123
-administrator@localhost.com,administrator123
+email,password,role
+student@localhost.com,studentpassword123,Student
+tutor@localhost.com,tutorpassword123,Tutor
+academic-advisor@localhost.com,academicadvisorpassword123,Academic Advisor
+course-leader@localhost.com,courseleader123,Course Leader
+module-leader@localhost.com,moduleleader123,Module Leader
+administrator@localhost.com,administrator123,Administrator
