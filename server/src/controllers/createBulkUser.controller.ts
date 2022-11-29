@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express';
+import { User, UserType } from '../database';
 import bcrypt from 'bcrypt';
 import { parse } from 'csv-parse';
 import debug from 'debug';
@@ -11,8 +12,20 @@ const connectionId = process.env.AUTH0_DATABASE_IDENTIFIER;
 
 type TypeCSV = {
   email: string;
+  first_name: string;
+  middle_name: string;
+  last_name: string;
   password: string;
   role: string;
+};
+
+type DatabaseUser = {
+  user_id: string;
+  email: string;
+  first_name: string;
+  middle_name: string;
+  last_name: string;
+  user_type_id: string;
 };
 
 type AuthUsers = {
@@ -56,7 +69,7 @@ async function getAuth0FormatAsync(records: TypeCSV[]): Promise<AuthUsers[]> {
   return users;
 }
 
-export const bulkImportAsync = (req: Request, res: Response) => {
+export const bulkImportUsersAsync = (req: Request, res: Response) => {
   const file = req.file;
 
   // ensure a file was uploaded
@@ -71,24 +84,80 @@ export const bulkImportAsync = (req: Request, res: Response) => {
   parse(data, { columns: true }, async (err, records: TypeCSV[]) => {
     if (err) {
       logger('unable to parse the CSV file.');
-      console.error(err);
+      logger(err);
       return res.status(500).end();
     }
 
-    // convert CSV into format Auth0 can understand
-    const users = await getAuth0FormatAsync(records);
-    const jsonUsers = JSON.stringify(users);
+    const job = await uploadToAuth0(records);
+    await waitForAuth0JobSuccessAsync(job.id);
+    await uploadToDatabase(records);
 
-    // send bulk import job command to auth0
-    logger(`sending import job to auth0... ${jsonUsers}`);
-    const result = await managementClient.importUsersJob({
-      connection_id: connectionId || '',
-      users_json: jsonUsers,
-    });
-    logger(
-      'sent import job to auth0 successfully...this will take time to populate'
-    );
-
-    return res.status(200).json(result);
+    return res.status(200).end();
   });
 };
+
+async function waitForAuth0JobSuccessAsync(jobId: string) {
+  let doRun = true;
+  do {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const job = await managementClient.getJob({ id: jobId });
+    if (job.status === 'completed') {
+      logger(`auth0 job id ${jobId} completed!`);
+      logger(job);
+      doRun = false;
+    } else {
+      logger(`auth0 job id ${jobId} has not yet completed... waiting...`);
+    }
+  } while (doRun);
+}
+
+async function uploadToDatabase(records: TypeCSV[]) {
+  const dbUsers: DatabaseUser[] = await Promise.all(
+    records.map(async (record) => {
+      // get the user type for that user
+      const userTypeId = await UserType.findOne({
+        where: { user_type_name: record.role },
+      });
+
+      // get user
+      const users = await managementClient.getUsersByEmail(record.email);
+
+      if (users.length !== 0) {
+        logger(`user with email ${record.email} was found`);
+      }
+
+      // create a new object for the database
+      return {
+        user_id: users[0].user_id as string,
+        first_name: record.first_name,
+        middle_name: record.middle_name,
+        last_name: record.last_name,
+        email: record.email,
+        user_type_id: userTypeId?.user_type_id as string,
+      };
+    })
+  );
+
+  logger('importing users to database...');
+  try {
+    await User.bulkCreate([...dbUsers], { validate: true });
+    logger('added all users successfully.');
+  } catch (err) {
+    logger('users could not be added to the database successfully.');
+    logger(err);
+  }
+}
+
+async function uploadToAuth0(records: TypeCSV[]) {
+  const users = await getAuth0FormatAsync(records);
+  const jsonUsers = JSON.stringify(users);
+
+  // send bulk import job command to auth0
+  logger('sending import job to auth0...');
+  const result = await managementClient.importUsersJob({
+    connection_id: connectionId || '',
+    users_json: jsonUsers,
+  });
+
+  return result;
+}

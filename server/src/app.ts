@@ -22,6 +22,7 @@ import {
   resetPasswordUserRouter,
   updateStudentsAttendanceRouter,
   updateUserRouter,
+  createBulkModulesRouter,
 } from './routes';
 
 const logger = debug('backend:request');
@@ -54,6 +55,7 @@ app.use(getAllUsersRouter);
 // create routes
 app.use(createUserRouter);
 app.use(createBulkUserRouter);
+app.use(createBulkModulesRouter);
 
 // update routes
 app.use(updateUserRouter);

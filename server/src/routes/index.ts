@@ -1,5 +1,6 @@
 // create routes
 export { createBulkUserRouter } from './createBulkUser.route';
+export { createBulkModulesRouter } from './createBulkModules.route';
 export { createUserRouter } from './createUser.route';
 
 // get routes
