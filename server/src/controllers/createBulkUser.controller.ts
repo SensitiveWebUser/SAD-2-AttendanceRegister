@@ -24,6 +24,9 @@ type AuthUsers = {
       value: string;
     };
   };
+  app_metadata: {
+    role: string;
+  };
 };
 
 async function getAuth0FormatAsync(records: TypeCSV[]): Promise<AuthUsers[]> {
@@ -37,6 +40,9 @@ async function getAuth0FormatAsync(records: TypeCSV[]): Promise<AuthUsers[]> {
       return {
         email: record.email,
         email_verified: true,
+        app_metadata: {
+          role: record.role,
+        },
         custom_password_hash: {
           algorithm: 'bcrypt',
           hash: {
