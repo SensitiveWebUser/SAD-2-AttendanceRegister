@@ -23,7 +23,7 @@
     ],
     "testMatch": [
       "**/?(*.)+(spec|test).[t]s?(x)"
-  ]
+    ]
   },
   "keywords": [],
   "author": "",

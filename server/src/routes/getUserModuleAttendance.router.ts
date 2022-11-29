@@ -23,4 +23,4 @@ router.get(
   getUserModuleAttendanceController
 );
 
-export { router as getUserModuleAttendance };
+export { router as getUserModuleAttendanceRouter };
