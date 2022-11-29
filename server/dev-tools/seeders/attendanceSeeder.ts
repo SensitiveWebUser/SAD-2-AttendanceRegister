@@ -1,4 +1,4 @@
-import { Attendance } from '@Database';
+import { Attendance } from '../../src/database';
 import userSeeder from './userSeeder';
 import sessionSeeder from './sessionSeeder';
 import debug from 'debug';

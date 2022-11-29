@@ -7,7 +7,7 @@ import sessionTypeSeeder from './seeders/sessionTypeSeeder';
 import moduleSeeder from './seeders/moduleSeeder';
 import courseSeeder from './seeders/courseSeeder';
 import moduleCourseSeeder from './seeders/moduleCourseSeeder';
-import advisorStudentLink from './seeders/advisorStudentLink';
+import advisorStudentLink from './seeders/advisorStudentLinkSeeder';
 
 const logger = debug('backend:seeder');
 

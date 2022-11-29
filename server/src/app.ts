@@ -1,12 +1,12 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import debug from 'debug';
 import 'express-async-errors';
 import { json } from 'body-parser';
-import { NotFoundError } from '@Errors';
-import { errorHandler } from '@Middlewares';
-import { getUserRouter } from '@Routes/index';
+import errorHandler from './middlewares/errorHandler';
+import userRouter from './routes/users.router';
+import courseRouter from './routes/courses.router';
 
 const logger = debug('backend:request');
 const app = express();
@@ -24,14 +24,16 @@ app.use(morgan('tiny', { stream: { write: (msg) => logger(msg) } }));
 app.use(json());
 
 // express routes
-app.use(getUserRouter);
-
-// 404 handler
-app.all('*', async () => {
-  throw new NotFoundError();
-});
+app.use('/api/users', userRouter);
+app.use('/api/courses', courseRouter);
 
 // generic error handler
 app.use(errorHandler);
+
+// 404 handler
+app.all('*', async (req: Request, res: Response) => {
+  logger(`route ${req.url} does not exist. `);
+  res.status(404).json({ error: 'route does not exist' });
+});
 
 export { app };

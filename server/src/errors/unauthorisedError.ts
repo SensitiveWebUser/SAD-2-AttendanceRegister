@@ -1,10 +1,11 @@
 import { CustomError } from './customError';
 
-export class UnauthorizedError extends CustomError {
+export class UnauthorisedError extends CustomError {
   statusCode = 401;
+
   constructor() {
-    super('Unauthorized');
-    Object.setPrototypeOf(this, UnauthorizedError.prototype);
+    super('Unauthorised');
+    Object.setPrototypeOf(this, UnauthorisedError.prototype);
   }
   serializeErrors() {
     return [{ message: this.message }];

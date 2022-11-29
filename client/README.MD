@@ -1,4 +1,5 @@
 # Attendance Register Client
+
 ## SAAD Group 2
 
 - Alice Chambers
@@ -10,5 +11,11 @@
 ### Launch client
 
 - `cd /client`
- 
+
 - `npm run start:dev`
+
+### Run Integration Tests with Cypress
+
+- `cd /client`
+
+- `npm run cy:run`

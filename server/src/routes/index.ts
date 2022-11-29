@@ -1,1 +1,0 @@
-export { getUserRouter } from './getUser';

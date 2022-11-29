@@ -1,5 +1,3 @@
-//like student
-
 import { User } from '../User';
 
 const userTestData = {

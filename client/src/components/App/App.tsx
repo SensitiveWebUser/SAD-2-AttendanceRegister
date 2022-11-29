@@ -1,23 +1,24 @@
-import { useAuth0 } from '@auth0/auth0-react';
-import { LinearProgress } from '@mui/material';
+import { Login } from '@mui/icons-material';
+import { Container, LinearProgress, Typography } from '@mui/material';
 import { Fragment, Suspense } from 'react';
 import {
   BrowserRouter as Router,
-  Routes,
-  Route,
   Outlet,
+  Route,
+  Routes,
 } from 'react-router-dom';
-
-import { Home, NotFound, Profile } from '../../pages';
+import { Home, NotFound } from '../../pages';
 import { Header } from '../Header';
 
 export const App = (): JSX.Element => {
-  const { isAuthenticated } = useAuth0();
   return (
     <Suspense
       fallback={
         <Fragment>
-          <LinearProgress /> <h1>Loading...</h1>
+          <Container>
+            {/* Would've used {t('loading.message')} here but can't due react not rendering it */}
+            <LinearProgress /> <Typography>Loading...</Typography>
+          </Container>
         </Fragment>
       }
     >
@@ -25,18 +26,7 @@ export const App = (): JSX.Element => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/Attendance"
-            element={isAuthenticated ? <Home /> : <NotFound />}
-          />
-          <Route
-            path="/Report"
-            element={isAuthenticated ? <Home /> : <NotFound />}
-          />
-          <Route
-            path="/profile"
-            element={isAuthenticated ? <Profile /> : <NotFound />}
-          />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Outlet />

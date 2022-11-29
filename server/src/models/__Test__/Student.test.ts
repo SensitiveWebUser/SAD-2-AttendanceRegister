@@ -1,4 +1,4 @@
-import { Student } from '@Models';
+import { Student } from '../../models/Student';
 
 const studentTestData = {
   id: '1',

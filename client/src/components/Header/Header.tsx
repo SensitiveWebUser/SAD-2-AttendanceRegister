@@ -1,10 +1,11 @@
-import { useState, Fragment } from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import { useAuth0 } from '@auth0/auth0-react';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import LogoutIcon from '@mui/icons-material/Logout';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
   Avatar,
@@ -24,11 +25,11 @@ import {
   useScrollTrigger,
   Zoom,
 } from '@mui/material';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import logo from '../../utils/resources/images/logo192.png';
+import { Fragment, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
+import logo from '../../utils/resources/images/logo192.png';
 import { ExternalLink } from '../ExternalLink';
-import { useAuth0 } from '@auth0/auth0-react';
 
 const ScrollTop = () => {
   const trigger = useScrollTrigger({
@@ -83,8 +84,15 @@ export const Header = (): JSX.Element => {
   const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
   const [isSidebarOpen, setSideBarOpen] = useState(false);
   const navigate = useNavigate();
-  const tooltipMessage = isAuthenticated ? 'Profile' : 'Login';
-  const pages = ['home', 'attendance', 'report'];
+  const { t } = useTranslation();
+  const tooltipMessage = isAuthenticated
+    ? t('nav.link.profile')
+    : t('nav.link.login');
+  const pages = [
+    t('nav.link.home'),
+    t('nav.link.attendance'),
+    t('nav.link.report'),
+  ];
   const icons = [
     <DashboardIcon key={'dashboardIcon'} />,
     <ArticleOutlinedIcon key={'articleIcon'} />,
@@ -135,7 +143,7 @@ export const Header = (): JSX.Element => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title={tooltipMessage}>
                   <IconButton sx={{ gap: 2 }} onClick={handleClick}>
-                    <Avatar alt="Default Image" src={user?.picture} />
+                    <Avatar alt={t('nav.avatarAlt')} src={user?.picture} />
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -159,7 +167,7 @@ export const Header = (): JSX.Element => {
           <List>
             <ListItem>
               <Box margin="auto">
-                <img src={logo} alt="logo" width={95} />
+                <img src={logo} alt={t('nav.logoAlt')} width={95} />
               </Box>
             </ListItem>
           </List>
@@ -188,37 +196,37 @@ export const Header = (): JSX.Element => {
               <Fragment>
                 <ListItem
                   button
-                  key={'Profile'}
+                  key={t('nav.link.profile')}
                   component={NavLink}
                   to={'/profile'}
                 >
                   <ListItemIcon sx={{ color: 'white' }}>
                     <AccountCircleIcon />
                   </ListItemIcon>
-                  <ListItemText primary={'Profile'} />
+                  <ListItemText primary={t('nav.link.profile')} />
                 </ListItem>
                 <ListItem
                   button
-                  key={'Logout'}
+                  key={t('nav.link.logout')}
                   onClick={() => logout({ returnTo: window.location.origin })}
                 >
                   <ListItemIcon sx={{ color: 'white' }}>
                     <LogoutIcon />
                   </ListItemIcon>
-                  <ListItemText primary={'Logout'} />
+                  <ListItemText primary={t('nav.link.logout')} />
                 </ListItem>
               </Fragment>
             ) : (
               <Fragment>
                 <ListItem
                   button
-                  key={'Login'}
+                  key={t('nav.link.login')}
                   onClick={() => loginWithRedirect()}
                 >
                   <ListItemIcon sx={{ color: 'white' }}>
                     <AccountCircleIcon />
                   </ListItemIcon>
-                  <ListItemText primary={'Login'} />
+                  <ListItemText primary={t('nav.link.login')} />
                 </ListItem>
               </Fragment>
             )}
@@ -233,9 +241,7 @@ export const Header = (): JSX.Element => {
           >
             <ListItem>
               <ListItemText>
-                Made with love
-                <br />
-                By{' '}
+                <Trans i18nKey="nav.footer.message" />
                 <ExternalLink href="https://github.com/SensitiveWebUser/SAD-2-AttendanceRegister">
                   Group 2
                 </ExternalLink>

@@ -18,6 +18,7 @@ module.exports = {
     'public/**/*',
     '*.json',
     '*.md',
+    '*.csv',
     '*.test.tsx',
     'build/**/*',
     'src/utils/resources/*',
