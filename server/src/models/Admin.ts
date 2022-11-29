@@ -1,30 +1,19 @@
-import { User } from './User';
+import { User, UserToJsonReturn } from '../models';
 
 export class Admin extends User {
-  constructor(
-    id: string,
-    type: string,
-    firstName: string,
-    middleName: string,
-    lastName: string,
-    email: string
-  ) {
-    super(id, type, firstName, middleName, lastName, email);
+  constructor({ userObject }: constructorParams) {
+    super(userObject);
   }
 
-  createUser() {
-    console.log('TODO FUNCTION');
+  async toJsonAsync(): Promise<toJsonReturn> {
+    return {
+      ...(await super.toJsonAsync()),
+    };
   }
+}
 
-  updateUser() {
-    console.log('TODO FUNCTION');
-  }
+type toJsonReturn = UserToJsonReturn;
 
-  bulkImportUsers() {
-    console.log('TODO FUNCTION');
-  }
-
-  initiatePasswordReset() {
-    console.log('TODO FUNCTION');
-  }
+interface constructorParams {
+  userObject: User;
 }

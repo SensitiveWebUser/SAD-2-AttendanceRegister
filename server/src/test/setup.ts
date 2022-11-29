@@ -1,4 +1,4 @@
-import { sequelize } from '../database/database';
+import { sequelize } from '../database';
 
 // This function is called after each tests are done
 // It will wipe the database clean

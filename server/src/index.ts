@@ -2,10 +2,10 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: __dirname + '/../.env.local' });
 
 import debug from 'debug';
-import { app } from './app';
 import 'express-async-errors';
-import { sequelize } from './database/database';
 import seedAsync from '../dev-tools/seed';
+import { app } from './app';
+import { sequelize } from './database';
 
 const logger = debug('backend:startup');
 

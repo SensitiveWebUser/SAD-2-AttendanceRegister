@@ -1,9 +1,9 @@
 import type { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
-import debug from 'debug';
+
 import { parse } from 'csv-parse';
+import debug from 'debug';
 import fs from 'fs';
-import managementClient from '../../utils/managementClient';
+import managementClient from '../utils/managementClient';
 
 const logger = debug('backend:users-controller');
 
@@ -85,4 +85,4 @@ export default async function bulkImportAsync(req: Request, res: Response) {
 
     return res.status(200).json(result);
   });
-}
+};
