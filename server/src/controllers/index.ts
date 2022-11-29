@@ -1,5 +1,6 @@
 // create
-export { bulkImportAsync } from './createBulkUser.controller';
+export { bulkImportUsersAsync } from './createBulkUser.controller';
+export { bulkImportModulesAsync } from './createBulkModules.controller';
 export { createUserController } from './createUser.controller';
 
 // get controllers
