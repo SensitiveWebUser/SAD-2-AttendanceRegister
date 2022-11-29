@@ -2,9 +2,9 @@ import { CourseLeader } from '../models';
 import { Course as CourseSchema } from '../database';
 
 export class Course {
-  id: number;
-  name: string;
-  courseLeader: CourseLeader;
+  private id: number;
+  private name: string;
+  private courseLeader: CourseLeader;
 
   constructor({ id, name, courseLeader }: constructorParams) {
     this.id = id;
@@ -12,7 +12,6 @@ export class Course {
     this.courseLeader = courseLeader;
   }
 
-  // getters
   public get getId(): number {
     return this.id;
   }
@@ -25,8 +24,6 @@ export class Course {
     return this.courseLeader;
   }
 
-  // setters
-
   public set setName(name: string) {
     this.name = name;
   }
@@ -34,8 +31,6 @@ export class Course {
   public set setCourseLeader(courseLeader: CourseLeader) {
     this.courseLeader = courseLeader;
   }
-
-  // methods
 
   public updateDatabaseAsync = async (): Promise<boolean> => {
     const course = await CourseSchema.findByPk(this.getId);

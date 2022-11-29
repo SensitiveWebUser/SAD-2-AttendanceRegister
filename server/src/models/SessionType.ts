@@ -1,15 +1,14 @@
 import { SessionType as sessionTypeSchema } from '../database';
 
 export class SessionType {
-  id: string;
-  name: string;
+  private id: string;
+  private name: string;
 
   constructor({ id, name }: constructorParams) {
     this.id = id;
     this.name = name;
   }
 
-  //getters
   public get getId(): string {
     return this.id;
   }
@@ -18,13 +17,9 @@ export class SessionType {
     return this.name;
   }
 
-  //setters
-
   public set setName(name: string) {
     this.name = name;
   }
-
-  //methods
 
   public updateDatabaseAsync = async (): Promise<boolean> => {
     const sessionType = await sessionTypeSchema.findByPk(this.getId);

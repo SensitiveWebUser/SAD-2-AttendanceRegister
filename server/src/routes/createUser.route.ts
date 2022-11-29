@@ -1,10 +1,7 @@
-//Route that imports the controller and calls the create method
-
 import { Router } from 'express';
 import { body } from 'express-validator';
-
-import { validateRequest } from '../middlewares';
 import { createUserController } from '../controllers';
+import { validateRequest } from '../middlewares';
 
 const router = Router();
 

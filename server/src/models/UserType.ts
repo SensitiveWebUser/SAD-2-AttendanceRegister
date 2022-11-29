@@ -1,15 +1,14 @@
 import { UserType as UserTypeSchema } from '../database';
 
 export class UserType {
-  id: string;
-  name: string;
+  private id: string;
+  private name: string;
 
   constructor({ id, name }: constructorParams) {
     this.id = id;
     this.name = name;
   }
 
-  // getters
   public get getId(): string {
     return this.id;
   }
@@ -18,12 +17,9 @@ export class UserType {
     return this.name;
   }
 
-  // setters
   public set setName(name: string) {
     this.name = name;
   }
-
-  // methods
 
   public updateDatabaseAsync = async (): Promise<boolean> => {
     const userType = await UserTypeSchema.findByPk(this.getId);
@@ -41,7 +37,6 @@ export class UserType {
     return true;
   };
 
-  // methods
   toJson(): toJsonReturn {
     return {
       id: this.id,

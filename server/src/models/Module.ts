@@ -1,10 +1,10 @@
-import { Tutor } from '../models';
 import { Module as ModuleSchema } from '../database';
+import { Tutor } from '../models';
 
 export class Module {
-  id: number;
-  name: string;
-  moduleLeader: Tutor;
+  private id: number;
+  private name: string;
+  private moduleLeader: Tutor;
 
   constructor({ id, name, moduleLeader }: constructorParams) {
     this.id = id;
@@ -12,7 +12,6 @@ export class Module {
     this.moduleLeader = moduleLeader;
   }
 
-  // getters
   public get getId(): number {
     return this.id;
   }
@@ -25,8 +24,6 @@ export class Module {
     return this.moduleLeader;
   }
 
-  // setters
-
   public set setName(name: string) {
     this.name = name;
   }
@@ -34,8 +31,6 @@ export class Module {
   public set setModuleLeader(moduleLeader: Tutor) {
     this.moduleLeader = moduleLeader;
   }
-
-  // methods
 
   public updateDatabaseAsync = async (): Promise<boolean> => {
     const module = await ModuleSchema.findByPk(this.getId);

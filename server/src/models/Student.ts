@@ -1,17 +1,17 @@
 import { debug } from 'debug';
-
-import {
-  User,
-  UserToJsonReturn,
-  AcademicAdvisor,
-  Attendance,
-  Session,
-} from '../models';
+import { BadRequestError } from 'src/errors';
 import {
   Attendance as AttendanceSchema,
   Session as SessionSchema,
   User as UserSchema,
 } from '../database';
+import {
+  AcademicAdvisor,
+  Attendance,
+  Session,
+  User,
+  UserToJsonReturn,
+} from '../models';
 
 const logger = debug('backend:Student');
 
@@ -31,7 +31,9 @@ export class Student extends User {
 
   // methods
 
-  public getAttendances = async (moduleId?: string): Promise<Attendance[]> => {
+  public getAttendancesAsync = async (
+    moduleId?: string
+  ): Promise<Attendance[]> => {
     const attendanceRecords = await AttendanceSchema.findAll({
       where: {
         user_id: this.getId,
@@ -73,7 +75,7 @@ export class Student extends User {
       const filteredAttendanceArray = attendanceArray.filter(
         async (attendance) => {
           const session = (await attendance).getSession;
-          return session.getModuleId() === moduleId;
+          return session.getModuleId === moduleId;
         }
       );
 
@@ -83,40 +85,39 @@ export class Student extends User {
     return Promise.all(attendanceArray);
   };
 
-  public getAcademicAdvisor = async (): Promise<AcademicAdvisor | null> => {
-    const advisorRecord = await UserSchema.findOne({
-      where: {
-        user_id: this.academicAdvisorId,
-      },
-    });
+  public getAcademicAdvisorAsync =
+    async (): Promise<AcademicAdvisor | null> => {
+      const advisorRecord = await UserSchema.findOne({
+        where: {
+          user_id: this.academicAdvisorId,
+        },
+      });
 
-    logger('advisorRecord', advisorRecord);
+      logger('advisorRecord', advisorRecord);
 
-    if (!advisorRecord) {
-      logger(
-        'No academic advisor found for student in advisor_student_link table'
-      );
-      return null;
-    }
+      if (!advisorRecord) {
+        logger(
+          'No academic advisor found for student in advisor_student_link table'
+        );
+        return null;
+      }
 
-    return new AcademicAdvisor({
-      userObject: new User({
-        id: advisorRecord!.dataValues.user_id,
-        type: advisorRecord!.dataValues.user_type_id,
-        firstName: advisorRecord!.dataValues.first_name,
-        middleName: advisorRecord!.dataValues.middle_name,
-        lastName: advisorRecord!.dataValues.last_name,
-        email: advisorRecord!.dataValues.email,
-      }),
-    });
-  };
+      return new AcademicAdvisor({
+        userObject: new User({
+          id: advisorRecord!.dataValues.user_id,
+          type: advisorRecord!.dataValues.user_type_id,
+          firstName: advisorRecord!.dataValues.first_name,
+          middleName: advisorRecord!.dataValues.middle_name,
+          lastName: advisorRecord!.dataValues.last_name,
+          email: advisorRecord!.dataValues.email,
+        }),
+      });
+    };
 
   public registerAttendanceAsync = async (
     session: Session,
     code: string
   ): Promise<boolean> => {
-    console.log('registerAttendanceAsync()');
-
     // Get the attendanceRecord from the database
     const attendanceRecord = await AttendanceSchema.findOne({
       where: {
@@ -124,8 +125,6 @@ export class Student extends User {
         session_id: session.getId,
       },
     });
-
-    console.log('attendanceRecord', attendanceRecord);
 
     const attendance = new Attendance({
       student: this,
@@ -137,29 +136,24 @@ export class Student extends User {
     const timestamp: Date = new Date();
 
     const hasAttended: boolean = await attendance.hasAttendedAsync();
-    console.log('hasAttended', hasAttended);
 
-    // Checks if code is correct, student already registered and if the session has not ended/started
+    if (session.getCode !== code) throw new BadRequestError('Invalid code');
+    if (hasAttended) throw new BadRequestError('Already register attendance');
     if (
-      session.getCode() === code &&
-      !hasAttended &&
-      session.getStartTimestamp() > timestamp &&
-      session.getEndTimestamp() < timestamp
+      session.getStartTimestamp.getTime() > timestamp.getTime() ||
+      session.getEndTimestamp.getTime() < timestamp.getTime()
     ) {
-      // Try to update the attendance record in the database
-      try {
-        console.log('Updating attendance record');
-
-        attendance.setAttendance(timestamp);
-        await attendance.updateDatabaseAsync();
-      } catch {
-        return false;
-      }
-
-      return true;
+      throw new BadRequestError('Session is not active');
     }
 
-    return false;
+    try {
+      attendance.setAttendance(timestamp);
+      await attendance.updateDatabaseAsync();
+    } catch {
+      return false;
+    }
+
+    return true;
   };
 
   async toJsonAsync(): Promise<toJsonReturn> {

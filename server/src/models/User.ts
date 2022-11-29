@@ -1,5 +1,5 @@
-import { UserType } from '../models';
 import { User as UserSchema, UserType as UserTypeSchema } from '../database';
+import { UserType } from '../models';
 
 export class User {
   id: string;
@@ -25,12 +25,11 @@ export class User {
     this.email = email;
   }
 
-  //getters
   public get getId(): string {
     return this.id;
   }
 
-  public async getType(): Promise<UserType> {
+  public async getTypeAsync(): Promise<UserType> {
     const userTypeRecord = await UserTypeSchema.findByPk(this.type);
 
     const type = new UserType({
@@ -101,7 +100,7 @@ export class User {
     await user
       .update({
         first_name: this.firstName,
-        user_type_id: await this.getType().then((type) => type?.getId),
+        user_type_id: await this.getTypeAsync().then((type) => type?.getId),
         middle_name: this.middleName,
         last_name: this.lastName,
         email: this.email,
@@ -116,7 +115,7 @@ export class User {
   async toJsonAsync(): Promise<toJsonReturn> {
     return {
       id: this.id,
-      type: await this.getType().then((type) => type?.getName || ''),
+      type: await this.getTypeAsync().then((type) => type?.getName || ''),
       firstName: this.firstName,
       middleName: this.middleName || '',
       lastName: this.lastName,

@@ -1,15 +1,21 @@
 import { Request, Response } from 'express';
 
-import { Module, ModuleLeader, User } from '../models';
+import debug from 'debug';
 import { Module as ModuleSchema, User as UserSchema } from '../database';
 import { BadRequestError } from '../errors';
+import { Module, ModuleLeader, User } from '../models';
+
+const logger = debug('backend:get.module.controller');
 
 export const getModuleController = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const moduleRecord = await ModuleSchema.findByPk(id);
 
-  if (!moduleRecord) throw new BadRequestError('Module not found');
+  if (!moduleRecord) {
+    logger('module not found');
+    throw new BadRequestError('Module not found');
+  }
 
   const moduleLeaderRecord = await UserSchema.findByPk(
     moduleRecord.dataValues.module_leader_id

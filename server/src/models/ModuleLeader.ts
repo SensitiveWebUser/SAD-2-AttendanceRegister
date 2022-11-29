@@ -1,6 +1,6 @@
 import {
-  Tutor,
   Module,
+  Tutor,
   TutorConstructorParams,
   TutorToJsonReturn,
 } from '../models';
@@ -8,22 +8,16 @@ import {
 import { Module as ModuleSchema } from '../database';
 
 export class ModuleLeader extends Tutor {
-  moduleId: string;
+  private moduleId: string;
 
   constructor({ userObject, moduleId }: constructorParams) {
     super({ userObject });
     this.moduleId = moduleId;
   }
 
-  // getters
-
   public get getModuleId(): string {
     return this.moduleId;
   }
-
-  // setters
-
-  // methods
 
   async getModule(): Promise<Module> {
     const moduleRecord = await ModuleSchema.findOne({

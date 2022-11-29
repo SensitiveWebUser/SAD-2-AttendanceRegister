@@ -1,14 +1,20 @@
 import { Request, Response } from 'express';
 
-import { Attendance, Session, User, Student } from '../models';
+import debug from 'debug';
 import {
   Attendance as AttendanceSchema,
-  User as UserSchema,
   Session as SessionSchema,
+  User as UserSchema,
 } from '../database';
-import { BadRequestError, NotFoundError } from '../errors';
+import { BadRequestError } from '../errors';
+import { Attendance, Session, Student, User } from '../models';
 
-export const updateStudentsAttendance = async (req: Request, res: Response) => {
+const logger = debug('backend:update.student.attendance.controller');
+
+export const updateStudentsAttendanceController = async (
+  req: Request,
+  res: Response
+) => {
   const { sessionId, studentId, date } = req.body;
 
   const attendanceRecord = await AttendanceSchema.findOne({
@@ -19,6 +25,7 @@ export const updateStudentsAttendance = async (req: Request, res: Response) => {
   });
 
   if (!attendanceRecord) {
+    logger('attendance not found');
     throw new BadRequestError('Attendance record not found');
   }
 
@@ -28,8 +35,8 @@ export const updateStudentsAttendance = async (req: Request, res: Response) => {
     id: sessionRecord!.dataValues.session_id,
     type: sessionRecord!.dataValues.session_type_id,
     moduleId: sessionRecord!.dataValues.module_id,
-    startTimestamp: new Date(sessionRecord!.dataValues.start_timestamp),
-    endTimestamp: new Date(sessionRecord!.dataValues.end_timestamp),
+    startTimestamp: sessionRecord!.dataValues.start_timestamp,
+    endTimestamp: sessionRecord!.dataValues.end_timestamp,
     code: sessionRecord!.dataValues.code,
   });
 

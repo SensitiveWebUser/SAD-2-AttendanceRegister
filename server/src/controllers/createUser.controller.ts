@@ -1,15 +1,23 @@
 import { Request, Response } from 'express';
 
-import { User } from '../models';
+import { debug } from 'debug';
 import { User as UserSchema } from '../database';
-import { NotFoundError } from '../errors';
+import { BadRequestError } from '../errors';
+import { User } from '../models';
+
+const logger = debug('backend:create.user.controller');
 
 export const createUserController = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const userRecord = await UserSchema.findByPk(id);
 
-  if (!userRecord) throw new NotFoundError('User not found');
+  if (!userRecord) {
+    logger('user not found');
+    throw new BadRequestError('User not found');
+  }
+
+  //TODO: Add user to auth0
 
   const user = new User({
     id: userRecord.dataValues.user_id,

@@ -2,9 +2,9 @@ import { Session, Student } from '../models';
 import { Attendance as AttendanceSchema } from '../database';
 
 export class Attendance {
-  student: Student;
-  session: Session;
-  attended: Date | undefined;
+  private student: Student;
+  private session: Session;
+  private attended: Date | undefined;
 
   constructor({ student, session, attended }: constructorParams) {
     this.student = student;
@@ -12,7 +12,6 @@ export class Attendance {
     if (attended) this.attended = attended;
   }
 
-  // getters
   public get getStudent(): Student {
     return this.student;
   }
@@ -25,16 +24,12 @@ export class Attendance {
     return this.attended;
   }
 
-  // setters
-
   public setAttendance(attended: Date) {
     this.attended = attended;
   }
 
-  // Methods
-
   public hasAttendedAsync = async (): Promise<boolean> => {
-    return this.attended !== null;
+    return this.attended !== undefined;
   };
 
   public updateDatabaseAsync = async (): Promise<void> => {
@@ -50,6 +45,18 @@ export class Attendance {
       }
     );
   };
+
+  toJsonWithAttendance(): {
+    student: string;
+    session: string;
+    attended: Date | null;
+    } {
+    return {
+      student: this.student.getId,
+      session: this.session.getId,
+      attended: this.attended ? this.attended : null,
+    };
+  }
 
   async toJsonAsync(): Promise<toJsonReturn> {
     return {

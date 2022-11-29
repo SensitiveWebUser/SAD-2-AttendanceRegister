@@ -1,21 +1,15 @@
-import { User, UserToJsonReturn, Session } from '../models';
 import { Session as SessionSchema } from '../database';
+import { Session, User, UserToJsonReturn } from '../models';
 
 export class Tutor extends User {
   constructor({ userObject }: constructorParams) {
     super(userObject);
   }
 
-  // getters
-
-  // setters
-
-  // methods
-
   public getSessions = async (): Promise<Session[]> => {
     const sessions = await SessionSchema.findAll({
       where: {
-        tutorId: this.id,
+        tutor_id: this.id,
       },
     });
 
@@ -34,6 +28,16 @@ export class Tutor extends User {
 
     return Promise.all(sessionsArray);
   };
+
+  async tutorSessionsToJsonAsync(): Promise<object[]> {
+    const sessions = await this.getSessions();
+
+    const sessionsArray = sessions.map(async (session: Session) => {
+      return await session.toJsonAsync();
+    });
+
+    return Promise.all(sessionsArray);
+  }
 
   async toJsonAsync(): Promise<toJsonReturn> {
     return {

@@ -1,4 +1,4 @@
-import { User, Student, UserToJsonReturn } from '../models';
+import { Student, User, UserToJsonReturn } from '../models';
 
 import {
   AdvisorStudentLink as AdvisorStudentLinkSchema,
@@ -9,12 +9,6 @@ export class AcademicAdvisor extends User {
   constructor({ userObject }: constructorParams) {
     super(userObject);
   }
-
-  // getters
-
-  // setters
-
-  // methods
 
   async getAdvisees(): Promise<Student[]> {
     const adviseeRecords = await AdvisorStudentLinkSchema.findAll({
@@ -31,17 +25,15 @@ export class AcademicAdvisor extends User {
           },
         });
 
-        const adviseeUser = new User({
-          id: userRecords!.dataValues.user_id,
-          type: userRecords!.dataValues.user_type_id,
-          firstName: userRecords!.dataValues.first_name,
-          middleName: userRecords!.dataValues.middle_name,
-          lastName: userRecords!.dataValues.last_name,
-          email: userRecords!.dataValues.email,
-        });
-
         return new Student({
-          userObject: adviseeUser,
+          userObject: new User({
+            id: userRecords!.dataValues.user_id,
+            type: userRecords!.dataValues.user_type_id,
+            firstName: userRecords!.dataValues.first_name,
+            middleName: userRecords!.dataValues.middle_name,
+            lastName: userRecords!.dataValues.last_name,
+            email: userRecords!.dataValues.email,
+          }),
           academicAdvisorId: this.getId,
         });
       }

@@ -1,17 +1,19 @@
-import { Module, SessionType } from '../models';
 import {
+  Attendance as AttendanceSchema,
+  Module as ModuleSchema,
   Session as SessionSchema,
   SessionType as SessionTypeSchema,
-  Module as ModuleSchema,
+  User as UserSchema,
 } from '../database';
+import { Attendance, Module, SessionType, Student, User } from '../models';
 
 export class Session {
-  id: string;
-  type: string;
-  moduleId: string;
-  startTimestamp: Date;
-  endTimestamp: Date;
-  code: string;
+  private id: string;
+  private type: string;
+  private moduleId: string;
+  private startTimestamp: Date;
+  private endTimestamp: Date;
+  private code: string;
 
   constructor({
     id,
@@ -29,11 +31,11 @@ export class Session {
     this.code = code;
   }
 
-  // getters
+  public get getId(): string {
+    return this.id;
+  }
 
-  public getId = (): string => this.id;
-
-  public getType = async (): Promise<SessionType> => {
+  public getTypeAsync = async (): Promise<SessionType> => {
     const sessionTypeRecord = await SessionTypeSchema.findByPk(this.type);
 
     const type = new SessionType({
@@ -44,13 +46,67 @@ export class Session {
     return type;
   };
 
-  public getModuleId = (): string => this.moduleId;
+  public getAttendancesAsync = async (): Promise<{
+    attendances: Attendance[];
+    total: number;
+  }> => {
+    let total = 0;
 
-  public getStartTimestamp = (): Date => this.startTimestamp;
+    const attendances = await AttendanceSchema.findAll({
+      where: {
+        session_id: this.id,
+      },
+    });
 
-  public getEndTimestamp = (): Date => this.endTimestamp;
+    if (!attendances) return { attendances: [], total };
 
-  public getCode = (): string => this.code;
+    const attendancesArray = attendances.map(async (attendance: any) => {
+      const studentRecord = await UserSchema.findByPk(
+        attendance.dataValues.user_id
+      );
+
+      const student = new Student({
+        userObject: new User({
+          id: studentRecord!.dataValues.user_id,
+          type: studentRecord!.dataValues.user_type_id,
+          firstName: studentRecord!.dataValues.first_name,
+          middleName: studentRecord!.dataValues.middle_name,
+          lastName: studentRecord!.dataValues.last_name,
+          email: studentRecord!.dataValues.email,
+        }),
+        academicAdvisorId: studentRecord!.dataValues.academic_advisor_id,
+      });
+
+      total++;
+
+      return new Attendance({
+        student,
+        session: this,
+        attended: attendance.dataValues.attended,
+      });
+    });
+
+    return {
+      attendances: await Promise.all(attendancesArray),
+      total: total,
+    };
+  };
+
+  public get getModuleId(): string {
+    return this.moduleId;
+  }
+
+  public get getStartTimestamp(): Date {
+    return this.startTimestamp;
+  }
+
+  public get getEndTimestamp(): Date {
+    return this.endTimestamp;
+  }
+
+  public get getCode(): string {
+    return this.code;
+  }
 
   // setters
 
@@ -69,7 +125,7 @@ export class Session {
   // methods
 
   public updateDatabaseAsync = async (): Promise<boolean> => {
-    const session = await SessionSchema.findByPk(this.getId());
+    const session = await SessionSchema.findByPk(this.getId);
 
     if (!session) return false;
 
@@ -88,7 +144,7 @@ export class Session {
     return true;
   };
 
-  public getModule = async (): Promise<Module | null> => {
+  public getModuleAsync = async (): Promise<Module | null> => {
     const moduleRecord = await ModuleSchema.findOne({
       where: {
         module_id: this.getModuleId,
@@ -105,12 +161,22 @@ export class Session {
   };
 
   async toJsonAsync(): Promise<toJsonReturn> {
+    const sessionAttendancesData = await this.getAttendancesAsync();
+
+    const sessionAttendances = {
+      attendances: sessionAttendancesData.attendances.map(
+        (attendance: Attendance) => attendance.toJsonWithAttendance()
+      ),
+      total: sessionAttendancesData.total,
+    };
+
     return {
-      id: this.getId(),
-      type: await this.getType().then((type) => type.getName),
-      moduleId: this.getModuleId(),
+      id: this.getId,
+      type: await this.getTypeAsync().then((type) => type.getName),
+      moduleId: this.getModuleId,
       startTime: this.startTimestamp,
       endTime: this.endTimestamp,
+      sessionAttendances: sessionAttendances,
     };
   }
 }
@@ -121,6 +187,10 @@ interface toJsonReturn {
   moduleId: string;
   startTime: Date;
   endTime: Date;
+  sessionAttendances: {
+    attendances: object[];
+    total: number;
+  };
 }
 
 interface constructorParams {

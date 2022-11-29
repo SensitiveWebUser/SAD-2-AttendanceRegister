@@ -1,17 +1,21 @@
 import express from 'express';
-import { param, body } from 'express-validator';
-
+import { body, param } from 'express-validator';
+import { registerAttendanceController } from '../controllers';
 import { validateRequest } from '../middlewares';
-import { updateAttendanceController } from '../controllers';
 
 const router = express.Router();
 
 router.post(
-  '/api/user/:id/session/:sessionId/attendance',
+  '/api/user/:id/register/session/:sessionId/attendance',
   [
-    param('id').isString().notEmpty().withMessage('User id must be a string'),
+    param('id')
+      .isString()
+      .trim()
+      .notEmpty()
+      .withMessage('User id must be a string'),
     param('sessionId')
       .isUUID()
+      .trim()
       .notEmpty()
       .withMessage('Session id must be a UUID'),
     body('code')
@@ -21,7 +25,7 @@ router.post(
       .withMessage('Code must be a string of 4 characters'),
   ],
   validateRequest,
-  updateAttendanceController
+  registerAttendanceController
 );
 
 export { router as registerAttendanceRouter };

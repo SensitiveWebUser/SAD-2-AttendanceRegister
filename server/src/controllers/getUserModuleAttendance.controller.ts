@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 
-import { Student, User } from '../models';
+import debug from 'debug';
 import { User as UserSchema } from '../database';
 import { BadRequestError } from '../errors';
+import { Student, User } from '../models';
+
+const logger = debug('backend:get.user.module.controller');
 
 export const getUserModuleAttendanceController = async (
   req: Request,
@@ -12,7 +15,10 @@ export const getUserModuleAttendanceController = async (
 
   const studentRecord = await UserSchema.findByPk(id);
 
-  if (!studentRecord) throw new BadRequestError('Student not found');
+  if (!studentRecord) {
+    logger('student not found');
+    throw new BadRequestError('Student not found');
+  }
 
   const student = new Student({
     userObject: new User({
@@ -26,5 +32,5 @@ export const getUserModuleAttendanceController = async (
     academicAdvisorId: studentRecord.dataValues.academic_advisor_id,
   });
 
-  res.status(200).send(await student.getAttendances(moduleId));
+  res.status(200).send(await student.getAttendancesAsync(moduleId));
 };

@@ -1,7 +1,7 @@
-import { ModuleCourseLink } from '../../src/database';
-import moduleSeeder from './moduleSeeder';
-import courseSeeder from './courseSeeder';
 import debug from 'debug';
+import { ModuleCourseLink } from '../../src/database';
+import courseSeeder from './courseSeeder';
+import moduleSeeder from './moduleSeeder';
 
 const logger = debug('backend:seeder-module-course-link');
 

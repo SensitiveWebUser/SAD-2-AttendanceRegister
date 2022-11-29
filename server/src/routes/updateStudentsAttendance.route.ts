@@ -1,23 +1,27 @@
 import express from 'express';
-import { param, body } from 'express-validator';
-
+import { body, param } from 'express-validator';
+import { updateStudentsAttendanceController } from '../controllers';
 import { validateRequest } from '../middlewares';
-import { updateAttendanceController } from '../controllers';
 
 const router = express.Router();
 
-router.post(
+router.patch(
   '/api/user/:id/session/:sessionId/attendance',
   [
     param('id').isString().notEmpty().withMessage('User id must be a string'),
     param('sessionId')
       .isUUID()
+      .trim()
       .notEmpty()
       .withMessage('Session id must be a UUID'),
-    body('date').isDate().notEmpty().withMessage('Date must be a date'),
+    body('date')
+      .isISO8601()
+      .notEmpty()
+      .toDate()
+      .withMessage('Date must be a valid ISO 8601 date'),
   ],
   validateRequest,
-  updateAttendanceController
+  updateStudentsAttendanceController
 );
 
-export { router as updateAttendanceRouter };
+export { router as updateStudentsAttendanceRouter };
