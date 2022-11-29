@@ -1,6 +1,6 @@
+import debug from 'debug';
 import { AdvisorStudentLink } from '../../src/database';
 import userSeeder from './userSeeder';
-import debug from 'debug';
 
 const logger = debug('backend:seeder-advisor-student-link');
 
@@ -14,8 +14,8 @@ const advisorId = userSeeder.objects[4].user_id;
 
 const objects: ObjectType[] = [
   {
-    advisor_id: studentId,
-    student_id: advisorId,
+    advisor_id: advisorId,
+    student_id: studentId,
   },
 ];
 

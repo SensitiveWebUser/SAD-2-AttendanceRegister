@@ -1,8 +1,9 @@
 import type { Request, Response } from 'express';
-import debug from 'debug';
+
 import { parse } from 'csv-parse';
+import debug from 'debug';
 import fs from 'fs';
-import managementClient from '../../utils/managementClient';
+import managementClient from '../utils/managementClient';
 
 const logger = debug('backend:users-controller');
 
@@ -17,8 +18,8 @@ type AuthUsers = {
   email_verified: boolean;
 };
 
-export default async function bulkImportAsync(req: Request, res: Response) {
-  const file = req.file;
+export const bulkImportAsync = async (req: Request, res: Response) => {
+  const { file } = req;
 
   // ensure a file was uploaded
   if (file === undefined) {
@@ -52,4 +53,4 @@ export default async function bulkImportAsync(req: Request, res: Response) {
 
     return res.status(200).json(result);
   });
-}
+};

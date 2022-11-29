@@ -1,7 +1,7 @@
-import { Model, DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database';
-import { Module } from './module';
 import { Course } from './course';
+import { Module } from './module';
 
 export const ModuleCourseLink = sequelize.define<ModuleCourseLink>(
   'module_course_link',

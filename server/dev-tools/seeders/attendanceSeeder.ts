@@ -1,7 +1,7 @@
-import { Attendance } from '../../src/database';
-import userSeeder from './userSeeder';
-import sessionSeeder from './sessionSeeder';
 import debug from 'debug';
+import { Attendance } from '../../src/database';
+import sessionSeeder from './sessionSeeder';
+import userSeeder from './userSeeder';
 
 const logger = debug('backend:seeder-attendance');
 
