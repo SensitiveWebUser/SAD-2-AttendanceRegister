@@ -8,7 +8,7 @@ module.exports = defineConfig({
     screenshotsFolder: 'cypress/results/screenshots',
     videosFolder: 'cypress/results/videos',
     supportFile: 'cypress/support/beforeAfter.ts',
-    specPattern: 'cypress/integration/**/*.cy.ts',
+    specPattern: 'cypress/integration/**/*',
     chromeWebSecurity: false,
   },
 });

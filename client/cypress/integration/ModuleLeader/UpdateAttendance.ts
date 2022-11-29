@@ -5,8 +5,8 @@
 // will resolve to "cypress/support/index.d.ts"
 /// <reference types="../../support" />
 
-describe('Module Leader', () => {
-  it('As a Module Leader, I would like to be able to update an exisiting attendance record', () => {
+describe('ModuleLeader', () => {
+  it('As a ModuleLeader, I would like to be able to update an exisiting attendance record', () => {
     expect(true).to.equal(true);
     cy.visit('/');
   });

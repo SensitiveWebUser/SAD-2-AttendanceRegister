@@ -175,6 +175,7 @@ export const Header = () => {
           <List>
             {pages.map((value, index) => (
               <ListItem
+                data-testid={`${value}Button`}
                 button
                 key={value}
                 component={NavLink}
@@ -195,6 +196,7 @@ export const Header = () => {
             {isAuthenticated ? (
               <Fragment>
                 <ListItem
+                  data-testid="profileButton"
                   button
                   key={t('nav.link.profile')}
                   component={NavLink}
@@ -206,6 +208,7 @@ export const Header = () => {
                   <ListItemText primary={t('nav.link.profile')} />
                 </ListItem>
                 <ListItem
+                  data-testid="logoutButton"
                   button
                   key={t('nav.link.logout')}
                   onClick={() => logout({ returnTo: window.location.origin })}
@@ -219,6 +222,7 @@ export const Header = () => {
             ) : (
               <Fragment>
                 <ListItem
+                  data-testid="loginButton"
                   button
                   key={t('nav.link.login')}
                   onClick={() => loginWithRedirect()}
