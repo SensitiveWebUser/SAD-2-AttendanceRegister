@@ -1,27 +1,52 @@
-import { Tutor } from './Tutor';
+import {
+  Module,
+  Tutor,
+  TutorConstructorParams,
+  TutorToJsonReturn,
+} from '../models';
+
+import { Module as ModuleSchema } from '../database';
 
 export class ModuleLeader extends Tutor {
-  private _moduleId: string;
+  private moduleId: string;
 
-  constructor(
-    id: string,
-    type: string,
-    firstName: string,
-    middleName: string,
-    lastName: string,
-    email: string,
-    sessionList: object,
-    moduleId: string
-  ) {
-    super(id, type, firstName, middleName, lastName, email, sessionList);
-    this._moduleId = moduleId;
+  constructor({ userObject, moduleId }: constructorParams) {
+    super({ userObject });
+    this.moduleId = moduleId;
   }
 
-  public getModuleId() {
-    return this._moduleId;
+  public get getModuleId(): string {
+    return this.moduleId;
   }
 
-  public updateAttendance() {
-    console.log('TODO FUNCTION');
+  async getModule(): Promise<Module> {
+    const moduleRecord = await ModuleSchema.findOne({
+      where: {
+        moduleLeaderId: this.getId,
+      },
+    });
+
+    return new Module({
+      id: moduleRecord!.dataValues.id,
+      name: moduleRecord!.dataValues.name,
+      moduleLeader: this,
+    });
   }
+
+  async toJsonAsync(): Promise<toJsonReturn> {
+    const tutor = await super.toJsonAsync();
+
+    return {
+      ...tutor,
+      moduleId: this.getModuleId,
+    };
+  }
+}
+
+interface toJsonReturn extends TutorToJsonReturn {
+  moduleId: string;
+}
+
+interface constructorParams extends TutorConstructorParams {
+  moduleId: string;
 }

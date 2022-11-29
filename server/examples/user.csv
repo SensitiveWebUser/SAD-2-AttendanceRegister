@@ -1,4 +1,7 @@
-email
-test@test.com
-test1@test.com
-test2@test.com
+email,password,role
+student@localhost.com,studentpassword123,Student
+tutor@localhost.com,tutorpassword123,Tutor
+academic-advisor@localhost.com,academicadvisorpassword123,Academic Advisor
+course-leader@localhost.com,courseleader123,Course Leader
+module-leader@localhost.com,moduleleader123,Module Leader
+administrator@localhost.com,administrator123,Administrator

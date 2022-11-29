@@ -1,4 +1,5 @@
-import { Model, DataTypes, CreationOptional } from 'sequelize';
+import { CreationOptional, DataTypes, Model } from 'sequelize';
+import { userTypeEnum } from '../../utils/userTypeEnum';
 import { sequelize } from '../database';
 
 export const UserType = sequelize.define<UserType>(
@@ -21,10 +22,10 @@ export const UserType = sequelize.define<UserType>(
 interface UserType extends Model {
   user_type_id?: CreationOptional<string>;
   user_type_name:
-    | 'Admin'
-    | 'Student'
-    | 'Tutor'
-    | 'ModuleLeader'
-    | 'CourseLeader'
-    | 'AcademicAdvisor';
+    | userTypeEnum.ADMIN
+    | userTypeEnum.STUDENT
+    | userTypeEnum.TUTOR
+    | userTypeEnum.MODULE_LEADER
+    | userTypeEnum.COURSE_LEADER
+    | userTypeEnum.ACADEMIC_ADVISOR;
 }

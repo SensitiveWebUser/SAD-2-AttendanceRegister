@@ -1,7 +1,7 @@
-import { Model, DataTypes, CreationOptional } from 'sequelize';
+import { CreationOptional, DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database';
-import { User } from './user';
 import { Session } from './session';
+import { User } from './user';
 
 export const Attendance = sequelize.define<Attendance>(
   'attendance',

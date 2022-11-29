@@ -29,5 +29,7 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    '@typescript-eslint/no-non-null-assertion': 'warn',
+    'no-case-declarations': 'warn',
   },
 };

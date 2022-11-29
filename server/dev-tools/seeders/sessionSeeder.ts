@@ -1,9 +1,9 @@
-import { v4 as uuidv4 } from 'uuid';
 import debug from 'debug';
+import { v4 as uuidv4 } from 'uuid';
 import { Session } from '../../src/database';
-import userSeeder from './userSeeder';
-import sessionTypeSeeder from './sessionTypeSeeder';
 import moduleSeeder from './moduleSeeder';
+import sessionTypeSeeder from './sessionTypeSeeder';
+import userSeeder from './userSeeder';
 
 const logger = debug('backend:seeder-session');
 
