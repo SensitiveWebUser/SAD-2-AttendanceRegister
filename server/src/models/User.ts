@@ -60,7 +60,6 @@ export class User {
     return `${this.firstName} ${this.middleName} ${this.lastName}`;
   }
 
-  //setters
   public set setFirstName(firstName: string) {
     this.firstName = firstName;
   }
@@ -91,7 +90,6 @@ export class User {
     this.lastName = lastName;
   };
 
-  //methods
   public updateDatabaseAsync = async (): Promise<boolean> => {
     const user = await UserSchema.findByPk(this.getId);
 
@@ -112,7 +110,7 @@ export class User {
     return true;
   };
 
-  async toJsonAsync(): Promise<toJsonReturn> {
+  public async toJsonAsync(): Promise<toJsonReturn> {
     return {
       id: this.id,
       type: await this.getTypeAsync().then((type) => type?.getName || ''),

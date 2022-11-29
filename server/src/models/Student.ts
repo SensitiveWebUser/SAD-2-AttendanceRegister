@@ -23,13 +23,7 @@ export class Student extends User {
     this.academicAdvisorId = academicAdvisorId;
   }
 
-  // getters
-
   public getAcademicAdvisorId = (): string => this.academicAdvisorId;
-
-  // setters
-
-  // methods
 
   public getAttendancesAsync = async (
     moduleId?: string
