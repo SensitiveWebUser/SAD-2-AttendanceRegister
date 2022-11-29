@@ -1,13 +1,47 @@
+import { debug } from 'debug';
 import { NextFunction, Request, Response } from 'express';
+import jwt_decode from 'jwt-decode';
+
 import { ForbiddenError } from '../errors';
 
-export const requireRole =
-  (roles: string[]) => (req: Request, res: Response, next: NextFunction) => {
-    const authorization = req.headers['Authorization'] as string;
+const logger = debug('backend:authorization.roles.middleware');
 
-    if (!authorization) return next(new ForbiddenError());
-
-    //TODO: Check if the user has the required role
-
-    return next();
+type jwt = {
+  'http://sad.assignment.com/userData': {
+    user: object;
+    app: {
+      role: string;
+    };
   };
+  iss: string;
+  sub: string;
+  aud: string[];
+  iat: number;
+  exp: number;
+  azp: string;
+  scope: string;
+};
+
+export const requireRole = (roles: string[]) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const authorization = req.headers.authorization?.split(' ')[1];
+
+    if (!authorization) {
+      logger('request was not authorised.');
+      return next(new ForbiddenError());
+    }
+
+    const decoded: jwt = jwt_decode(authorization);
+
+    logger('decoded token: ', decoded);
+
+    if (
+      !roles.includes(decoded['http://sad.assignment.com/userData'].app.role)
+    ) {
+      logger('request was not authorised.');
+      return next(new ForbiddenError());
+    }
+
+    next();
+  };
+};

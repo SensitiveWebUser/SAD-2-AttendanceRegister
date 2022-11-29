@@ -1,12 +1,13 @@
 import express from 'express';
 import { param } from 'express-validator';
 import { getUserModuleAttendanceController } from '../controllers';
-import { validateRequest } from '../middlewares';
+import { requireAuth, validateRequest } from '../middlewares';
 
 const router = express.Router();
 
 router.get(
   '/api/user/:id/module/:moduleId/attendances',
+  requireAuth,
   [
     param('id')
       .isString()

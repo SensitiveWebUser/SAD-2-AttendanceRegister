@@ -1,12 +1,15 @@
 import express from 'express';
 import { body, param } from 'express-validator';
+import { userTypeEnum } from 'src/utils/userTypeEnum';
 import { registerAttendanceController } from '../controllers';
-import { validateRequest } from '../middlewares';
+import { requireAuth, requireRole, validateRequest } from '../middlewares';
 
 const router = express.Router();
 
 router.post(
   '/api/user/:id/register/session/:sessionId/attendance',
+  requireAuth,
+  requireRole([userTypeEnum.STUDENT, userTypeEnum.ADMIN]),
   [
     param('id')
       .isString()
