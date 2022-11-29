@@ -23,6 +23,7 @@ export const bulkImportAsync = async (req: Request, res: Response) => {
 
   // ensure a file was uploaded
   if (file === undefined) {
+    logger('a file was not included in the request');
     res.status(500).end();
     return;
   }
