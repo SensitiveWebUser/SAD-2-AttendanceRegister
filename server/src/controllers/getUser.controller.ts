@@ -1,26 +1,26 @@
 import { Request, Response } from 'express';
-import debug from 'debug';
 
+import debug from 'debug';
 import {
-  Tutor,
-  Student,
-  ModuleLeader,
-  CourseLeader,
-  AcademicAdvisor,
-  User,
-  Admin,
-} from '../models';
-import { BadRequestError, NotFoundError } from '../errors';
-import {
+  AdvisorStudentLink as AdvisorStudentLinkSchema,
+  Course as CourseSchema,
+  Module as ModuleSchema,
   User as UserSchema,
   UserType as UserTypeSchema,
-  Module as ModuleSchema,
-  Course as CourseSchema,
-  AdvisorStudentLink as AdvisorStudentLinkSchema,
 } from '../database';
+import { BadRequestError, NotFoundError } from '../errors';
+import {
+  AcademicAdvisor,
+  Admin,
+  CourseLeader,
+  ModuleLeader,
+  Student,
+  Tutor,
+  User,
+} from '../models';
 import { userTypeEnum } from '../utils/userTypeEnum';
 
-const logger = debug('backend:getUserController');
+const logger = debug('backend:get.user.controller');
 
 export const getUserController = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -29,7 +29,10 @@ export const getUserController = async (req: Request, res: Response) => {
   const user = await UserSchema.findByPk(id);
 
   // If the user is not found, throw a 404 error
-  if (!user) throw new BadRequestError('User doesn\'t exist');
+  if (!user) {
+    logger('user not found');
+    throw new BadRequestError('User doesn\'t exist');
+  }
 
   const userType = await UserTypeSchema.findByPk(user.dataValues.user_type_id);
 
@@ -99,10 +102,9 @@ export const getUserController = async (req: Request, res: Response) => {
     });
     break;
   default:
+    logger(`user type ${userType!.dataValues.user_type_name} not found`);
     throw new NotFoundError('User type not found');
   }
-
-  logger(`User ${userChildObject!.getId} retrieved`);
 
   // Return json data of the user
   res.status(200).json(await userChildObject.toJsonAsync());

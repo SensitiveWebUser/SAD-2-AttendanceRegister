@@ -1,14 +1,20 @@
-export { getUserController } from './getUser.controller';
+// create
+export { bulkImportAsync } from './createBulkUser.controller';
+export { createUserController } from './createUser.controller';
+
+// get controllers
 export { getCourseController } from './getCourse.controller';
 export { getModuleController } from './getModule.controller';
 export { getSessionController } from './getSession.controller';
+export { getTutorSessionsController } from './getTutorSessions.controller';
+export { getUserController } from './getUser.controller';
+export { getUserAttendanceController } from './getUserAttendance.controller';
 export { getUserModuleAttendanceController } from './getUserModuleAttendance.controller';
 
-export { updateAttendanceController } from './updateAttendance.controller';
-export { updateStudentsAttendance } from './updateStudentsAttendance.controller';
-export { updateUserController } from './updateUser.controller';
-
+// custom controllers
 export { registerAttendanceController } from './registerAttendance.controller';
-
 export { resetPasswordController } from './resetPassword.controller';
-export { createUserController } from './createUser.controller';
+
+// update controllers
+export { updateStudentsAttendanceController } from './updateStudentsAttendance.controller';
+export { updateUserController } from './updateUser.controller';

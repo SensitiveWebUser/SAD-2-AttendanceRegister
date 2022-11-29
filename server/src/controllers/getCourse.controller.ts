@@ -1,16 +1,21 @@
 import { Request, Response } from 'express';
 
-import { Course, CourseLeader, User } from '../models';
+import debug from 'debug';
 import { Course as CourseSchema, User as UserSchema } from '../database';
 import { BadRequestError } from '../errors';
+import { Course, CourseLeader, User } from '../models';
+
+const logger = debug('backend:get.course.controller');
 
 export const getCourseController = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const courseRecord = await CourseSchema.findByPk(id);
 
-  if (!courseRecord) throw new BadRequestError('Course not found');
-
+  if (!courseRecord) {
+    logger('course not found');
+    throw new BadRequestError('Course not found');
+  }
   const courseLeaderRecord = await UserSchema.findByPk(
     courseRecord.dataValues.course_leader_id
   );

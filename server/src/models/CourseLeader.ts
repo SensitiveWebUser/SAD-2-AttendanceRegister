@@ -1,23 +1,21 @@
 import {
+  Course,
   Tutor,
   TutorConstructorParams,
   UserToJsonReturn,
-  Course,
 } from '../models';
 
 import { Course as CourseSchema } from '../database';
 
 export class CourseLeader extends Tutor {
-  courseId: string;
+  private courseId: string;
 
   constructor({ userObject, courseId }: constructorParams) {
     super({ userObject });
     this.courseId = courseId;
   }
 
-  // getters
-
-  public getCourse = async (): Promise<Course> => {
+  public getCourseAsync = async (): Promise<Course> => {
     const courseRecord = await CourseSchema.findByPk(this.courseId);
 
     const course = new Course({
@@ -29,14 +27,10 @@ export class CourseLeader extends Tutor {
     return course;
   };
 
-  // setters
-
-  // methods
-
   async toJsonAsync(): Promise<toJsonReturn> {
     return {
       ...(await super.toJsonAsync()),
-      course: await this.getCourse(),
+      course: await this.getCourseAsync(),
     };
   }
 }

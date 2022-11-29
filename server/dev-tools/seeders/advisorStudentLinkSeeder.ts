@@ -1,6 +1,6 @@
+import debug from 'debug';
 import { AdvisorStudentLink } from '../../src/database';
 import userSeeder from './userSeeder';
-import debug from 'debug';
 
 const logger = debug('backend:seeder-advisor-student-link');
 

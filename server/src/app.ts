@@ -1,22 +1,26 @@
-import express, { Request, Response } from 'express';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import debug from 'debug';
-import 'express-async-errors';
 import { json } from 'body-parser';
+import debug from 'debug';
+import express, { Request, Response } from 'express';
+import 'express-async-errors';
+import helmet from 'helmet';
+import morgan from 'morgan';
 import { NotFoundError } from '../src/errors';
 import { errorHandler } from '../src/middlewares';
 
 import {
-  getUserRouter,
+  createBulkUserRouter,
+  createUserRouter,
   getCourseRouter,
   getModuleRouter,
   getSessionRouter,
+  getTutorSessionsRouter,
+  getUserAttendanceRouter,
   getUserModuleAttendanceRouter,
-  createUserRouter,
-  updateUserRouter,
+  getUserRouter,
   registerAttendanceRouter,
-  updateAttendanceRouter,
+  resetPasswordUserRouter,
+  updateStudentsAttendanceRouter,
+  updateUserRouter,
 } from './routes';
 
 const logger = debug('backend:request');
@@ -35,15 +39,27 @@ app.use(morgan('tiny', { stream: { write: (msg) => logger(msg) } }));
 app.use(json());
 
 // express routes
+
+// get routes
 app.use(getUserRouter);
 app.use(getCourseRouter);
 app.use(getModuleRouter);
 app.use(getSessionRouter);
 app.use(getUserModuleAttendanceRouter);
+app.use(getUserAttendanceRouter);
+app.use(getTutorSessionsRouter);
+
+// create routes
 app.use(createUserRouter);
+app.use(createBulkUserRouter);
+
+// update routes
 app.use(updateUserRouter);
 app.use(registerAttendanceRouter);
-app.use(updateAttendanceRouter);
+
+// custom routes
+app.use(resetPasswordUserRouter);
+app.use(updateStudentsAttendanceRouter);
 
 // 404 handler
 app.all('*', async () => {
