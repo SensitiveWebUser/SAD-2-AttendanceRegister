@@ -1,5 +1,10 @@
-import { CourseLeader } from '../models';
-import { Course as CourseSchema } from '../database';
+import { CourseLeader, Tutor, User, Module } from '../models';
+import {
+  Course as CourseSchema,
+  ModuleCourseLink as ModuleCourseLinkSchema,
+  Module as ModuleSchema,
+  User as UserSchema,
+} from '../database';
 
 export class Course {
   private id: number;
@@ -32,6 +37,51 @@ export class Course {
     this.courseLeader = courseLeader;
   }
 
+  public async getModulesAsync(): Promise<Module[]> {
+    const moduleRecords = await ModuleCourseLinkSchema.findAll({
+      where: {
+        course_id: this.id,
+      },
+    });
+
+    return Promise.all(
+      moduleRecords.map(async (module) => {
+        const moduleRecord = await ModuleSchema.findOne({
+          where: {
+            module_id: module.dataValues.module_id,
+          },
+        });
+
+        if (!moduleRecord) throw new Error('module not found');
+
+        const moduleLeaderRecord = await UserSchema.findOne({
+          where: {
+            user_id: moduleRecord.dataValues.module_leader_id,
+          },
+        });
+
+        if (!moduleLeaderRecord) throw new Error('module leader not found');
+
+        const moduleLeader = new Tutor({
+          userObject: new User({
+            id: moduleLeaderRecord.dataValues.user_id,
+            type: moduleLeaderRecord.dataValues.user_type_id,
+            firstName: moduleLeaderRecord.dataValues.first_name,
+            middleName: moduleLeaderRecord.dataValues.middle_name,
+            lastName: moduleLeaderRecord.dataValues.last_name,
+            email: moduleLeaderRecord.dataValues.email,
+          }),
+        });
+
+        return new Module({
+          id: moduleRecord.dataValues.module_id,
+          name: moduleRecord.dataValues.module_name,
+          moduleLeader: moduleLeader,
+        });
+      })
+    );
+  }
+
   public updateDatabaseAsync = async (): Promise<boolean> => {
     const course = await CourseSchema.findByPk(this.getId);
 
@@ -54,6 +104,9 @@ export class Course {
       id: this.id,
       name: this.name,
       courseLeader: await this.courseLeader.toJsonAsync(),
+      modules: await Promise.all(
+        (await this.getModulesAsync()).map((module) => module.toJsonAsync())
+      ),
     };
   }
 }
@@ -62,6 +115,7 @@ interface toJsonReturn {
   id: number;
   name: string;
   courseLeader: object;
+  modules: object[];
 }
 
 interface constructorParams {

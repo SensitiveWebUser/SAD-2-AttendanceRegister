@@ -19,8 +19,8 @@ export class CourseLeader extends Tutor {
     const courseRecord = await CourseSchema.findByPk(this.courseId);
 
     const course = new Course({
-      id: courseRecord!.dataValues.id,
-      name: courseRecord!.dataValues.name,
+      id: courseRecord!.dataValues.course_id,
+      name: courseRecord!.dataValues.course_name,
       courseLeader: this,
     });
 

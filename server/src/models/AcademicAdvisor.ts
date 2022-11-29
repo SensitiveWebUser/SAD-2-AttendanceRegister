@@ -1,13 +1,13 @@
-import { Student, User, UserToJsonReturn } from '../models';
+import { Student, User, Tutor, UserToJsonReturn } from '../models';
 
 import {
   AdvisorStudentLink as AdvisorStudentLinkSchema,
   User as UserSchema,
 } from '../database';
 
-export class AcademicAdvisor extends User {
+export class AcademicAdvisor extends Tutor {
   constructor({ userObject }: constructorParams) {
-    super(userObject);
+    super({ userObject });
   }
 
   async getAdvisees(): Promise<Student[]> {

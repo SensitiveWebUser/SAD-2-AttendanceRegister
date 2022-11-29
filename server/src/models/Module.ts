@@ -1,5 +1,5 @@
-import { Module as ModuleSchema } from '../database';
-import { Tutor } from '../models';
+import { Module as ModuleSchema, Session as SessionSchema } from '../database';
+import { Tutor, Session } from '../models';
 
 export class Module {
   private id: number;
@@ -32,6 +32,31 @@ export class Module {
     this.moduleLeader = moduleLeader;
   }
 
+  public async getModuleSessionsAsync(): Promise<Session[]> {
+    const sessionRecords = await SessionSchema.findAll({
+      where: {
+        module_id: this.id,
+      },
+    });
+
+    if (!sessionRecords) throw new Error('no sessions found');
+
+    console.log(sessionRecords);
+
+    return Promise.all(
+      sessionRecords.map(async (session) => {
+        return new Session({
+          id: session.dataValues.session_id,
+          type: session.dataValues.session_type_id,
+          moduleId: session.dataValues.module_id,
+          startTimestamp: session.dataValues.start_timestamp,
+          endTimestamp: session.dataValues.end_timestamp,
+          code: session.dataValues.code,
+        });
+      })
+    );
+  }
+
   public updateDatabaseAsync = async (): Promise<boolean> => {
     const module = await ModuleSchema.findByPk(this.getId);
 
@@ -54,6 +79,13 @@ export class Module {
       id: this.id,
       name: this.name,
       moduleLeader: await this.moduleLeader.toJsonAsync(),
+      sessions: await this.getModuleSessionsAsync().then((sessions) => {
+        return Promise.all(
+          sessions.map(async (session) => {
+            return await session.toJsonAsync();
+          })
+        );
+      }),
     };
   }
 }
@@ -62,6 +94,7 @@ interface toJsonReturn {
   id: number;
   name: string;
   moduleLeader: object;
+  sessions: object[];
 }
 
 interface constructorParams {

@@ -10,6 +10,7 @@ export { getTutorSessionsController } from './getTutorSessions.controller';
 export { getUserController } from './getUser.controller';
 export { getUserAttendanceController } from './getUserAttendance.controller';
 export { getUserModuleAttendanceController } from './getUserModuleAttendance.controller';
+export { getAllUsersController } from './getAllUsers.controller';
 
 // custom controllers
 export { registerAttendanceController } from './registerAttendance.controller';

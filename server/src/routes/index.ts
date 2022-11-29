@@ -10,6 +10,7 @@ export { getTutorSessionsRouter } from './getTutorSessions.route';
 export { getUserRouter } from './getUser.route';
 export { getUserAttendanceRouter } from './getUserAttendance.route';
 export { getUserModuleAttendanceRouter } from './getUserModuleAttendance.router';
+export { getAllUsersRouter } from './getAllUsers.route';
 
 // custom routes
 export { registerAttendanceRouter } from './registerAttendance.route';

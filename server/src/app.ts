@@ -17,6 +17,7 @@ import {
   getUserAttendanceRouter,
   getUserModuleAttendanceRouter,
   getUserRouter,
+  getAllUsersRouter,
   registerAttendanceRouter,
   resetPasswordUserRouter,
   updateStudentsAttendanceRouter,
@@ -48,6 +49,7 @@ app.use(getSessionRouter);
 app.use(getUserModuleAttendanceRouter);
 app.use(getUserAttendanceRouter);
 app.use(getTutorSessionsRouter);
+app.use(getAllUsersRouter);
 
 // create routes
 app.use(createUserRouter);
