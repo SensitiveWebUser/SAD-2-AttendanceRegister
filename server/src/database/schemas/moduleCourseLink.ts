@@ -1,20 +1,18 @@
-import { Model, DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database';
-import { Module } from './module';
 import { Course } from './course';
+import { Module } from './module';
 
 export const ModuleCourseLink = sequelize.define<ModuleCourseLink>(
   'module_course_link',
   {
     module_id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },
     course_id: {
       type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
     },

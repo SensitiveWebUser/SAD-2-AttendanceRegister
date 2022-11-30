@@ -1,5 +1,6 @@
-import { Model, DataTypes, CreationOptional } from 'sequelize';
+import { CreationOptional, DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database';
+import { Course } from './course';
 import { User } from './user';
 
 export const Module = sequelize.define<Module>(

@@ -1,4 +1,5 @@
 export * from './User';
+export * from './UserType';
 export * from './Tutor';
 export * from './Admin';
 export * from './CourseLeader';
@@ -6,3 +7,7 @@ export * from './ModuleLeader';
 export * from './AcademicAdvisor';
 export * from './Student';
 export * from './Session';
+export * from './Course';
+export * from './Module';
+export * from './SessionType';
+export * from './Attendance';

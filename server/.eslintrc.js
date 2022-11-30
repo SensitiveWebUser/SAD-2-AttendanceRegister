@@ -18,6 +18,7 @@ module.exports = {
     'public/**/*',
     '*.json',
     '*.md',
+    '*.csv',
     '*.test.tsx',
     'build/**/*',
     'src/utils/resources/*',
@@ -28,5 +29,7 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    '@typescript-eslint/no-non-null-assertion': 'warn',
+    'no-case-declarations': 'warn',
   },
 };

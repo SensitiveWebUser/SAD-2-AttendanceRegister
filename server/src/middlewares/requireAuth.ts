@@ -1,5 +1,5 @@
 import debug from 'debug';
-import type { Request, Response, NextFunction } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import { expressjwt, GetVerificationKey } from 'express-jwt';
 import * as jwks from 'jwks-rsa';
 import { UnauthorisedError } from '../errors';
