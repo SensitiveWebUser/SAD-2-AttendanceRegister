@@ -49,13 +49,14 @@ export const getUserController = async (req: Request, res: Response) => {
   let userChildObject = null;
 
   // Create a new object of the user type and choose the user child class
-  switch (userType!.dataValues.user_type_name) {
+  switch (userType?.dataValues.user_type_name) {
   case userTypeEnum.TUTOR:
     userChildObject = new Tutor({
       userObject,
     });
     break;
   case userTypeEnum.STUDENT:
+    // eslint-disable-next-line no-case-declarations
     const advisorStudentLink = await AdvisorStudentLinkSchema.findOne({
       where: {
         student_id: userObject.getId,
@@ -64,10 +65,11 @@ export const getUserController = async (req: Request, res: Response) => {
 
     userChildObject = new Student({
       userObject,
-      academicAdvisorId: advisorStudentLink!.dataValues.academic_advisor_id,
+      academicAdvisorId: advisorStudentLink?.dataValues.academic_advisor_id,
     });
     break;
   case userTypeEnum.MODULE_LEADER:
+    // eslint-disable-next-line no-case-declarations
     const moduleRecord = await ModuleSchema.findOne({
       where: {
         module_leader_id: userObject.getId,
@@ -76,10 +78,11 @@ export const getUserController = async (req: Request, res: Response) => {
 
     userChildObject = new ModuleLeader({
       userObject,
-      moduleId: moduleRecord!.dataValues.module_id,
+      moduleId: moduleRecord?.dataValues.module_id,
     });
     break;
   case userTypeEnum.COURSE_LEADER:
+    // eslint-disable-next-line no-case-declarations
     const courseRecord = await CourseSchema.findOne({
       where: {
         course_leader_id: userObject.getId,
@@ -88,7 +91,7 @@ export const getUserController = async (req: Request, res: Response) => {
 
     userChildObject = new CourseLeader({
       userObject,
-      courseId: courseRecord!.dataValues.course_id,
+      courseId: courseRecord?.dataValues.course_id,
     });
     break;
   case userTypeEnum.ACADEMIC_ADVISOR:
@@ -102,7 +105,7 @@ export const getUserController = async (req: Request, res: Response) => {
     });
     break;
   default:
-    logger(`user type ${userType!.dataValues.user_type_name} not found`);
+    logger(`user type ${userType?.dataValues.user_type_name} not found`);
     throw new NotFoundError('User type not found');
   }
 

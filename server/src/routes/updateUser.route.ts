@@ -6,7 +6,7 @@ import { requireAuth, requireRole, validateRequest } from '../middlewares';
 
 const router = express.Router();
 router.patch(
-  '/api/user/:id',
+  '/api/users/:id',
   requireAuth,
   requireRole([userTypeEnum.ADMIN]),
   [

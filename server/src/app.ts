@@ -24,6 +24,7 @@ import {
   updateStudentsAttendanceRouter,
   updateUserRouter,
   createBulkModulesRouter,
+  getUserCoursesRouter,
 } from './routes';
 
 const logger = debug('backend:request');
@@ -48,6 +49,7 @@ app.use(getUserModuleAttendanceRouter);
 app.use(getUserAttendanceRouter);
 app.use(getTutorSessionsRouter);
 app.use(getAllUsersRouter);
+app.use(getUserCoursesRouter);
 
 // create routes
 app.use(createUserRouter);

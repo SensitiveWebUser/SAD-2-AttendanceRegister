@@ -26,7 +26,7 @@ export const updateUserController = async (req: Request, res: Response) => {
   }
 
   const user = new User({
-    id: userRecord!.dataValues.user_id,
+    id: userRecord?.dataValues.user_id,
     type: userTypeRecord.dataValues.user_type_id,
     firstName: firstName,
     middleName: middleName,
