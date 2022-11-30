@@ -39,9 +39,6 @@ const darkTheme = createTheme({
     MuiTable: {
       color: 'primary.white',
     },
-    MuiTableCell: {
-      color: 'primary.white',
-    },
     MuiCssBaseline: {
       styleOverrides: {
         body: {
@@ -68,6 +65,114 @@ const darkTheme = createTheme({
             },
           '&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner': {
             backgroundColor: '#2b2b2b',
+          },
+        },
+      },
+    },
+    MuiTableSortLabel: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+          transition: 0.1,
+          '&:hover': {
+            color: 'salmon',
+            transition: 0.1,
+          },
+          '&.Mui-active': {
+            color: 'salmon',
+          },
+        },
+        icon: {
+          '& path': {
+            fill: '#eee',
+          },
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+        },
+      },
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          fill: '#fff',
+        },
+      },
+    },
+    MuiFilledInput: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+          '&::after': {
+            borderBottomColor: '#fff',
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+        },
+        notchedOutline: {
+          borderColor: 'white',
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          '&.MuiInput-underline::before': {
+            borderBottomColor: 'rgba(255,255,255,0.3)',
+          },
+          '&.MuiInput-underline:hover:not(.Mui-disabled):before': {
+            borderBottomColor: 'rgba(255,255,255,0.5)',
+          },
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          '&.MuiInput-input': {
+            color: 'white',
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: 'white',
+          '&.Mui-focused': {
+            color: 'white',
+          },
+        },
+      },
+    },
+    MuiLoadingButton: {
+      styleOverrides: {
+        root: {
+          '&.Mui-disabled': {
+            color: '#ADADAD',
           },
         },
       },

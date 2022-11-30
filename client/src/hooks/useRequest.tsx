@@ -1,6 +1,10 @@
-import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Alert, AlertTitle } from '@mui/material';
 import axios from 'axios';
+import { useSnackbar } from 'notistack';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ErrorSnackbar } from '../components/ErrorSnackbar';
 
 export const useRequest = ({
   url,
@@ -9,8 +13,10 @@ export const useRequest = ({
   onSuccess,
 }: useRequestProps) => {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
-
+  const { enqueueSnackbar } = useSnackbar();
   const [errors, setErrors] = useState(null);
+  const { t } = useTranslation();
+  let newUrl = url;
 
   // This function is used to make the request to the API
   // The function can be used as if it like a useHook function
@@ -18,6 +24,9 @@ export const useRequest = ({
   const doRequest = async (props = {}) => {
     try {
       setErrors(null);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      newUrl = props.url || url;
 
       // Set the Authorization header with the access token from Auth0 for the current user
       // If the user is not logged in, authorization will not be set
@@ -27,23 +36,38 @@ export const useRequest = ({
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       }
 
-      const response = await axios[method](url, { ...body, ...props });
+      const response = await axios[method](newUrl, { ...body, ...props });
 
       if (onSuccess) {
         onSuccess(response.data);
+        enqueueSnackbar(t('request.success'), {
+          variant: 'success',
+        });
+        return true;
       }
     } catch (err) {
+      enqueueSnackbar(t('request.error.title'), {
+        content: (key) => (
+          <ErrorSnackbar id={key} errors={err.response.data.errors} />
+        ),
+      });
       setErrors(
-        <div className="alert alert-danger">
-          <h4>Ooops....</h4>
-          <ul className="my-0">
-            {console.log(err)}
-            {err.response.data.errors.map((err) => (
-              <li key={err.message}>{err.message}</li>
-            ))}
-          </ul>
-        </div>
+        <Alert
+          severity="error"
+          sx={{
+            mt: 2,
+            bgcolor: '#160B0B',
+            color: '#F4C7C7',
+            textAlign: 'left',
+          }}
+        >
+          <AlertTitle sx={{ fontWeight: '600' }}>
+            {t('request.error.title')}
+          </AlertTitle>
+          {t('request.error.message')} — <strong>{newUrl}</strong>
+        </Alert>
       );
+      return err.response.data.errors > 0;
     }
   };
 
@@ -52,7 +76,7 @@ export const useRequest = ({
 
 interface useRequestProps {
   url: string;
-  method: 'get' | 'post' | 'put' | 'delete';
+  method: 'get' | 'post' | 'put' | 'delete' | 'patch';
   body?: Record<string, unknown>;
   // eslint-disable-next-line @typescript-eslint/ban-types
   onSuccess?: Function;

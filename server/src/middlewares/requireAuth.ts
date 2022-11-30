@@ -1,8 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
+import debug from 'debug';
+import type { NextFunction, Request, Response } from 'express';
 import { expressjwt, GetVerificationKey } from 'express-jwt';
 import * as jwks from 'jwks-rsa';
+import { UnauthorisedError } from '../errors';
 
-import { UnauthorizedError } from '@Errors/unauthorizedError';
+const logger = debug('backend:authentication');
 
 // This is the middleware that will be used to verify the JWT token
 // It will be used in the routes that require authentication
@@ -14,26 +16,27 @@ export const requireAuth = async (
   res: Response,
   next: NextFunction
 ) => {
-  const ISSUER = process.env.AUTH0_ISSUER;
+  const issuerUrl = process.env.AUTH0_ISSUER;
 
-  // This allows bypassing the authentication for testing purposes
+  // bypassing authentication for testing purposes
   if (process.env.NODE_ENV === 'test') {
-    next();
-    return;
+    return next();
   }
 
+  // validate JWT
   expressjwt({
     secret: jwks.expressJwtSecret({
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: `${ISSUER}.well-known/jwks.json`,
+      jwksUri: `${issuerUrl}.well-known/jwks.json`,
     }) as GetVerificationKey,
-    issuer: ISSUER,
+    issuer: issuerUrl,
     algorithms: ['RS256'],
   })(req, res, (err) => {
     if (err) {
-      next(new UnauthorizedError());
+      logger('request was not authorised.');
+      return next(new UnauthorisedError());
     }
 
     next();

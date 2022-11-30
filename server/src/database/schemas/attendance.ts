@@ -1,28 +1,29 @@
-import { Model, DataTypes, CreationOptional } from 'sequelize';
-
-import { sequelize } from '@Database';
-
-import { User } from './user';
+import { CreationOptional, DataTypes, Model } from 'sequelize';
+import { sequelize } from '../database';
 import { Session } from './session';
+import { User } from './user';
 
-export const Attendance = sequelize.define<Attendance>('attendance', {
-  user_id: {
-    type: DataTypes.STRING(36),
-    allowNull: false,
-    primaryKey: true,
+export const Attendance = sequelize.define<Attendance>(
+  'attendance',
+  {
+    user_id: {
+      type: DataTypes.STRING(36),
+      allowNull: false,
+      primaryKey: true,
+    },
+    session_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      primaryKey: true,
+    },
+    attended: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
-  session_id: {
-    type: DataTypes.STRING(36),
-    allowNull: false,
-    primaryKey: true,
-  },
-  attended: {
-    type: DataTypes.BIGINT,
-    allowNull: true,
-  },
-});
+  { underscored: true, timestamps: false, freezeTableName: true }
+);
 
-// Add foreign keys
 Attendance.belongsTo(User, { foreignKey: 'user_id' });
 Attendance.belongsTo(Session, { foreignKey: 'session_id' });
 

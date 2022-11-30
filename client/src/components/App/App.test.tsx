@@ -1,13 +1,9 @@
-import React from 'react';
+import { CssBaseline, Slide, ThemeProvider } from '@mui/material';
+import { SnackbarProvider } from 'notistack';
 import ReactDOM from 'react-dom';
 import { I18nextProvider } from 'react-i18next';
-import i18n from '../../i18n';
 import { App } from '../../components/App';
-import { SnackbarProvider } from 'notistack';
-import { Slide } from '@mui/material';
-
-import { CssBaseline, ThemeProvider } from '@mui/material';
-
+import i18n from '../../i18n';
 import darkTheme from '../../utils/themes/Dark';
 
 it('renders without crashing', () => {

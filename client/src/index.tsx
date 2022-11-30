@@ -1,16 +1,13 @@
+import { Auth0Provider } from '@auth0/auth0-react';
+import { CssBaseline, Slide, ThemeProvider } from '@mui/material';
+import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Auth0Provider } from '@auth0/auth0-react';
-import * as serviceWorker from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
 import { I18nextProvider } from 'react-i18next';
-import i18n from './i18n';
 import { App } from './components/App';
-import { SnackbarProvider } from 'notistack';
-import { Slide } from '@mui/material';
-
-import { CssBaseline, ThemeProvider } from '@mui/material';
-
+import i18n from './i18n';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import darkTheme from './utils/themes/Dark';
 
 ReactDOM.render(
@@ -23,7 +20,6 @@ ReactDOM.render(
       }}
       TransitionComponent={Slide}
       hideIconVariant
-      preventDuplicate
       transitionDuration={{ exit: 200, enter: 200 }}
       autoHideDuration={3500}
     >
@@ -46,7 +42,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker.register();
+serviceWorkerRegistration.unregister();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

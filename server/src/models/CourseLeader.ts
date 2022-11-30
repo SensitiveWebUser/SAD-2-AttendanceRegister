@@ -1,25 +1,44 @@
-import { Tutor } from './Tutor';
+import {
+  Course,
+  Tutor,
+  TutorConstructorParams,
+  UserToJsonReturn,
+} from '../models';
+
+import { Course as CourseSchema } from '../database';
 
 export class CourseLeader extends Tutor {
-  private _courseId: string;
+  private courseId: string;
 
-  constructor(
-    id: string,
-    type: string,
-    firstName: string,
-    middleName: string,
-    lastName: string,
-    email: string,
-    sessionList: object,
-    courseId: string
-  ) {
-    super(id, type, firstName, middleName, lastName, email, sessionList);
-    this._courseId = courseId;
+  constructor({ userObject, courseId }: constructorParams) {
+    super({ userObject });
+    this.courseId = courseId;
   }
 
-  public getCourseId() {
-    return this._courseId;
-  }
+  public getCourseAsync = async (): Promise<Course> => {
+    const courseRecord = await CourseSchema.findByPk(this.courseId);
 
-  public updateAttendance() {}
+    const course = new Course({
+      id: courseRecord!.dataValues.course_id,
+      name: courseRecord!.dataValues.course_name,
+      courseLeader: this,
+    });
+
+    return course;
+  };
+
+  async toJsonAsync(): Promise<toJsonReturn> {
+    return {
+      ...(await super.toJsonAsync()),
+      course: await this.getCourseAsync(),
+    };
+  }
+}
+
+interface toJsonReturn extends UserToJsonReturn {
+  course: object;
+}
+
+interface constructorParams extends TutorConstructorParams {
+  courseId: string;
 }

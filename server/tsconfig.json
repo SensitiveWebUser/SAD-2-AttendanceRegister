@@ -1,21 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./build",
     "strict": true,
     "baseUrl": "./",
-    "paths": {
-      "@Routes/*": ["src/routes/*"],
-      "@Middlewares": ["src/middlewares/index.ts"],
-      "@Errors": ["src/errors/index.ts"],
-      "@Errors/*": ["src/errors/*"],
-      "@Models/*": ["src/models/*"],
-      "@Models": ["src/models/index.ts"],
-      "@Utils/*": ["src/utils/*"],
-      "@Database": ["src/database/index.ts"]
-    },
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
