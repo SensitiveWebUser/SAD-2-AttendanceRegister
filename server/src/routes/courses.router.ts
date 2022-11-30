@@ -7,6 +7,7 @@ import deleteCourseAsync from '../controllers/courses/courses.delete';
 import createCourseAsync from '../controllers/courses/courses.create';
 import updateCourseAsync from '../controllers/courses/courses.update';
 import bulkImportAsync from '../controllers/courses/courses.bulk';
+import { requireAuth } from '../middlewares';
 
 const upload = multer({ dest: os.tmpdir() });
 const router = express.Router();
@@ -18,6 +19,7 @@ const router = express.Router();
  */
 router.post(
   '/',
+  requireAuth,
   [query('name').isString().withMessage('Name must be a string')],
   [query('courseLeader').isUUID().withMessage('Course leader must be a UUID')],
   createCourseAsync
@@ -28,7 +30,7 @@ router.post(
  *
  * Bulk import courses using CSV files.
  */
-router.post('/bulk', upload.single('file'), bulkImportAsync);
+router.post('/bulk', requireAuth, upload.single('file'), bulkImportAsync);
 
 /**
  * GET /api/courses/:id
@@ -37,6 +39,7 @@ router.post('/bulk', upload.single('file'), bulkImportAsync);
  */
 router.get(
   '/:id',
+  requireAuth,
   [param('id').isString().withMessage('Course id must be a string')],
   getCourseAsync
 );
@@ -46,7 +49,7 @@ router.get(
  *
  * Updates a course in the database by using OPTIONAL parameters.
  */
-router.patch('/:id', updateCourseAsync);
+router.patch('/:id', requireAuth, updateCourseAsync);
 
 /**
  * DELETE /api/courses/:id
@@ -55,6 +58,7 @@ router.patch('/:id', updateCourseAsync);
  */
 router.delete(
   '/:id',
+  requireAuth,
   [param('id').isString().withMessage('Course id must be a string')],
   deleteCourseAsync
 );

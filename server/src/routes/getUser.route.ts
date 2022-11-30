@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get(
   '/api/users/:id',
-  // requireAuth,
+  requireAuth,
   [
     param('id')
       .isString()
