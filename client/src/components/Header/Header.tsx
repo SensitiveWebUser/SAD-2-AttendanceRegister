@@ -1,5 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -28,6 +29,7 @@ import {
 import { Fragment, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { roles } from '../../utils/constants';
 import logo from '../../utils/resources/images/logo192.png';
 import { ExternalLink } from '../ExternalLink';
 
@@ -80,7 +82,7 @@ const ScrollTop = () => {
   );
 };
 
-export const Header = (): JSX.Element => {
+export const Header = ({ role }: ComponentProps) => {
   const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
   const [isSidebarOpen, setSideBarOpen] = useState(false);
   const navigate = useNavigate();
@@ -205,6 +207,19 @@ export const Header = (): JSX.Element => {
                   </ListItemIcon>
                   <ListItemText primary={t('nav.link.profile')} />
                 </ListItem>
+                {role === roles.ADMIN && (
+                  <ListItem
+                    button
+                    key={t('nav.link.admin')}
+                    component={NavLink}
+                    to={'/admin'}
+                  >
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      <AdminPanelSettingsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={t('nav.link.admin')} />
+                  </ListItem>
+                )}
                 <ListItem
                   button
                   key={t('nav.link.logout')}
@@ -254,3 +269,7 @@ export const Header = (): JSX.Element => {
     </Fragment>
   );
 };
+
+interface ComponentProps {
+  role: string;
+}

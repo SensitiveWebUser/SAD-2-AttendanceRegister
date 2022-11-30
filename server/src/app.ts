@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { NotFoundError } from '../src/errors';
 import { errorHandler } from '../src/middlewares';
+import cors from 'cors';
 
 import {
   createBulkUserRouter,
@@ -22,17 +23,14 @@ import {
   resetPasswordUserRouter,
   updateStudentsAttendanceRouter,
   updateUserRouter,
+  createBulkModulesRouter,
 } from './routes';
 
 const logger = debug('backend:request');
 const app = express();
 
 // cors rules
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  next();
-});
+app.use(cors());
 
 // application middleware
 app.use(helmet());
@@ -54,6 +52,7 @@ app.use(getAllUsersRouter);
 // create routes
 app.use(createUserRouter);
 app.use(createBulkUserRouter);
+app.use(createBulkModulesRouter);
 
 // update routes
 app.use(updateUserRouter);

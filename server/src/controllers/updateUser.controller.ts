@@ -9,10 +9,12 @@ const logger = debug('backend:update.user.controller');
 
 export const updateUserController = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { firstName, middleName, lastName, typeId } = req.body;
+  const { firstName, middleName, lastName, email, type } = req.body;
 
   const userRecord = await UserSchema.findByPk(id);
-  const userTypeRecord = await UserTypeSchema.findByPk(typeId);
+  const userTypeRecord = await UserTypeSchema.findOne({
+    where: { user_type_name: type },
+  });
 
   if (!userRecord) {
     logger('user not found');
@@ -25,11 +27,11 @@ export const updateUserController = async (req: Request, res: Response) => {
 
   const user = new User({
     id: userRecord!.dataValues.user_id,
-    type: userRecord.dataValues.user_type_id,
+    type: userTypeRecord.dataValues.user_type_id,
     firstName: firstName,
     middleName: middleName,
     lastName: lastName,
-    email: userRecord!.dataValues.email,
+    email: email,
   });
 
   await user.updateDatabaseAsync();

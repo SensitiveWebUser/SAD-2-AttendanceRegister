@@ -27,7 +27,6 @@ ReactDOM.render(
       }}
       TransitionComponent={Slide}
       hideIconVariant
-      preventDuplicate
       transitionDuration={{ exit: 200, enter: 200 }}
       autoHideDuration={3500}
     >
@@ -50,7 +49,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.unregister();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

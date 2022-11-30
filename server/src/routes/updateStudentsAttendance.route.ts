@@ -1,12 +1,20 @@
 import express from 'express';
 import { body, param } from 'express-validator';
+import { userTypeEnum } from 'src/utils/userTypeEnum';
 import { updateStudentsAttendanceController } from '../controllers';
-import { validateRequest } from '../middlewares';
+import { requireAuth, requireRole, validateRequest } from '../middlewares';
 
 const router = express.Router();
 
 router.patch(
   '/api/user/:id/session/:sessionId/attendance',
+  requireAuth,
+  requireRole([
+    userTypeEnum.ADMIN,
+    userTypeEnum.TUTOR,
+    userTypeEnum.COURSE_LEADER,
+    userTypeEnum.MODULE_LEADER,
+  ]),
   [
     param('id').isString().notEmpty().withMessage('User id must be a string'),
     param('sessionId')
