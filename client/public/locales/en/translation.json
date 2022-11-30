@@ -14,8 +14,8 @@
   "request": {
     "success": "success",
     "error": {
-      "title": "Error",
-      "message": "Something went wrong when requesting {{ url }}"
+      "title": "Error!",
+      "message": "Something went wrong when requesting "
     }
   },
   "nav": {
@@ -25,7 +25,8 @@
       "report": "report",
       "login": "Login",
       "logout": "Logout",
-      "profile": "Profile"
+      "profile": "Profile",
+      "admin": "Admin"
     },
     "avatarAlt": "Default Avatar",
     "logoAlt": "Company Logo",
@@ -35,5 +36,16 @@
   },
   "loading": {
     "message": "Loading..."
+  },
+  "admin": {
+    "uploadCSV": "Import Users",
+    "uploadSuccess": "Imported Users from CSV file",
+    "uploadError": "Error importing users from CSV file",
+    "uploading": "Uploading...",
+    "title": {
+      "users": "Users",
+      "createUsers": "Create Users",
+      "resetPassword": "Reset Password"
+    }
   }
 }
