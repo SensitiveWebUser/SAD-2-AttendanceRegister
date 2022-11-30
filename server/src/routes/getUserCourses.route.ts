@@ -13,7 +13,7 @@ const idCheckMiddleware = param('id')
 
 router.get(
   '/api/users/:id/courses',
-  requireAuth,
+  //requireAuth,
   idCheckMiddleware,
   validateRequest,
   getUserCoursesController

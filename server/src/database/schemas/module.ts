@@ -12,10 +12,6 @@ export const Module = sequelize.define<Module>(
       allowNull: false,
       primaryKey: true,
     },
-    course_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-    },
     module_name: {
       type: DataTypes.STRING(20),
       allowNull: false,
@@ -29,7 +25,6 @@ export const Module = sequelize.define<Module>(
 );
 
 Module.belongsTo(User, { foreignKey: 'module_leader_id' });
-Module.belongsTo(Course, { foreignKey: 'course_id' });
 
 interface Module extends Model {
   module_id?: CreationOptional<string>;
