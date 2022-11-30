@@ -31,7 +31,11 @@ router.patch(
       .trim()
       .isLength({ max: 20, min: 1 })
       .withMessage('Email must be between 1 and 20 characters'),
-    body('typeId').isUUID().withMessage('Type id must be a UUID'),
+    body('type')
+      .isString()
+      .trim()
+      .isLength({ max: 20, min: 1 })
+      .withMessage('User type must be a string'),
   ],
   validateRequest,
   updateUserController
