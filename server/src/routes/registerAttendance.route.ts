@@ -7,7 +7,7 @@ import { requireAuth, requireRole, validateRequest } from '../middlewares';
 const router = express.Router();
 
 router.post(
-  '/api/user/:id/register/session/:code/attendance',
+  '/api/users/:id/register/sessions/:code/attendances',
   requireAuth,
   requireRole([userTypeEnum.STUDENT, userTypeEnum.ADMIN]),
   [

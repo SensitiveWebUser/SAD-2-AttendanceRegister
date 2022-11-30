@@ -6,7 +6,7 @@ import { requireAuth, validateRequest } from '../middlewares';
 const router = Router();
 
 router.get(
-  '/api/course/:id',
+  '/api/courses/:id',
   requireAuth,
   [
     param('id')

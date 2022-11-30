@@ -70,7 +70,7 @@ export const registerAttendanceController = async (
   const student = new Student({
     userObject: new User({
       id: userRecord.dataValues.user_id,
-      type: UserTypeRecord!.dataValues.user_type_id,
+      type: UserTypeRecord?.dataValues.user_type_id,
       firstName: userRecord.dataValues.first_name,
       middleName: userRecord.dataValues.middle_name,
       lastName: userRecord.dataValues.last_name,
