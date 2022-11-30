@@ -11,6 +11,7 @@ import {
   Session,
   User,
   UserToJsonReturn,
+  Course,
 } from '../models';
 
 const logger = debug('backend:Student');
@@ -48,12 +49,12 @@ export class Student extends User {
         );
 
         const session = new Session({
-          id: sessionRecord!.dataValues.user_id,
-          type: sessionRecord!.dataValues.session_type_id,
-          moduleId: sessionRecord!.dataValues.module_id,
-          startTimestamp: sessionRecord!.dataValues.start_timestamp,
-          endTimestamp: sessionRecord!.dataValues.end_timestamp,
-          code: sessionRecord!.dataValues.code,
+          id: sessionRecord?.dataValues.user_id,
+          type: sessionRecord?.dataValues.session_type_id,
+          moduleId: sessionRecord?.dataValues.module_id,
+          startTimestamp: sessionRecord?.dataValues.start_timestamp,
+          endTimestamp: sessionRecord?.dataValues.end_timestamp,
+          code: sessionRecord?.dataValues.code,
         });
 
         return new Attendance({
@@ -98,12 +99,12 @@ export class Student extends User {
 
       return new AcademicAdvisor({
         userObject: new User({
-          id: advisorRecord!.dataValues.user_id,
-          type: advisorRecord!.dataValues.user_type_id,
-          firstName: advisorRecord!.dataValues.first_name,
-          middleName: advisorRecord!.dataValues.middle_name,
-          lastName: advisorRecord!.dataValues.last_name,
-          email: advisorRecord!.dataValues.email,
+          id: advisorRecord?.dataValues.user_id,
+          type: advisorRecord?.dataValues.user_type_id,
+          firstName: advisorRecord?.dataValues.first_name,
+          middleName: advisorRecord?.dataValues.middle_name,
+          lastName: advisorRecord?.dataValues.last_name,
+          email: advisorRecord?.dataValues.email,
         }),
       });
     };
@@ -123,7 +124,7 @@ export class Student extends User {
     const attendance = new Attendance({
       student: this,
       session,
-      attended: attendanceRecord!.dataValues.attended || null,
+      attended: attendanceRecord?.dataValues.attended || null,
     });
 
     // Makes date objects for the current time
@@ -151,7 +152,6 @@ export class Student extends User {
   };
 
   async toJsonAsync(): Promise<toJsonReturn> {
-    logger('toJsonAsync()');
     return {
       ...(await super.toJsonAsync()),
       academicAdvisorId: this.academicAdvisorId,
