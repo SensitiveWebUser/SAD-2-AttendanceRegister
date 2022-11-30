@@ -12,8 +12,7 @@ import { roles } from '../../utils/constants';
 import { Header } from '../Header';
 
 export const App = (): JSX.Element => {
-  const { isAuthenticated, user, isLoading, getAccessTokenSilently } =
-    useAuth0();
+  const { isAuthenticated, user, isLoading } = useAuth0();
 
   const role = isAuthenticated
     ? user['http://sad.assignment.com/userData'].app.role
