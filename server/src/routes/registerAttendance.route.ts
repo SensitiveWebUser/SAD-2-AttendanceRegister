@@ -7,7 +7,7 @@ import { requireAuth, requireRole, validateRequest } from '../middlewares';
 const router = express.Router();
 
 router.post(
-  '/api/user/:id/register/session/:sessionId/attendance',
+  '/api/user/:id/register/session/:code/attendance',
   requireAuth,
   requireRole([userTypeEnum.STUDENT, userTypeEnum.ADMIN]),
   [
@@ -16,11 +16,6 @@ router.post(
       .trim()
       .notEmpty()
       .withMessage('User id must be a string'),
-    param('sessionId')
-      .isUUID()
-      .trim()
-      .notEmpty()
-      .withMessage('Session id must be a UUID'),
     body('code')
       .isString()
       .notEmpty()

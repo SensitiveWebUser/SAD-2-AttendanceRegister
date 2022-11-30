@@ -17,11 +17,13 @@ export const registerAttendanceController = async (
   req: Request,
   res: Response
 ) => {
-  const { id, sessionId } = req.params;
+  const { id } = req.params;
   const { code } = req.body;
 
   const userRecord = await UserSchema.findByPk(id);
-  const sessionRecord = await SessionSchema.findByPk(sessionId);
+  const sessionRecord = await SessionSchema.findOne({
+    where: { code: code },
+  });
 
   if (!userRecord) {
     logger('user not found');
