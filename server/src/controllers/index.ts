@@ -12,6 +12,7 @@ export { getUserController } from './getUser.controller';
 export { getUserAttendanceController } from './getUserAttendance.controller';
 export { getUserModuleAttendanceController } from './getUserModuleAttendance.controller';
 export { getAllUsersController } from './getAllUsers.controller';
+export { getUserCoursesController } from './getUserCourses.controller';
 
 // custom controllers
 export { registerAttendanceController } from './registerAttendance.controller';

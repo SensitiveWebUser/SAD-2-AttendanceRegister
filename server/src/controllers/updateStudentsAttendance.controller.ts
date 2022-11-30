@@ -32,26 +32,26 @@ export const updateStudentsAttendanceController = async (
   const sessionRecord = await SessionSchema.findByPk(sessionId);
 
   const session = new Session({
-    id: sessionRecord!.dataValues.session_id,
-    type: sessionRecord!.dataValues.session_type_id,
-    moduleId: sessionRecord!.dataValues.module_id,
-    startTimestamp: sessionRecord!.dataValues.start_timestamp,
-    endTimestamp: sessionRecord!.dataValues.end_timestamp,
-    code: sessionRecord!.dataValues.code,
+    id: sessionRecord?.dataValues.session_id,
+    type: sessionRecord?.dataValues.session_type_id,
+    moduleId: sessionRecord?.dataValues.module_id,
+    startTimestamp: sessionRecord?.dataValues.start_timestamp,
+    endTimestamp: sessionRecord?.dataValues.end_timestamp,
+    code: sessionRecord?.dataValues.code,
   });
 
   const userRecord = await UserSchema.findByPk(studentId);
 
   const student = new Student({
     userObject: new User({
-      id: userRecord!.dataValues.user_id,
-      type: userRecord!.dataValues.user_type_id,
-      firstName: userRecord!.dataValues.first_name,
-      middleName: userRecord!.dataValues.middle_name,
-      lastName: userRecord!.dataValues.last_name,
-      email: userRecord!.dataValues.email,
+      id: userRecord?.dataValues.user_id,
+      type: userRecord?.dataValues.user_type_id,
+      firstName: userRecord?.dataValues.first_name,
+      middleName: userRecord?.dataValues.middle_name,
+      lastName: userRecord?.dataValues.last_name,
+      email: userRecord?.dataValues.email,
     }),
-    academicAdvisorId: userRecord!.dataValues.academic_advisor_id,
+    academicAdvisorId: userRecord?.dataValues.academic_advisor_id,
   });
 
   const attendance = new Attendance({

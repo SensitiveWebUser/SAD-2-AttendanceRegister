@@ -7,7 +7,7 @@ import { requireAuth, requireRole, validateRequest } from '../middlewares';
 const router = express.Router();
 
 router.patch(
-  '/api/user/:id/session/:sessionId/attendance',
+  '/api/user/:id/sessions/:sessionId/attendances',
   requireAuth,
   requireRole([
     userTypeEnum.ADMIN,

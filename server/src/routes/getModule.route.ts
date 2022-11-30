@@ -6,7 +6,7 @@ import { requireAuth, validateRequest } from '../middlewares';
 const router = express.Router();
 
 router.get(
-  '/api/module/:id',
+  '/api/modules/:id',
   requireAuth,
   [
     param('id')

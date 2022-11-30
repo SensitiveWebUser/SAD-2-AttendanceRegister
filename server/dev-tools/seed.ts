@@ -6,6 +6,7 @@ import moduleCourseSeeder from './seeders/moduleCourseSeeder';
 import moduleSeeder from './seeders/moduleSeeder';
 import sessionSeeder from './seeders/sessionSeeder';
 import sessionTypeSeeder from './seeders/sessionTypeSeeder';
+import userCourseLinkSeeder from './seeders/userCourseLinkSeeder';
 import userSeeder from './seeders/userSeeder';
 import userTypeSeeder from './seeders/userTypeSeeder';
 
@@ -22,6 +23,7 @@ export default async function seedAsync() {
   await courseSeeder.bulkCreateAsync();
   await moduleSeeder.bulkCreateAsync();
   await moduleCourseSeeder.bulkCreateAsync();
+  await userCourseLinkSeeder.bulkCreateAsync();
 
   await sessionSeeder.bulkCreateAsync();
   await attendanceSeeder.bulkCreateAsync();

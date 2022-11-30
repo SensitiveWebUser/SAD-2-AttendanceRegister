@@ -1,13 +1,13 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database';
 import { Course } from './course';
-import { Module } from './module';
+import { User } from './user';
 
-export const ModuleCourseLink = sequelize.define<ModuleCourseLink>(
-  'module_course_link',
+export const UserCourseLink = sequelize.define<UserCourseLink>(
+  'user_course_link',
   {
-    module_id: {
-      type: DataTypes.UUID,
+    user_id: {
+      type: DataTypes.STRING(36),
       allowNull: false,
       primaryKey: true,
     },
@@ -20,10 +20,10 @@ export const ModuleCourseLink = sequelize.define<ModuleCourseLink>(
   { underscored: true, freezeTableName: true, timestamps: false }
 );
 
-ModuleCourseLink.belongsTo(Module, { foreignKey: 'module_id' });
-ModuleCourseLink.belongsTo(Course, { foreignKey: 'course_id' });
+UserCourseLink.belongsTo(User, { foreignKey: 'user_id' });
+UserCourseLink.belongsTo(Course, { foreignKey: 'course_id' });
 
-interface ModuleCourseLink extends Model {
-  module_id: string;
+interface UserCourseLink extends Model {
+  user_id: string;
   course_id: string;
 }
