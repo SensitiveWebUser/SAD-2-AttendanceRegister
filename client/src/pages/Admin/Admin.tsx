@@ -47,7 +47,7 @@ export const Admin = () => {
       const token: string = ((await getAccessTokenSilently()) as string) || '';
       axios({
         method: 'post',
-        url: '/api/users/bulk',
+        url: 'http://localhost:3001/api/users/bulk',
         data: formData,
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -69,7 +69,7 @@ export const Admin = () => {
   };
 
   const [getUsers] = useRequest({
-    url: '/api/users',
+    url: 'http://localhost:3001/api/users',
     method: 'get',
     onSuccess: (data) => setUsers(data),
   });

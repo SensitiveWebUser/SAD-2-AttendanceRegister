@@ -35,7 +35,7 @@ export const CreateUser = () => {
   };
 
   const [createUser, errors] = useRequest({
-    url: '/api/user',
+    url: 'http://localhost:3001/api/user',
     method: 'post',
     onSuccess: () => {
       return;
