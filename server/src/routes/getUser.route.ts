@@ -1,14 +1,13 @@
 import express from 'express';
 import { param } from 'express-validator';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
 import { getUserController } from '../controllers';
-import { validateRequest, requireAuth, requireRole } from '../middlewares';
+import { validateRequest, requireAuth } from '../middlewares';
 
 const router = express.Router();
 
 router.get(
   '/api/users/:id',
-  requireAuth,
+  // requireAuth,
   [
     param('id')
       .isString()

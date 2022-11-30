@@ -23,14 +23,14 @@ export const getModuleController = async (req: Request, res: Response) => {
 
   const moduleLeader = new ModuleLeader({
     userObject: new User({
-      id: moduleLeaderRecord!.dataValues.user_id,
-      type: moduleLeaderRecord!.dataValues.user_type_id,
-      firstName: moduleLeaderRecord!.dataValues.first_name,
-      middleName: moduleLeaderRecord!.dataValues.middle_name,
-      lastName: moduleLeaderRecord!.dataValues.last_name,
-      email: moduleLeaderRecord!.dataValues.email,
+      id: moduleLeaderRecord?.dataValues.user_id,
+      type: moduleLeaderRecord?.dataValues.user_type_id,
+      firstName: moduleLeaderRecord?.dataValues.first_name,
+      middleName: moduleLeaderRecord?.dataValues.middle_name,
+      lastName: moduleLeaderRecord?.dataValues.last_name,
+      email: moduleLeaderRecord?.dataValues.email,
     }),
-    moduleId: moduleRecord!.dataValues.module_id,
+    moduleId: moduleRecord?.dataValues.module_id,
   });
 
   const module = new Module({

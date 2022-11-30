@@ -22,14 +22,14 @@ export const getCourseController = async (req: Request, res: Response) => {
 
   const courseLeader = new CourseLeader({
     userObject: new User({
-      id: courseLeaderRecord!.dataValues.user_id,
-      type: courseLeaderRecord!.dataValues.user_type_id,
-      firstName: courseLeaderRecord!.dataValues.first_name,
-      middleName: courseLeaderRecord!.dataValues.middle_name,
-      lastName: courseLeaderRecord!.dataValues.last_name,
-      email: courseLeaderRecord!.dataValues.email,
+      id: courseLeaderRecord?.dataValues.user_id,
+      type: courseLeaderRecord?.dataValues.user_type_id,
+      firstName: courseLeaderRecord?.dataValues.first_name,
+      middleName: courseLeaderRecord?.dataValues.middle_name,
+      lastName: courseLeaderRecord?.dataValues.last_name,
+      email: courseLeaderRecord?.dataValues.email,
     }),
-    courseId: courseRecord!.dataValues.course_id,
+    courseId: courseRecord?.dataValues.course_id,
   });
 
   const course = new Course({

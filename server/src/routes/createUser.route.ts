@@ -7,7 +7,7 @@ import { requireAuth, requireRole, validateRequest } from '../middlewares';
 const router = Router();
 
 router.post(
-  '/api/user',
+  '/api/users',
   requireAuth,
   requireRole([userTypeEnum.ADMIN]),
   [

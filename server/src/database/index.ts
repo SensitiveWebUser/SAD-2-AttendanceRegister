@@ -10,3 +10,4 @@ export * from './schemas/session';
 export * from './schemas/sessionType';
 export * from './schemas/user';
 export * from './schemas/userType';
+export * from './schemas/userCourseLink';

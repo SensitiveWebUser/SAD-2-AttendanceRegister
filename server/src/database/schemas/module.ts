@@ -1,5 +1,6 @@
 import { CreationOptional, DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database';
+import { Course } from './course';
 import { User } from './user';
 
 export const Module = sequelize.define<Module>(
@@ -10,6 +11,10 @@ export const Module = sequelize.define<Module>(
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
+    },
+    course_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
     },
     module_name: {
       type: DataTypes.STRING(20),
@@ -24,6 +29,7 @@ export const Module = sequelize.define<Module>(
 );
 
 Module.belongsTo(User, { foreignKey: 'module_leader_id' });
+Module.belongsTo(Course, { foreignKey: 'course_id' });
 
 interface Module extends Model {
   module_id?: CreationOptional<string>;
