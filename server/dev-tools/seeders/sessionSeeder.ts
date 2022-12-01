@@ -42,7 +42,7 @@ const objects: ObjectType[] = [
     user_id: studentUser.user_id,
     start_timestamp: new Date(),
     end_timestamp: new Date(),
-    code: 'code',
+    code: 'abcd',
   },
   {
     session_id: uuidv4(),
@@ -52,7 +52,7 @@ const objects: ObjectType[] = [
     user_id: studentUser.user_id,
     start_timestamp: new Date(),
     end_timestamp: new Date(),
-    code: 'code',
+    code: 'efgh',
   },
   {
     session_id: uuidv4(),
@@ -62,7 +62,7 @@ const objects: ObjectType[] = [
     user_id: studentUser.user_id,
     start_timestamp: new Date(),
     end_timestamp: new Date(),
-    code: 'code',
+    code: 'ijkl',
   },
 ];
 

@@ -9,6 +9,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRequest } from '../../hooks/useRequest';
 import { CreateUser } from './CreateUser';
+import { DeleteAdvisor } from './DeleteAdvisor';
 import { ResetPassword } from './ResetPassword';
 import { UserTable } from './UserTable';
 
@@ -71,7 +72,10 @@ export const Admin = () => {
   const [getUsers] = useRequest({
     url: 'http://localhost:3001/api/users',
     method: 'get',
-    onSuccess: (data) => setUsers(data),
+    onSuccess: (data) => {
+      console.log(data);
+      setUsers(data);
+    },
   });
 
   useEffect(() => {
@@ -130,6 +134,14 @@ export const Admin = () => {
             </Typography>
             <Paper>
               <ResetPassword />
+            </Paper>
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            <Typography variant="h4" color="white" mb={6}>
+              {t('admin.title.deleteAdvisor')}
+            </Typography>
+            <Paper>
+              <DeleteAdvisor />
             </Paper>
           </Grid>
         </Grid>

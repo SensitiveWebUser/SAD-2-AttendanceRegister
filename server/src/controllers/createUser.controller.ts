@@ -6,6 +6,7 @@ import {
   UserType as UserTypeSchema,
   Attendance as AttendanceSchema,
   Session as SessionSchema,
+  AdvisorStudentLink,
 } from '../database';
 import { BadRequestError } from '../errors';
 import { Student, User } from '../models';
@@ -46,6 +47,13 @@ export const createUserController = async (req: Request, res: Response) => {
     },
   });
 
+  const AcademicAdvisorUser = await UserSchema.findByPk(academicAdvisorId);
+
+  if (!AcademicAdvisorUser) {
+    logger('academic advisor not found');
+    throw new BadRequestError('academic advisor not found');
+  }
+
   const Auth0Result = await managementClient.createUser({
     connection: connectionId,
     email,
@@ -53,15 +61,8 @@ export const createUserController = async (req: Request, res: Response) => {
     app_metadata: {
       role: userTypeEnum.STUDENT,
     },
-    user_metadata: {
-      first_name: firstName,
-      middle_name: middleName,
-      last_name: lastName,
-    },
     email_verified: true,
   });
-
-  logger('Auth0Result', Auth0Result);
 
   const student = new Student({
     userObject: new User({
@@ -75,23 +76,43 @@ export const createUserController = async (req: Request, res: Response) => {
     academicAdvisorId: academicAdvisorId,
   });
 
-  sessionIds.forEach(async (sessionId: string) => {
-    const SessionRecord = SessionSchema.findByPk(sessionId);
+  await UserSchema.build({
+    user_id: Auth0Result.user_id as string,
+    user_type_id: StudentTypeRecord?.dataValues.user_type_id,
+    first_name: firstName,
+    middle_name: middleName || null,
+    last_name: lastName,
+    email: email,
+  }).save();
 
-    if (!SessionRecord) {
-      logger('session does not exist');
+  await AdvisorStudentLink.build({
+    student_id: Auth0Result.user_id as string,
+    advisor_id: academicAdvisorId,
+  }).save();
+
+  const regexExp =
+    /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
+  for (const sessionId of sessionIds) {
+    try {
+      if (!regexExp.test(sessionId)) {
+        continue;
+      }
+      const SessionRecord = SessionSchema.findByPk(sessionId);
+
+      if (!SessionRecord) {
+        logger('session does not exist');
+      }
+
+      const attendance = AttendanceSchema.build({
+        session_id: sessionId,
+        user_id: student.getId,
+        attended: null,
+      });
+      await attendance.save();
+    } catch (err) {
+      logger('Error creating attendance record', err);
     }
-
-    const attendance = AttendanceSchema.build({
-      session_id: sessionId,
-      user_id: student.getId,
-      attended: null,
-    });
-    await attendance.save().catch(() => {
-      logger('Error creating attendance record');
-      throw new Error('Error creating attendance record');
-    });
-  });
+  }
 
   res.status(200).json(await student.toJsonAsync());
 };

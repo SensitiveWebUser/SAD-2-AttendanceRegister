@@ -45,7 +45,8 @@
     "title": {
       "users": "Users",
       "createUsers": "Create Users",
-      "resetPassword": "Reset Password"
+      "resetPassword": "Reset Password",
+      "deleteAdvisor": "Delete Advisor"
     }
   },
   "checkStudent": {
