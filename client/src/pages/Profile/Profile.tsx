@@ -6,17 +6,12 @@ import {
   Divider,
   List,
   Typography,
-  Button,
 } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useRequest } from '../../hooks/useRequest';
-import { useEffect, useState } from 'react';
 import { roles } from '../../utils/constants';
 
 export const Profile = (): JSX.Element => {
   const { isAuthenticated, user } = useAuth0();
-  const [userData, setUserData] = useState([]);
-  const [courseData, setCourseData] = useState([]);
 
   const role = isAuthenticated
     ? user['http://sad.assignment.com/userData'].app.role
