@@ -47,6 +47,7 @@ export const ResetPassword = () => {
           </Grid>
           <Grid item xs={12} sm={4}>
             <OutlinedTextField
+              data-testid="confirmInput"
               id="passwordConfirm"
               label="Confirm Password"
               required
@@ -56,6 +57,7 @@ export const ResetPassword = () => {
         <Divider color="black" sx={{ my: 2 }} />
         <Grid container justifyContent="center" alignItems="center">
           <Button
+            data-testid="resetSubmit"
             sx={{
               color: 'white',
               marginTop: '8px',
