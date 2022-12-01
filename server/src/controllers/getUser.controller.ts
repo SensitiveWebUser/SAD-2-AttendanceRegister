@@ -28,7 +28,7 @@ export const getUserController = async (req: Request, res: Response) => {
   // Get the user from the database
   const user = await UserSchema.findByPk(id);
 
-  // If the user is not found, throw a 404 error
+  // If the user is not found, throw a 400 error
   if (!user) {
     logger('user not found');
     throw new BadRequestError('User doesn\'t exist');

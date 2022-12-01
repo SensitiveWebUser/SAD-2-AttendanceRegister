@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { param } from 'express-validator';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
 import { deleteAdvisorController } from '../controllers';
 import { requireAuth, requireRole, validateRequest } from '../middlewares';
 

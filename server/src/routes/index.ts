@@ -4,7 +4,6 @@ export { createBulkModulesRouter } from './createBulkModules.route';
 export { createUserRouter } from './createUser.route';
 
 // get routes
-export { getCourseRouter } from './getCourse.route';
 export { getModuleRouter } from './getModule.route';
 export { getSessionRouter } from './getSession.route';
 export { getTutorSessionsRouter } from './getTutorSessions.route';
@@ -18,6 +17,7 @@ export { getUserCoursesRouter } from './getUserCourses.route';
 export { registerAttendanceRouter } from './registerAttendance.route';
 export { resetPasswordUserRouter } from './resetPasswordUser.route';
 export { deleteAdvisorRouter } from './deleteAdvisor.route';
+export * from './courses.router';
 
 // update routes
 export { updateStudentsAttendanceRouter } from './updateStudentsAttendance.route';

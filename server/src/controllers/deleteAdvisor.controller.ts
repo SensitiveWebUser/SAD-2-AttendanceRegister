@@ -2,14 +2,14 @@ import { Request, Response } from 'express';
 
 import { debug } from 'debug';
 import { Op } from 'sequelize';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
+import { userTypeEnum } from '../utils/userTypeEnum';
 import {
   AdvisorStudentLink as AdvisorStudentLinkSchema,
   User as UserSchema,
   UserType as UserTypeSchema,
 } from '../database';
 import { BadRequestError } from '../errors';
-import managementClient from 'src/utils/managementClient';
+import managementClient from '../utils/managementClient';
 
 const logger = debug('backend:delete.advisor.controller');
 

@@ -4,7 +4,6 @@ export { bulkImportModulesAsync } from './createBulkModules.controller';
 export { createUserController } from './createUser.controller';
 
 // get controllers
-export { getCourseController } from './getCourse.controller';
 export { getModuleController } from './getModule.controller';
 export { getSessionController } from './getSession.controller';
 export { getTutorSessionsController } from './getTutorSessions.controller';

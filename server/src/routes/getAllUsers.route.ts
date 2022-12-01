@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
+import { userTypeEnum } from '../utils/userTypeEnum';
 import { getAllUsersController } from '../controllers';
 import { requireAuth, requireRole, validateRequest } from '../middlewares';
 

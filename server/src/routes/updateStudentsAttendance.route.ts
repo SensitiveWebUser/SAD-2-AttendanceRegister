@@ -1,6 +1,6 @@
 import express from 'express';
 import { body, param } from 'express-validator';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
+import { userTypeEnum } from '../utils/userTypeEnum';
 import { updateStudentsAttendanceController } from '../controllers';
 import { requireAuth, requireRole, validateRequest } from '../middlewares';
 
