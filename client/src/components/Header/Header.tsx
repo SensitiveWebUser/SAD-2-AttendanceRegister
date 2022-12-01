@@ -91,19 +91,19 @@ export const Header = ({ role }: ComponentProps) => {
     ? t('nav.link.profile')
     : t('nav.link.login');
 
-  let pages;
-  if (role === roles.ADMIN) {
-    pages = [t('nav.link.home')];
-  }
-
+  const pages = [t('nav.link.home')];
   if (role === roles.STUDENT) {
-    pages = [
-      t('nav.link.home'),
-      t('nav.link.attendance'),
-      t('nav.link.report'),
-    ];
-  } else {
-    pages = [t('nav.link.home'), t('nav.link.report')];
+    pages.push(t('nav.link.attendance'), t('nav.link.report'));
+  }
+  if (
+    [
+      roles.TUTOR as string,
+      roles.COURSE_LEADER as string,
+      roles.MODULE_LEADER as string,
+      roles.ACADEMIC_ADVISOR as string,
+    ].includes(role)
+  ) {
+    pages.push(t('nav.link.report'));
   }
 
   const icons = [
