@@ -19,6 +19,11 @@ const objects: ObjectType[] = [
     course_name: 'cooking course',
     course_leader_id: courseLeader.user_id,
   },
+  {
+    course_id: uuidv4(),
+    course_name: 'video games',
+    course_leader_id: courseLeader.user_id,
+  },
 ];
 
 async function isTableSeedableAsync() {
