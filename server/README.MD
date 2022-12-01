@@ -9,7 +9,6 @@
 <div align="center">
  Contains ORM functionality, unit and functionality tests.
 </div>
-
 <br />
 
 <div align="center">
