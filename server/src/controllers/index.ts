@@ -17,6 +17,7 @@ export { getUserCoursesController } from './getUserCourses.controller';
 // custom controllers
 export { registerAttendanceController } from './registerAttendance.controller';
 export { resetPasswordController } from './resetPassword.controller';
+export { deleteAdvisorController } from './deleteAdvisor.controller';
 
 // update controllers
 export { updateStudentsAttendanceController } from './updateStudentsAttendance.controller';

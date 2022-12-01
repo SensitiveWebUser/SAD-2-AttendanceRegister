@@ -17,6 +17,7 @@ export { getUserCoursesRouter } from './getUserCourses.route';
 // custom routes
 export { registerAttendanceRouter } from './registerAttendance.route';
 export { resetPasswordUserRouter } from './resetPasswordUser.route';
+export { deleteAdvisorRouter } from './deleteAdvisor.route';
 
 // update routes
 export { updateStudentsAttendanceRouter } from './updateStudentsAttendance.route';
