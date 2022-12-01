@@ -116,7 +116,7 @@ const darkTheme = createTheme({
         },
         input: {
           '&.Mui-disabled': {
-            '-webkit-text-fill-color': 'white',
+            WebkitTextFillColor: 'white',
           },
         },
       },

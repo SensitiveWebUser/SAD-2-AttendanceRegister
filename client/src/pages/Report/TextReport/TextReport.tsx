@@ -1,6 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import {
+  Box,
   Button,
   Grid,
   Table,
@@ -10,14 +11,23 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import axios from 'axios';
 import { isEmpty } from 'lodash';
+import { useSnackbar } from 'notistack';
 import { Fragment, useEffect, useState } from 'react';
+import { OutlinedTextField } from '../../../components/OutlinedTextField';
 import { useRequest } from '../../../hooks/useRequest';
+import { roles } from '../../../utils/constants';
 
 export const TextReport = (): JSX.Element => {
-  const { user } = useAuth0();
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0();
   const [moduleData, setModuleData] = useState([]);
   const [moduleAttendanceData, setmoduleAttendanceData] = useState({});
+  const { enqueueSnackbar } = useSnackbar();
+
+  const isStudent =
+    isAuthenticated &&
+    user['http://sad.assignment.com/userData'].app.role === roles.STUDENT;
 
   const [getData] = useRequest({
     url: `http://localhost:3001/api/users/${user.sub}/courses`,
@@ -42,7 +52,9 @@ export const TextReport = (): JSX.Element => {
   });
 
   useEffect(() => {
-    getData();
+    if (isStudent) {
+      getData();
+    }
   }, []);
 
   const downloadTxtFile = () => {
@@ -57,12 +69,61 @@ export const TextReport = (): JSX.Element => {
       type: 'text/plain',
     });
     element.href = URL.createObjectURL(file);
-    element.download = 'report.txt';
+    element.download = 'attendance.txt';
     document.body.appendChild(element);
     element.click();
   };
 
-  return isEmpty(moduleData) ? (
+  const downloadCourseFile = async (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const courseID = data.get('courseID');
+    const token: string = ((await getAccessTokenSilently()) as string) || '';
+    axios({
+      method: 'get',
+      url: `http://localhost:3001/api/courses/${courseID}`,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        const element = document.createElement('a');
+        const file = new Blob([JSON.stringify(res.data, null, 2)], {
+          type: 'application/json',
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = 'course.json';
+        document.body.appendChild(element);
+        element.click();
+        enqueueSnackbar('Success!', { variant: 'success' });
+      })
+      .catch(() => enqueueSnackbar('Invalid Request!', { variant: 'error' }));
+  };
+
+  return !isStudent ? (
+    <Grid container>
+      <Grid item xs>
+        <Box component="form" onSubmit={downloadCourseFile}>
+          <OutlinedTextField id="courseID" label="Course ID" required />
+          <Grid container item>
+            <Button
+              startIcon={<FileDownloadIcon style={{ fontSize: '1.5rem' }} />}
+              sx={{
+                color: 'salmon',
+                textTransform: 'none',
+                fontWeight: 500,
+                fontSize: '1.1rem',
+              }}
+              type="submit"
+            >
+              Download Data
+            </Button>
+          </Grid>
+        </Box>
+      </Grid>
+    </Grid>
+  ) : isEmpty(moduleData) ? (
     <Fragment></Fragment>
   ) : (
     <Grid container>
