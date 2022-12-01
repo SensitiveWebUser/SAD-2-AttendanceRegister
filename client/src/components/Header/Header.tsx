@@ -188,6 +188,7 @@ export const Header = ({ role }: ComponentProps) => {
           <List>
             {pages.map((value, index) => (
               <ListItem
+                data-testid={`${value}Button`}
                 button
                 key={value}
                 component={NavLink}
@@ -208,6 +209,7 @@ export const Header = ({ role }: ComponentProps) => {
             {isAuthenticated ? (
               <Fragment>
                 <ListItem
+                  data-testid="profileButton"
                   button
                   key={t('nav.link.profile')}
                   component={NavLink}
@@ -220,6 +222,7 @@ export const Header = ({ role }: ComponentProps) => {
                 </ListItem>
                 {role === roles.ADMIN && (
                   <ListItem
+                    data-testid="adminButton"
                     button
                     key={t('nav.link.admin')}
                     component={NavLink}
@@ -232,6 +235,7 @@ export const Header = ({ role }: ComponentProps) => {
                   </ListItem>
                 )}
                 <ListItem
+                  data-testid="logoutButton"
                   button
                   key={t('nav.link.logout')}
                   onClick={() => logout({ returnTo: window.location.origin })}
@@ -245,6 +249,7 @@ export const Header = ({ role }: ComponentProps) => {
             ) : (
               <Fragment>
                 <ListItem
+                  data-testid="loginButton"
                   button
                   key={t('nav.link.login')}
                   onClick={() => loginWithRedirect()}

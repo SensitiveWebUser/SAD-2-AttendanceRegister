@@ -1,8 +1,8 @@
 export default {
-  admin: { user: 'test@localhost.com', pass: 'Apassword1' },
-  moduleLeader: { user: 'test@localhost.com', pass: '' },
-  courseLeader: { user: 'test@localhost.com', pass: '' },
-  academicadvisor: { user: 'test@localhost.com', pass: '' },
-  tutor: { user: 'test@localhost.com', pass: '' },
-  student: { user: 'test@localhost.com', pass: '' },
+  Admin: { user: 'administrator@localhost.com', pass: '' },
+  ModuleLeader: { user: 'module-leader@localhost.com', pass: '' },
+  CourseLeader: { user: 'course-leader@localhost.com', pass: '' },
+  AcademicAdvisor: { user: 'academic-advisor@localhost.com', pass: '' },
+  Tutor: { user: 'tutor@localhost.com', pass: '' },
+  Student: { user: 'student@localhost.com', pass: '' },
 };

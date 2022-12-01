@@ -1,5 +1,6 @@
 import './commands';
-import user from './testUsers';
+import Users from './testUsers';
+export {};
 
 before(() => {
   // root-level hook
@@ -7,10 +8,23 @@ before(() => {
 });
 
 beforeEach(() => {
-  cy.visit('/');
-  cy.login(user.admin);
   // root-level hook
   // runs before every test block
+  cy.visit('/');
+  cy.clearCookies({ domain: null });
+
+  const testUser = Cypress.currentTest.titlePath[0];
+  let user: string;
+  let pass: string;
+
+  for (const [key, value] of Object.entries(Users)) {
+    if (key === testUser) {
+      user = value.user;
+      pass = value.pass;
+    }
+  }
+
+  cy.login(user, pass);
 });
 
 afterEach(() => {

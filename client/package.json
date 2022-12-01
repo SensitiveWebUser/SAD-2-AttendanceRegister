@@ -35,7 +35,7 @@
     "prettier": "prettier --write --ignore-unknown .",
     "eject": "react-scripts eject",
     "cy:open": "npx cypress open",
-    "cy:run": "npx cypress run"
+    "cy:run": "npx cypress run --browser chrome"
   },
   "eslintConfig": {
     "extends": [

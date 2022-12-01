@@ -3,10 +3,10 @@
 
 // type definitions for custom commands
 // will resolve to "cypress/support/index.d.ts"
-/// <reference types="../support" />
+/// <reference types="../../support" />
 
-describe('Visual Report', () => {
-  it('Ensure the correct data is displayed for the user', () => {
+describe('Tutor', () => {
+  it('As a Tutor, I would like to be able to update an exisiting attendance record', () => {
     expect(true).to.equal(true);
     cy.visit('/');
   });
