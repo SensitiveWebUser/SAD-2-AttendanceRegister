@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { Tutor, User } from '../models';
 import { User as UserSchema, UserType as UserTypeSchema } from '../database';
 import { BadRequestError } from '../errors';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
+import { userTypeEnum } from '../utils/userTypeEnum';
 import debug from 'debug';
 
 const logger = debug('backend:get.tutor.sessions.controller');

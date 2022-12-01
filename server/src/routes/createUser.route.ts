@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
+import { userTypeEnum } from '../utils/userTypeEnum';
 import { createUserController } from '../controllers';
 import { requireAuth, requireRole, validateRequest } from '../middlewares';
 
@@ -8,8 +8,8 @@ const router = Router();
 
 router.post(
   '/api/users',
-  //  requireAuth,
-  //  requireRole([userTypeEnum.ADMIN]),
+  requireAuth,
+  requireRole([userTypeEnum.ADMIN]),
   [
     body('firstName')
       .isString()

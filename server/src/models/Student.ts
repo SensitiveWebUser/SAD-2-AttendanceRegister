@@ -1,5 +1,5 @@
 import { debug } from 'debug';
-import { BadRequestError } from 'src/errors';
+import { BadRequestError } from '../errors';
 import {
   Attendance as AttendanceSchema,
   Session as SessionSchema,

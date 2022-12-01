@@ -1,8 +1,8 @@
 import express from 'express';
 import multer from 'multer';
 import os from 'os';
-import { requireAuth, requireRole } from 'src/middlewares';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
+import { requireAuth, requireRole } from '../middlewares';
+import { userTypeEnum } from '../utils/userTypeEnum';
 import { bulkImportUsersAsync } from '../controllers';
 
 const upload = multer({ dest: os.tmpdir() });

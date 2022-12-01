@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import debug from 'debug';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
+import { userTypeEnum } from '../utils/userTypeEnum';
 import {
   AdvisorStudentLink as AdvisorStudentLinkSchema,
   Session as SessionSchema,

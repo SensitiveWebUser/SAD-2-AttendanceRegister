@@ -8,12 +8,12 @@ import morgan from 'morgan';
 import { NotFoundError } from '../src/errors';
 import { errorHandler } from '../src/middlewares';
 
+import courseRouter from '../src/routes/courses.router';
 import {
   createBulkModulesRouter,
   createBulkUserRouter,
   createUserRouter,
   getAllUsersRouter,
-  getCourseRouter,
   getModuleRouter,
   getSessionRouter,
   getTutorSessionsRouter,
@@ -43,7 +43,6 @@ app.use(json());
 
 // get routes
 app.use(getUserRouter);
-app.use(getCourseRouter);
 app.use(getModuleRouter);
 app.use(getSessionRouter);
 app.use(getUserModuleAttendanceRouter);
@@ -51,6 +50,7 @@ app.use(getUserAttendanceRouter);
 app.use(getTutorSessionsRouter);
 app.use(getAllUsersRouter);
 app.use(getUserCoursesRouter);
+app.use('/api/courses', courseRouter);
 
 // create routes
 app.use(createUserRouter);

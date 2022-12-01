@@ -10,7 +10,7 @@ import {
 } from '../database';
 import { BadRequestError } from '../errors';
 import { Student, User } from '../models';
-import { userTypeEnum } from 'src/utils/userTypeEnum';
+import { userTypeEnum } from '../utils/userTypeEnum';
 import managementClient from '../utils/managementClient';
 
 const logger = debug('backend:create.user.controller');
