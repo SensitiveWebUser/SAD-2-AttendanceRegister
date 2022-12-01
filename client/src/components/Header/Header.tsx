@@ -211,6 +211,7 @@ export const Header = ({ role }: ComponentProps) => {
                 </ListItem>
                 {role === roles.ADMIN && (
                   <ListItem
+                    data-testid="adminButton"
                     button
                     key={t('nav.link.admin')}
                     component={NavLink}

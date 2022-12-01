@@ -278,6 +278,7 @@ export const UserTable = ({ rows }: ComponentProps) => {
             size={dense ? 'small' : 'medium'}
           >
             <EnhancedTableHead
+              data-testid="userTableHead"
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
