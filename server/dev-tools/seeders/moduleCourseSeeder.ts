@@ -12,8 +12,20 @@ type ObjectType = {
 
 const objects: ObjectType[] = [
   {
-    module_id: moduleSeeder.objects[0].module_id,
     course_id: courseSeeder.objects[0].course_id,
+    module_id: moduleSeeder.objects[0].module_id,
+  },
+  {
+    course_id: courseSeeder.objects[0].course_id,
+    module_id: moduleSeeder.objects[1].module_id,
+  },
+  {
+    course_id: courseSeeder.objects[0].course_id,
+    module_id: moduleSeeder.objects[2].module_id,
+  },
+  {
+    course_id: courseSeeder.objects[1].course_id,
+    module_id: moduleSeeder.objects[3].module_id,
   },
 ];
 

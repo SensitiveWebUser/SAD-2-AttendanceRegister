@@ -8,7 +8,7 @@ import {
   Routes,
 } from 'react-router-dom';
 
-import { Admin, Home, NotFound, Profile, Attendance } from '../../pages';
+import { Admin, Home, NotFound, Profile, Attendance, Report } from '../../pages';
 import { roles } from '../../utils/constants';
 import { Header } from '../Header';
 
@@ -49,7 +49,17 @@ export const App = (): JSX.Element => {
           <Route path="/" element={<Home />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
-          {role === roles.ADMIN && <Route path="admin" element={<Admin />} />}
+          <Route
+            path="/report"
+            element={
+              [roles.ADMIN, roles.GUEST].includes(role) ? (
+                <NotFound />
+              ) : (
+                <Report />
+              )
+            }
+          />
+          {role === roles.ADMIN && <Route path="/admin" element={<Admin />} />}
           {role === roles.STUDENT && (
             <Route path="/attendance" element={<Attendance />} />
           )}

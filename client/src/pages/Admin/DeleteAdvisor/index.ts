@@ -1,0 +1,1 @@
+export { DeleteAdvisor } from './DeleteAdvisor';

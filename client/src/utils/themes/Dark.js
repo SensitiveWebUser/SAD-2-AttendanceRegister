@@ -128,6 +128,11 @@ const darkTheme = createTheme({
         notchedOutline: {
           borderColor: 'white',
         },
+        input: {
+          '&.Mui-disabled': {
+            WebkitTextFillColor: 'white',
+          },
+        },
       },
     },
     MuiInput: {
@@ -156,6 +161,9 @@ const darkTheme = createTheme({
         root: {
           color: 'white',
           '&.Mui-focused': {
+            color: 'white',
+          },
+          '&.Mui-disabled': {
             color: 'white',
           },
         },

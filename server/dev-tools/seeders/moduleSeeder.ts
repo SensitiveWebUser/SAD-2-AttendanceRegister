@@ -1,7 +1,6 @@
 import debug from 'debug';
 import { v4 as uuidv4 } from 'uuid';
 import { Module } from '../../src/database';
-import courseSeeder from './courseSeeder';
 import userSeeder from './userSeeder';
 
 const logger = debug('backend:seeder-module');
@@ -18,6 +17,21 @@ const objects: ObjectType[] = [
   {
     module_id: uuidv4(),
     module_name: 'cooking 101',
+    module_leader_id: moduleLeader.user_id,
+  },
+  {
+    module_id: uuidv4(),
+    module_name: 'banana',
+    module_leader_id: moduleLeader.user_id,
+  },
+  {
+    module_id: uuidv4(),
+    module_name: 'apple',
+    module_leader_id: moduleLeader.user_id,
+  },
+  {
+    module_id: uuidv4(),
+    module_name: 'pineapple',
     module_leader_id: moduleLeader.user_id,
   },
 ];

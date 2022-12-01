@@ -31,7 +31,7 @@ export const ResetPassword = () => {
     };
     await resetPassword({
       ...newData,
-      url: `http://localhost:3001/api/users/${userID}/reset/password`,
+      url: `http://localhost:3001/api/users/${userID}/password`,
     });
   };
 
