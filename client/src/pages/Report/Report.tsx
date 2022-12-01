@@ -1,9 +1,40 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { TextReport } from '../../components/TextReport';
 import { BarReport } from '../../components/BarReport';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import { useRequest } from '../../hooks/useRequest';
+import { useAuth0 } from '@auth0/auth0-react';
+import fs from 'fs';
+import { ErrorSnackbar } from '../../components';
 
 export const Report = (): JSX.Element => {
+  const { user } = useAuth0();
+  const [report, setReport] = useState([]);
+
+  const [reportGeneration, errors] = useRequest({
+    url: `/api/courses/${user.sub}`,
+    method: 'get',
+    onSuccess: (data) => setReport(data),
+  });
+
+  useEffect(() => {
+    reportGeneration();
+  }, []);
+
+  const generateReport = () => {
+    fs.writeFile('report.txt', JSON.stringify(report), (err) => {
+      if (err) {
+        return enqueueSnackbar('Failed to generate report', {
+          variant: 'error',
+        });
+      }
+    });
+    return enqueueSnackbar('Generated Report to report.txt', {
+      variant: 'sucess',
+    });
+  };
+
   return (
     <React.Fragment>
       <Grid
@@ -14,6 +45,18 @@ export const Report = (): JSX.Element => {
         alignItems="center"
         sx={{ pt: '100px', flexGrow: 1 }}
       >
+        <Button
+          onClick={generateReport}
+          sx={{
+            color: 'primary.white',
+            backgroundColor: '#33353f',
+            borderRadius: '4px',
+            mb: '2rem',
+            flexGrow: 1,
+          }}
+        >
+          Generate Report
+        </Button>
         <Grid
           item
           xs={12}
@@ -51,3 +94,6 @@ export const Report = (): JSX.Element => {
     </React.Fragment>
   );
 };
+function enqueueSnackbar(arg0: string, arg1: { variant: string }) {
+  throw new Error('Function not implemented.');
+}
