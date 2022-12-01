@@ -1,5 +1,6 @@
 import { User as UserSchema, UserType as UserTypeSchema } from '../database';
 import { UserType } from '../models';
+import helperFunctions from '../utils/helperFunctions';
 
 export class User {
   id: string;
@@ -57,7 +58,11 @@ export class User {
   }
 
   public getName(): string {
-    return `${this.firstName} ${this.middleName} ${this.lastName}`;
+    return helperFunctions.formatName(
+      this.firstName,
+      this.middleName,
+      this.lastName
+    );
   }
 
   public set setFirstName(firstName: string) {
