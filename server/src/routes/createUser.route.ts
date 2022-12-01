@@ -8,20 +8,23 @@ const router = Router();
 
 router.post(
   '/api/users',
-  requireAuth,
-  requireRole([userTypeEnum.ADMIN]),
+  //  requireAuth,
+  //  requireRole([userTypeEnum.ADMIN]),
   [
     body('firstName')
       .isString()
+      .trim()
       .isLength({ min: 1, max: 20 })
       .notEmpty()
       .withMessage('First name must be a string of 20 characters or less'),
     body('middleName')
       .isString()
+      .trim()
       .isLength({ max: 20 })
       .withMessage('Middle name must be a string of 20 characters or less'),
     body('lastName')
       .isString()
+      .trim()
       .isLength({ min: 1, max: 20 })
       .notEmpty()
       .withMessage('Last name must be a string of 20 characters or less'),
@@ -29,12 +32,15 @@ router.post(
       .isEmail()
       .notEmpty()
       .withMessage('Email must be a valid email'),
-    body('password')
-      .isString()
-      .isLength({ min: 8, max: 20 })
+    body('sessionIds')
+      .isArray()
       .notEmpty()
-      .withMessage('Password must be a string of 8 to 20 characters'),
-    body('type').isUUID().notEmpty().withMessage('Type must be a UUID'),
+      .withMessage('SessionIds must be an array'),
+    body('academicAdvisorId')
+      .isString()
+      .trim()
+      .notEmpty()
+      .withMessage('Academic advisor id must be a string'),
   ],
   validateRequest,
   createUserController

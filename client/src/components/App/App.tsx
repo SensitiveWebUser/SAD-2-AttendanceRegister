@@ -49,6 +49,9 @@ export const App = (): JSX.Element => {
           <Route path="/Profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
           {role === roles.ADMIN && <Route path="admin" element={<Admin />} />}
+          {role === roles.STUDENT && (
+            <Route path="attendance" element={<NotFound />} />
+          )}
         </Routes>
         <Outlet />
       </Router>
