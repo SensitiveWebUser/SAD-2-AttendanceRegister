@@ -189,7 +189,7 @@ export const UserTable = ({ rows }: ComponentProps) => {
   };
 
   const [updateUser, errors] = useRequest({
-    url: `http://localhost:3001/api/user/${modalData?.id}`,
+    url: `http://localhost:3001/api/users/${modalData?.id}`,
     method: 'patch',
     onSuccess: () => {
       return;

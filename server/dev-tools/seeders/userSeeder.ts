@@ -47,7 +47,7 @@ const objects: ObjectType[] = [
     user_type_id: academicAdvisorUserTypeId ?? '',
   },
   {
-    user_id: 'auth0|6386776b841043dd7a9e4da1',
+    user_id: 'auth0|6386776b841043dd7a9e4d9d',
     first_name: 'student',
     middle_name: '2',
     last_name: 'test',
@@ -55,7 +55,7 @@ const objects: ObjectType[] = [
     user_type_id: studentUserTypeId ?? '',
   },
   {
-    user_id: 'auth0|abc',
+    user_id: 'auth0|6386776b841043dd7a9e4da1',
     first_name: 'module',
     middle_name: '2',
     last_name: 'leader',
