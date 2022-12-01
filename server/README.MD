@@ -1,43 +1,44 @@
-# Attendance Register Server
+<h1 align="center">SAAD Assignment</h1>
 
-## SAAD Group 2
+<div align="center">
+  🧪🧪🧪
+</div>
+<div align="center">
+  <strong>Server assignment</strong>
+</div>
+<div align="center">
+ Contains ORM functionality, unit and functionality tests.
+</div>
 
-- Alice Chambers
-- Nathan Hall
-- Silvia Horoba
-- Alex Hornsby
-- Adam Edmunds
+<br />
 
-## Launch Server
+<div align="center">
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/SensitiveWebUser/SAD-2-AttendanceRegister/ci">
+<img alt="GitHub issues" src="https://img.shields.io/github/issues/SensitiveWebUser/SAD-2-AttendanceRegister">
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/SensitiveWebUser/SAD-2-AttendanceRegister">
+</div>
 
-#### 1 - Enter server sub-folder
+<div align="center">
+<sub>The little assignment that could. Pending final year mark.
+<br />
+Built with ❤︎ by
+<a href="https://github.com/whatshark">Nathan Hall</a>,
+<a href="https://github.com/Alicee5cha">Alice Chambers</a>,
+<a href="https://github.com/SensitiveWebUser">Alex Hornsby</a>,
+<a href="https://github.com/adam-edmunds">Adam Edmunds</a>,
+<a href="https://github.com/hsilviav">Silvia Horoba</a> and
+<a href="https://github.com/SensitiveWebUser/SAD-2-AttendanceRegister/graphs/contributors">
+  contributors.
+</a>
+</sub>
+</div>
 
-- `cd /server`
+## Running the project
 
-#### 2 - Add ENV file
+Copy and paste the `.env.template` files and rename to run the application. Instructions are in the file. Set up an Auth0 tennant via following the [documentation](https://auth0.com/docs/get-started). Those who are marking the project have been given an Auth0 tennant to mark from.
 
-- Copy the file `.env.local.template` and rename it to `.env.local`
-- Then fill in empty fields
+Install the packages via running `npm i`.
 
-#### 3 - Start server side
+Once the packages have installed, run `npm start`.
 
-- `npm run start`
-
-- Default port is 3001
-
-## Development Tools
-
-### To start postgres contaier
-
-#### 1 - Enter dev-tools folder
-
-- `cd server/dev-tools`
-- or
-- `cd dev-tools`
-
-#### 2 - Start docker-compose
-
-- `docker-compose up -d`
-
-- Data will then persist between sesssions in `server/dev-tools/postgres-data`
-- Remove `postgres-data` folder to reset db
+To run unit and integration tests, run `npm run test`.
