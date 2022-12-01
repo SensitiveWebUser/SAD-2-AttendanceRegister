@@ -189,7 +189,7 @@ export const UserTable = ({ rows }: ComponentProps) => {
   };
 
   const [updateUser, errors] = useRequest({
-    url: `http://localhost:3001/api/users/${modalData?.id}`,
+    url: `http://localhost:3001/api/user/${modalData?.id}`,
     method: 'patch',
     onSuccess: () => {
       return;
@@ -398,18 +398,9 @@ export const UserTable = ({ rows }: ComponentProps) => {
                     variant="outlined"
                     defaultValue={modalData.type}
                     fullWidth
-                    select
                     required
-                  >
-                    {map(roles, (role) => {
-                      if (role === 'Guest') return null;
-                      return (
-                        <MenuItem value={role} key={role}>
-                          {role}
-                        </MenuItem>
-                      );
-                    })}
-                  </StyledTextField>
+                    disabled
+                  />
                 </Grid>
               </Grid>
               <Divider color="black" />

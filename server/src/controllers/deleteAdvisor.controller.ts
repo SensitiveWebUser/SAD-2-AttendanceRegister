@@ -4,11 +4,12 @@ import { debug } from 'debug';
 import { Op } from 'sequelize';
 import { userTypeEnum } from 'src/utils/userTypeEnum';
 import {
-  AdvisorStudentLink as AdvisorStudentLinkSchame,
+  AdvisorStudentLink as AdvisorStudentLinkSchema,
   User as UserSchema,
   UserType as UserTypeSchema,
 } from '../database';
 import { BadRequestError } from '../errors';
+import managementClient from 'src/utils/managementClient';
 
 const logger = debug('backend:delete.advisor.controller');
 
@@ -26,24 +27,19 @@ export const deleteAdvisorController = async (req: Request, res: Response) => {
     advisorRecord.user_type_id
   );
 
-  if (!advisorTypeRecord) {
+  if (advisorTypeRecord!.user_type_name !== userTypeEnum.ACADEMIC_ADVISOR) {
     logger('user is not an academic advisor');
     throw new BadRequestError('user is not an academic advisor');
   }
 
-  if (advisorTypeRecord.user_type_name !== userTypeEnum.ACADEMIC_ADVISOR) {
-    logger('user is not an academic advisor');
-    throw new BadRequestError('user is not an academic advisor');
-  }
-
-  const advieeRecords = await AdvisorStudentLinkSchame.findAll({
+  const adviseeRecords = await AdvisorStudentLinkSchema.findAll({
     where: {
       advisor_id: id,
     },
   });
 
-  //Find advieeRecords where advisor_id does not equal id
-  const otherAdvieeRecords = await AdvisorStudentLinkSchame.findAll({
+  //Find adviseeRecords where advisor_id does not equal id
+  const otherAdvisorRecords = await AdvisorStudentLinkSchema.findAll({
     where: {
       advisor_id: {
         [Op.ne]: id,
@@ -51,19 +47,26 @@ export const deleteAdvisorController = async (req: Request, res: Response) => {
     },
   });
 
-  logger('advieeRecords', advieeRecords);
+  logger('adviseeRecords', adviseeRecords);
 
-  const otherAdvieeIds = otherAdvieeRecords.map((record) => record.student_id);
+  const otherAdvieeIds = otherAdvisorRecords.map((record) => record.advisor_id);
 
   logger('otherAdvieeIds', otherAdvieeIds);
 
-  advieeRecords.map(async (advieeRecord) => {
-    //Sets the advisor_id to a random advisor from the otherAdvieeRecords
-    advieeRecord.advisor_id =
+  for (const adviseeRecord of adviseeRecords) {
+    const studentId = adviseeRecord.dataValues.student_id;
+    const otherAdvisorId =
       otherAdvieeIds[Math.floor(Math.random() * otherAdvieeIds.length)];
-  });
+    await adviseeRecord.destroy();
+    await AdvisorStudentLinkSchema.build({
+      advisor_id: otherAdvisorId,
+      student_id: studentId,
+    }).save();
+  }
 
-  advisorRecord.destroy();
+  await managementClient.deleteUser({ id: id });
+
+  await advisorRecord.destroy();
 
   res.status(200).send();
 };
