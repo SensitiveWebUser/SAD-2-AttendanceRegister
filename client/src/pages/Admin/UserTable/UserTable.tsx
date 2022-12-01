@@ -3,7 +3,6 @@ import {
   Button,
   Divider,
   Grid,
-  MenuItem,
   outlinedInputClasses,
   Paper,
   styled,
@@ -24,7 +23,6 @@ import { useState } from 'react';
 import { CustomModal } from '../../../components/CustomModal';
 import { OutlinedTextField } from '../../../components/OutlinedTextField';
 import { useRequest } from '../../../hooks/useRequest';
-import { roles } from '../../../utils/constants';
 import { ModalTheme } from '../../../utils/themes/ModalTheme';
 
 const StyledTextField = styled(TextField)(`
