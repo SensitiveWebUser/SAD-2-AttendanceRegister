@@ -13,7 +13,7 @@ import { useRequest } from '../../hooks/useRequest';
 import { useEffect, useState } from 'react';
 import { roles } from '../../utils/constants';
 
-export const Profile = async (): Promise<JSX.Element> => {
+export const Profile = (): JSX.Element => {
   const { isAuthenticated, user } = useAuth0();
   const [userData, setUserData] = useState([]);
   const [courseData, setCourseData] = useState([]);
