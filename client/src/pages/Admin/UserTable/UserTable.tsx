@@ -247,7 +247,7 @@ export const UserTable = ({ rows }: ComponentProps) => {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box data-testid="userTableHead" sx={{ width: '100%' }}>
       <Paper
         elevation={0}
         sx={{
@@ -276,7 +276,6 @@ export const UserTable = ({ rows }: ComponentProps) => {
             size={dense ? 'small' : 'medium'}
           >
             <EnhancedTableHead
-              data-testid="userTableHead"
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
@@ -288,6 +287,7 @@ export const UserTable = ({ rows }: ComponentProps) => {
                 .map((row) => {
                   return (
                     <TableRow
+                      data-testid={`row-${row.email}`}
                       hover
                       onClick={(event) => handleClick(event, row)}
                       role="checkbox"
