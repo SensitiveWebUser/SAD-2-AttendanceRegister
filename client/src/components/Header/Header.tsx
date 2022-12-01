@@ -90,11 +90,22 @@ export const Header = ({ role }: ComponentProps) => {
   const tooltipMessage = isAuthenticated
     ? t('nav.link.profile')
     : t('nav.link.login');
-  const pages = [
-    t('nav.link.home'),
-    t('nav.link.attendance'),
-    t('nav.link.report'),
-  ];
+
+  const pages = [t('nav.link.home')];
+  if (role === roles.STUDENT) {
+    pages.push(t('nav.link.attendance'), t('nav.link.report'));
+  }
+  if (
+    [
+      roles.TUTOR as string,
+      roles.COURSE_LEADER as string,
+      roles.MODULE_LEADER as string,
+      roles.ACADEMIC_ADVISOR as string,
+    ].includes(role)
+  ) {
+    pages.push(t('nav.link.report'));
+  }
+
   const icons = [
     <DashboardIcon key={'dashboardIcon'} />,
     <ArticleOutlinedIcon key={'articleIcon'} />,
