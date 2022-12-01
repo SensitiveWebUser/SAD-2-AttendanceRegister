@@ -1,4 +1,5 @@
 import { json } from 'body-parser';
+import cors from 'cors';
 import debug from 'debug';
 import express, { Request, Response } from 'express';
 import 'express-async-errors';
@@ -6,25 +7,25 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { NotFoundError } from '../src/errors';
 import { errorHandler } from '../src/middlewares';
-import cors from 'cors';
 
 import {
+  createBulkModulesRouter,
   createBulkUserRouter,
   createUserRouter,
+  getAllUsersRouter,
   getCourseRouter,
   getModuleRouter,
   getSessionRouter,
   getTutorSessionsRouter,
   getUserAttendanceRouter,
+  getUserCoursesRouter,
   getUserModuleAttendanceRouter,
   getUserRouter,
-  getAllUsersRouter,
+  deleteAdvisorRouter,
   registerAttendanceRouter,
   resetPasswordUserRouter,
   updateStudentsAttendanceRouter,
   updateUserRouter,
-  createBulkModulesRouter,
-  getUserCoursesRouter,
 } from './routes';
 
 const logger = debug('backend:request');
@@ -63,6 +64,7 @@ app.use(registerAttendanceRouter);
 // custom routes
 app.use(resetPasswordUserRouter);
 app.use(updateStudentsAttendanceRouter);
+app.use(deleteAdvisorRouter);
 
 // 404 handler
 app.all('*', async () => {

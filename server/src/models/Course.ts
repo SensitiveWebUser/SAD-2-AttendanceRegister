@@ -7,7 +7,7 @@ import {
 } from '../database';
 
 export class Course {
-  private id: number;
+  private id: string;
   private name: string;
   private courseLeader: CourseLeader;
 
@@ -17,7 +17,7 @@ export class Course {
     this.courseLeader = courseLeader;
   }
 
-  public get getId(): number {
+  public get getId(): string {
     return this.id;
   }
 
@@ -112,14 +112,14 @@ export class Course {
 }
 
 interface toJsonReturn {
-  id: number;
+  id: string;
   name: string;
   courseLeader: object;
   modules: object[];
 }
 
 interface constructorParams {
-  id: number;
+  id: string;
   name: string;
   courseLeader: CourseLeader;
 }
