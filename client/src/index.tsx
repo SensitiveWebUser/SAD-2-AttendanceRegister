@@ -1,5 +1,10 @@
 import { Auth0Provider } from '@auth0/auth0-react';
-import { CssBaseline, Slide, ThemeProvider } from '@mui/material';
+import {
+  CssBaseline,
+  responsiveFontSizes,
+  Slide,
+  ThemeProvider,
+} from '@mui/material';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -8,7 +13,9 @@ import { App } from './components/App';
 import i18n from './i18n';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+
 import darkTheme from './utils/themes/Dark';
+const theme = responsiveFontSizes(darkTheme);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,7 +31,7 @@ ReactDOM.render(
       autoHideDuration={3500}
     >
       <I18nextProvider i18n={i18n}>
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={theme}>
           <Auth0Provider
             domain={process.env.REACT_APP_AUTH0_DOMAIN}
             clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}

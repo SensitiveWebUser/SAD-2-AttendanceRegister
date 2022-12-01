@@ -7,7 +7,8 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { Admin, Attendance, Home, NotFound, Report } from '../../pages';
+
+import { Admin, Home, NotFound, Profile, Attendance, Report } from '../../pages';
 import { roles } from '../../utils/constants';
 import { Header } from '../Header';
 
@@ -46,6 +47,8 @@ export const App = (): JSX.Element => {
         <Header role={role} />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
           <Route
             path="/report"
             element={

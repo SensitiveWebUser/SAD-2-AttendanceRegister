@@ -1,6 +1,20 @@
 import { createTheme } from '@mui/material';
 
 const darkTheme = createTheme({
+  typography: {
+    h1: {
+      fontSize: '1.7rem',
+    },
+    h2: {
+      fontSize: '1.5rem',
+    },
+    h3: {
+      fontSize: '1.2rem',
+    },
+    body1: {
+      fontSize: '1.0rem',
+    },
+  },
   palette: {
     type: 'dark',
     primary: {
