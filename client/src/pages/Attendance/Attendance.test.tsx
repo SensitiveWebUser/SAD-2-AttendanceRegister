@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Attendance } from './Attendance';
 
 describe('<Attendance />', () => {

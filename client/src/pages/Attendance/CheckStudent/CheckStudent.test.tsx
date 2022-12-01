@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CheckStudent } from './CheckStudent';
 
 describe('<CheckStudent />', () => {

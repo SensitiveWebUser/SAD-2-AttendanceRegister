@@ -7,9 +7,8 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { Admin, Home, NotFound } from '../../pages';
+import { Admin, Attendance, Home, NotFound } from '../../pages';
 import { roles } from '../../utils/constants';
-import { Attendance } from '../../pages/Attendance';
 import { Header } from '../Header';
 
 export const App = (): JSX.Element => {
@@ -47,9 +46,11 @@ export const App = (): JSX.Element => {
         <Header role={role} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/attendance" element={<Attendance />} />
+          {role === roles.ADMIN && <Route path="/admin" element={<Admin />} />}
+          {role === roles.STUDENT && (
+            <Route path="/attendance" element={<Attendance />} />
+          )}
           <Route path="*" element={<NotFound />} />
-          {role === roles.ADMIN && <Route path="admin" element={<Admin />} />}
         </Routes>
         <Outlet />
       </Router>

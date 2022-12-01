@@ -76,13 +76,13 @@ export const registerAttendanceController = async (
       lastName: userRecord.dataValues.last_name,
       email: userRecord.dataValues.email,
     }),
-    academicAdvisorId: userRecord.dataValues.academic_advisor_id,
+    academicAdvisorId: AdvisorStudentLinkRecord.dataValues.advisor_id,
   });
 
   if (await student.registerAttendanceAsync(session, code)) {
     res.status(200).send();
+  } else {
+    logger('failed to register attendance');
+    throw new BadRequestError('Failed to register attendance');
   }
-
-  logger('failed to register attendance');
-  throw new BadRequestError('Failed to register attendance');
 };
