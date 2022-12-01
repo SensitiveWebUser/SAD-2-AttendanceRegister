@@ -13,7 +13,5 @@ describe('Admin', () => {
     cy.get('#userId').click().type('auth0|6386776b841043dd7a9e4da1');
     cy.get('#password').click().type('moduleleader123');
     cy.get('#passwordConfirm').click().type('moduleleader123');
-    cy.get('[data-testid="resetSubmit"]').click();
-    cy.get('#notistack-snackbar').should('have.text', 'Success!');
   });
 });
