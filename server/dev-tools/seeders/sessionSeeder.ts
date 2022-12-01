@@ -12,14 +12,12 @@ type ObjectType = {
   session_type_id: string;
   tutor_id: string;
   module_id: string;
-  user_id: string;
   start_timestamp: Date;
   end_timestamp: Date;
   code: string;
 };
 
-const studentUser = userSeeder.objects[0];
-const tutorUser = userSeeder.objects[1];
+const tutorUser = userSeeder.objects[4];
 
 const tutorialSessionTypeId = sessionTypeSeeder.objects.find(
   (x) => x.session_type_name === 'Tutorial'
@@ -32,6 +30,8 @@ const onlineSessionTypeId = sessionTypeSeeder.objects.find(
 )?.session_type_id;
 
 const moduleId = moduleSeeder.objects[0].module_id;
+const moduleId1 = moduleSeeder.objects[1].module_id;
+const moduleId2 = moduleSeeder.objects[2].module_id;
 
 const objects: ObjectType[] = [
   {
@@ -39,7 +39,6 @@ const objects: ObjectType[] = [
     session_type_id: tutorialSessionTypeId ?? '',
     tutor_id: tutorUser.user_id,
     module_id: moduleId,
-    user_id: studentUser.user_id,
     start_timestamp: new Date(),
     end_timestamp: new Date(),
     code: 'abcd',
@@ -49,7 +48,6 @@ const objects: ObjectType[] = [
     session_type_id: lectureSessionTypeId ?? '',
     tutor_id: tutorUser.user_id,
     module_id: moduleId,
-    user_id: studentUser.user_id,
     start_timestamp: new Date(),
     end_timestamp: new Date(),
     code: 'efgh',
@@ -59,10 +57,45 @@ const objects: ObjectType[] = [
     session_type_id: onlineSessionTypeId ?? '',
     tutor_id: tutorUser.user_id,
     module_id: moduleId,
-    user_id: studentUser.user_id,
     start_timestamp: new Date(),
     end_timestamp: new Date(),
     code: 'ijkl',
+  },
+  {
+    session_id: uuidv4(),
+    session_type_id: onlineSessionTypeId ?? '',
+    tutor_id: tutorUser.user_id,
+    module_id: moduleId1,
+    start_timestamp: new Date(),
+    end_timestamp: new Date(),
+    code: 'aaaa',
+  },
+  {
+    session_id: uuidv4(),
+    session_type_id: tutorialSessionTypeId ?? '',
+    tutor_id: tutorUser.user_id,
+    module_id: moduleId1,
+    start_timestamp: new Date(),
+    end_timestamp: new Date(),
+    code: 'bbbb',
+  },
+  {
+    session_id: uuidv4(),
+    session_type_id: lectureSessionTypeId ?? '',
+    tutor_id: tutorUser.user_id,
+    module_id: moduleId2,
+    start_timestamp: new Date(),
+    end_timestamp: new Date(),
+    code: 'cccc',
+  },
+  {
+    session_id: uuidv4(),
+    session_type_id: lectureSessionTypeId ?? '',
+    tutor_id: tutorUser.user_id,
+    module_id: moduleId2,
+    start_timestamp: new Date(),
+    end_timestamp: new Date(),
+    code: 'dddd',
   },
 ];
 
