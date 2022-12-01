@@ -6,14 +6,23 @@ import {
   Divider,
   List,
   Typography,
+  Button,
 } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useRequest } from '../../hooks/useRequest';
+import { useEffect, useState } from 'react';
+import { roles } from '../../utils/constants';
 
-export const Profile = (): JSX.Element => {
-  const { user } = useAuth0();
+export const Profile = async (): Promise<JSX.Element> => {
+  const { isAuthenticated, user } = useAuth0();
+  const [userData, setUserData] = useState([]);
+  const [courseData, setCourseData] = useState([]);
 
-  const detail = ['userType', 'module1', 'module2', 'module3']; // TODO: replace with user details
-  const percentage = '100%';
+  const role = isAuthenticated
+    ? user['http://sad.assignment.com/userData'].app.role
+    : roles.GUEST;
+
+  const detail = [role];
 
   return (
     <>
@@ -21,7 +30,7 @@ export const Profile = (): JSX.Element => {
         sx={{
           width: '100%',
           height: '300px',
-          backgroundColor: '#68b3d6',
+          backgroundColor: '#404A86',
           position: 'absolute',
         }}
       />
