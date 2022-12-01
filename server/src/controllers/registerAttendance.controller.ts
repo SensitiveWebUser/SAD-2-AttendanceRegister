@@ -17,11 +17,13 @@ export const registerAttendanceController = async (
   req: Request,
   res: Response
 ) => {
-  const { id, sessionId } = req.params;
+  const { id } = req.params;
   const { code } = req.body;
 
   const userRecord = await UserSchema.findByPk(id);
-  const sessionRecord = await SessionSchema.findByPk(sessionId);
+  const sessionRecord = await SessionSchema.findOne({
+    where: { code: code },
+  });
 
   if (!userRecord) {
     logger('user not found');
@@ -74,13 +76,13 @@ export const registerAttendanceController = async (
       lastName: userRecord.dataValues.last_name,
       email: userRecord.dataValues.email,
     }),
-    academicAdvisorId: userRecord.dataValues.academic_advisor_id,
+    academicAdvisorId: AdvisorStudentLinkRecord.dataValues.advisor_id,
   });
 
   if (await student.registerAttendanceAsync(session, code)) {
     res.status(200).send();
+  } else {
+    logger('failed to register attendance');
+    throw new BadRequestError('Failed to register attendance');
   }
-
-  logger('failed to register attendance');
-  throw new BadRequestError('Failed to register attendance');
 };

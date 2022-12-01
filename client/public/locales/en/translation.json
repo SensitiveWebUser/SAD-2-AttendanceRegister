@@ -47,5 +47,11 @@
       "createUsers": "Create Users",
       "resetPassword": "Reset Password"
     }
+  },
+  "checkStudent": {
+    "title": "Please Log In to register attendance."
+  },
+  "registerAttendance": {
+    "title": "Register Attendance"
   }
 }
