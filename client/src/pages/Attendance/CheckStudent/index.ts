@@ -1,0 +1,1 @@
+export { CheckStudent } from './CheckStudent';
