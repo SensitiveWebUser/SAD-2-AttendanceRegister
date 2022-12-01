@@ -108,6 +108,7 @@ export const TextReport = (): JSX.Element => {
           <OutlinedTextField id="courseID" label="Course ID" required />
           <Grid container item>
             <Button
+              data-testid="download"
               startIcon={<FileDownloadIcon style={{ fontSize: '1.5rem' }} />}
               sx={{
                 color: 'salmon',
